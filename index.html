@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" data-theme="blossom">
+<html lang="fa" dir="rtl" data-theme="blossom" data-light="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#FFF6F8">
+<meta name="color-scheme" content="light dark">
 <meta name="apple-mobile-web-app-title" content="عربی‌بازی">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -13,7 +14,8 @@
 <link rel="icon" href="./icons/icon-192.png">
 <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
 <link rel="preload" href="./fonts/vazirmatn-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<style>@font-face{font-family:Vazirmatn;src:url(./fonts/vazirmatn-Regular.woff2) format("woff2");font-weight:400;font-display:swap}@font-face{font-family:Vazirmatn;src:url(./fonts/vazirmatn-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+<link rel="preload" href="./fonts/vazirmatn-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<style>@font-face{font-family:Vazirmatn;src:url(./fonts/vazirmatn-Regular.woff2) format("woff2");font-weight:400;font-display:swap}@font-face{font-family:Vazirmatn;src:url(./fonts/vazirmatn-Bold.woff2) format("woff2");font-weight:700;font-display:swap}@font-face{font-family:"Playpen Sans Arabic";src:url(./fonts/playpen-arabic.woff2) format("woff2");font-weight:400 700;font-display:swap;unicode-range:U+0600-06FF,U+200C}
 :root[data-theme="dark"]{--bg:#101410;--bg2:#171B15;--card:#1B211A;--ink:#EDEADF;--ink-dim:#9AA394;--line:#2B3226;--gold:#D9A24B;--sage:#7FAE86;--rust:#C1653F;--on-accent:#101410;--radius:14px;--ok:#7FC98A;--bad:#E8806A}
 :root[data-theme="light"]{--bg:#F4F1E8;--bg2:#EDE9DB;--card:#FFFDF7;--ink:#1E2117;--ink-dim:#6b6f5f;--line:#DBD5C2;--gold:#B4802C;--sage:#5C8563;--rust:#A94E2C;--on-accent:#1E2117;--radius:14px;--ok:#2F7D3F;--bad:#B3261E}
 :root[data-theme="underground"]{--bg:#0A0B0C;--bg2:#141516;--card:#17191A;--ink:#D7DAD5;--ink-dim:#7D857F;--line:#26292A;--gold:#6FC7CF;--sage:#5A6B68;--rust:#8A5A52;--on-accent:#0A0B0C;--radius:2px;--ok:#5FD39A;--bad:#F07A6E}
@@ -30,12 +32,14 @@
 :root[data-theme="mauve"]{--bg:#3E3239;--bg2:#463840;--card:#4A3C44;--ink:#F7EFE7;--ink-dim:#C7A9A3;--line:#6B5560;--gold:#E8D2C4;--sage:#C7A9A3;--rust:#F2A765;--on-accent:#3E3239;--radius:16px;--ok:#9FD8A8;--bad:#F5907E}
 :root[data-theme="forest"]{--bg:#051F20;--bg2:#092928;--card:#0B2B26;--ink:#DAF1DE;--ink-dim:#8EB69B;--line:#163832;--gold:#DAF1DE;--sage:#8EB69B;--rust:#E39B6B;--on-accent:#051F20;--radius:14px;--ok:#8EDB9F;--bad:#F08C6C}
 :root[data-theme="glass"]{--bg:#E8DCCF;--bg2:#DDCDBE;--card:#F4EDE6;--ink:#1F1915;--ink-dim:#5B5048;--line:#FFFFFF;--gold:#E4572E;--sage:#0E9A81;--rust:#C9391F;--on-accent:#1F1915;--radius:18px;--ok:#0B7F6A;--bad:#C9391F}
-:root[data-theme="paper"]{--bg:#F6F1E3;--bg2:#EFE8D5;--card:#FBF7EC;--ink:#1F3A9F;--ink-dim:#4B5A93;--line:#C9C1AA;--gold:#1F3A9F;--sage:#2E7D46;--rust:#C4302B;--on-accent:#FBF7EC;--radius:4px;--ok:#2E7D46;--bad:#C4302B}
+:root[data-theme="paper"]{--bg:#F6F1E3;--bg2:#EFE8D5;--card:#FBF7EC;--ink:#1F3A9F;--ink-dim:#4B5A93;--line:#C9C1AA;--gold:#1F3A9F;--sage:#2E7D46;--rust:#C4302B;--on-accent:#FBF7EC;--radius:4px;--ok:#26703D;--bad:#C4302B}
 :root[data-theme="pen"]{--bg:#E7EEF7;--bg2:#F3E4EE;--card:#F7F8FC;--ink:#1B3798;--ink-dim:#4A5893;--line:#FFFFFF;--gold:#1B3798;--sage:#2E7D46;--rust:#C4302B;--on-accent:#FFFFFF;--radius:12px;--ok:#2E7D46;--bad:#C4302B}
 
 *{box-sizing:border-box;min-width:0;-webkit-tap-highlight-color:transparent}
-html{height:100%;background:var(--bg);color-scheme:dark}
-:root[data-light="1"]{color-scheme:light}
+html{height:100%;background:var(--bg);color-scheme:only dark}
+:root[data-light="1"]{color-scheme:only light}
+@media (prefers-color-scheme:dark){:root[data-light="1"]{color-scheme:only light}}
+@media (prefers-color-scheme:light){:root[data-light="0"]{color-scheme:only dark}}
 body{margin:0;min-height:100dvh;background:var(--bg);color:var(--ink);font:16px/1.75 var(--font);-webkit-text-size-adjust:100%;overflow-x:clip}
 :root{--font:Vazirmatn,system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace;--btn:var(--gold);--btn-ink:var(--on-accent);
 --soft:color-mix(in srgb,var(--gold) 14%,var(--card));--okbg:color-mix(in srgb,var(--ok) 16%,var(--card));--badbg:color-mix(in srgb,var(--bad) 16%,var(--card));
@@ -171,6 +175,40 @@ input[type=range]{width:100%;accent-color:var(--gold);min-height:40px}
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
 ::view-transition-new(root){animation:reveal .5s ease-out}
 @keyframes reveal{from{clip-path:circle(0 at var(--vx,50%) var(--vy,50%))}to{clip-path:circle(150% at var(--vx,50%) var(--vy,50%))}}
+:root{--logo-ink:var(--on-accent)}:root:is([data-theme="blossom"],[data-theme="instagram"],[data-theme="light"],[data-theme="minimal"],[data-theme="glass"]){--logo-ink:#FFFFFF}
+.logo{display:grid;place-items:center;border-radius:30%;background:linear-gradient(135deg,var(--gold),color-mix(in srgb,var(--sage) 70%,var(--gold)));color:var(--logo-ink);box-shadow:0 6px 16px -8px color-mix(in srgb,var(--gold) 70%,transparent);overflow:hidden;position:relative}
+.logo svg{width:100%;height:100%;display:block}
+#intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:radial-gradient(60% 45% at 50% 42%,color-mix(in srgb,var(--gold) 24%,var(--bg)),var(--bg) 70%);cursor:pointer}
+.i-stage{display:grid;justify-items:center;gap:6px;text-align:center}
+.i-mark{position:relative;width:132px;height:132px;margin-bottom:10px}
+.i-logo{width:132px;height:132px;border-radius:32%;animation:i-pop .55s cubic-bezier(.2,1.5,.4,1) both}
+.i-glyph{transform-box:fill-box;transform-origin:center;animation:i-glyph .5s .18s cubic-bezier(.2,1.7,.4,1) both}
+.i-shine{position:absolute;top:-20%;bottom:-20%;width:38%;inset-inline-start:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);transform:translateX(-260%) rotate(18deg);animation:i-shine .5s .62s ease-in-out both}
+.sp{position:absolute;left:50%;top:50%;width:10px;height:10px;border-radius:50%;background:var(--gold);opacity:0;animation:i-burst .7s .36s cubic-bezier(.1,.8,.3,1) both}
+.sp:nth-child(2){--x:-92px;--y:-58px;background:var(--sage)}.sp:nth-child(3){--x:96px;--y:-46px;width:8px;height:8px;background:var(--rust)}
+.sp:nth-child(4){--x:-70px;--y:70px;width:12px;height:12px;border-radius:3px;--r:130deg}.sp:nth-child(5){--x:84px;--y:72px;background:var(--ok);width:7px;height:7px}
+.sp:nth-child(6){--x:4px;--y:-104px;width:9px;height:9px;border-radius:2px;background:var(--sage);--r:-90deg}.sp:nth-child(7){--x:-112px;--y:8px;width:6px;height:6px;background:var(--ink-dim)}
+.sp:nth-child(8){--x:116px;--y:14px;width:11px;height:11px;border-radius:3px;background:var(--gold);--r:200deg}.sp:nth-child(9){--x:-8px;--y:108px;width:8px;height:8px;background:var(--rust)}
+.i-name{font-size:clamp(34px,9vw,44px);font-weight:700;line-height:1.3;animation:i-up .45s .48s cubic-bezier(.2,1.4,.4,1) both}
+.i-sub{color:var(--ink-dim);font-weight:700;animation:i-up .45s .62s cubic-bezier(.2,1.4,.4,1) both}
+#intro.out{animation:i-out .28s ease both}
+@keyframes i-pop{0%{transform:scale(.3) rotate(-40deg);opacity:0}55%{opacity:1}100%{transform:scale(1) rotate(-8deg);opacity:1}}
+@keyframes i-glyph{from{transform:scale(.3) rotate(25deg);opacity:0}}
+@keyframes i-shine{to{transform:translateX(420%) rotate(18deg)}}
+@keyframes i-burst{0%{transform:translate(-50%,-50%) scale(.2);opacity:0}20%{opacity:1}100%{transform:translate(calc(-50% + var(--x,0px)),calc(-50% + var(--y,0px))) scale(1) rotate(var(--r,0deg));opacity:0}}
+@keyframes i-up{from{transform:translateY(18px);opacity:0}}
+@keyframes i-out{to{opacity:0;transform:scale(1.05)}}
+#tour{position:fixed;inset:0;z-index:90;pointer-events:none}
+.t-hole{position:fixed;border-radius:18px;box-shadow:0 0 0 200vmax rgba(8,6,18,.64);outline:2.5px solid var(--gold);outline-offset:2px;pointer-events:none}
+.t-b,.t-cover{position:fixed;pointer-events:auto}
+.t-card{position:fixed;pointer-events:auto;width:min(340px,calc(100vw - 24px));background:var(--bg2);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 20px 44px -14px rgba(0,0,0,.6);padding:14px 16px;display:grid;gap:10px}
+.fx .t-card.in{animation:t-in .3s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes t-in{from{opacity:0;transform:translateY(10px) scale(.97)}}
+.t-tx{margin:0;font-size:16px;line-height:1.85}
+.t-foot{display:flex;align-items:center;gap:8px}.t-n{flex:1;color:var(--ink-dim);font-size:13px}
+.t-foot .btn{min-height:42px;padding:8px 14px;font-size:15px}
+.qtip{margin:12px 0 0;padding:9px 12px;border-radius:12px;background:var(--soft);font-size:14px;font-weight:700;text-align:center;line-height:1.8}
+.fx .qtip{animation:enter .3s ease both}
 :root[data-theme="underground"] h1,:root[data-theme="underground"] h2,:root[data-theme="underground"] .btn,:root[data-theme="underground"] .stat b,:root[data-theme="underground"] .shead h2{font-family:var(--mono);letter-spacing:.4px}
 :root[data-theme="hacker"] .stat b,:root[data-theme="hacker"] .ring text{font-family:var(--mono)}
 :root[data-theme="hacker"] h1{text-shadow:0 0 18px color-mix(in srgb,var(--sage) 55%,transparent)}
@@ -184,12 +222,36 @@ input[type=range]{width:100%;accent-color:var(--gold);min-height:40px}
 @supports (backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px)){
 :root[data-theme="glass"]:not(.lite) .hdr,:root[data-theme="pen"]:not(.lite) .hdr{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);background:color-mix(in srgb,#FFFFFF 35%,transparent)}
 :root[data-theme="glass"]:not(.lite) .sheet,:root[data-theme="pen"]:not(.lite) .sheet{-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);background:color-mix(in srgb,#FFFFFF 70%,transparent)}}
-:root[data-theme="paper"] body{background:radial-gradient(circle,color-mix(in srgb,var(--ink) 16%,transparent) 1px,transparent 1.4px) 0 0/22px 22px,var(--bg)}
-:root[data-theme="paper"] .card,:root[data-theme="paper"] .opt,:root[data-theme="paper"] .gcard{border:1.5px solid color-mix(in srgb,var(--ink) 55%,transparent);border-radius:6px 10px 5px 12px/10px 5px 12px 6px;box-shadow:none}
+:root[data-theme="paper"]{--font:"Playpen Sans Arabic",Vazirmatn,system-ui,sans-serif;--btn:#FFE36E;--btn-ink:#1F3A9F;--card:#FFFDF6;--soft:#FFF4B8;--pen:#1F3A9F}
+:root[data-theme="paper"] body{background:linear-gradient(to left,transparent 30px,rgba(196,48,43,.5) 30px 32px,transparent 32px),radial-gradient(circle,rgba(31,58,159,.2) 1.1px,transparent 1.6px) 0 0/22px 22px,repeating-linear-gradient(17deg,rgba(120,96,50,.035) 0 1px,transparent 1px 7px),repeating-linear-gradient(-63deg,rgba(120,96,50,.03) 0 1px,transparent 1px 11px),radial-gradient(120% 90% at 50% 35%,transparent 55%,rgba(150,120,70,.14)),var(--bg)}
+:root[data-theme="paper"][dir="ltr"] body{background:linear-gradient(to right,transparent 30px,rgba(196,48,43,.5) 30px 32px,transparent 32px),radial-gradient(circle,rgba(31,58,159,.2) 1.1px,transparent 1.6px) 0 0/22px 22px,repeating-linear-gradient(17deg,rgba(120,96,50,.035) 0 1px,transparent 1px 7px),repeating-linear-gradient(-63deg,rgba(120,96,50,.03) 0 1px,transparent 1px 11px),radial-gradient(120% 90% at 50% 35%,transparent 55%,rgba(150,120,70,.14)),var(--bg)}
+:root[data-theme="paper"] :is(.stem,.opt.ar .tx,.rv .st,.blank){font-family:Vazirmatn,system-ui,sans-serif}
+:root[data-theme="paper"] .hdr{background:color-mix(in srgb,var(--bg) 94%,transparent);border-bottom:0}
+:root[data-theme="paper"] .hdr::after{content:"";position:absolute;inset-inline:var(--pad);bottom:-4px;height:8px;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2748%27%20height%3D%278%27%3E%3Cpath%20d%3D%27M0%204%20Q6%201%2012%204%20T24%204%20T36%204%20T48%204%27%20fill%3D%27none%27%20stroke%3D%27%231F3A9F%27%20stroke-width%3D%271.7%27%20stroke-linecap%3D%27round%27%20opacity%3D%27.75%27/%3E%3C/svg%3E") repeat-x 0 0/48px 8px}
+:root[data-theme="paper"] h2{display:table;padding-bottom:6px;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2748%27%20height%3D%278%27%3E%3Cpath%20d%3D%27M0%204%20Q6%201%2012%204%20T24%204%20T36%204%20T48%204%27%20fill%3D%27none%27%20stroke%3D%27%231F3A9F%27%20stroke-width%3D%271.7%27%20stroke-linecap%3D%27round%27%20opacity%3D%27.75%27/%3E%3C/svg%3E") repeat-x left bottom/48px 8px;transform:rotate(-.6deg)}
+:root[data-theme="paper"] h1{transform:rotate(-.8deg)}
+:root[data-theme="paper"] :is(.card,.opt,.gcard){background:var(--card);border:1.6px solid color-mix(in srgb,var(--pen) 72%,transparent);border-radius:7px 13px 6px 14px/13px 6px 14px 7px;box-shadow:2px 3px 0 -1px color-mix(in srgb,var(--pen) 24%,transparent)}
+:root[data-theme="paper"] :is(.chs>.card,.opts>.opt,.gcards>.gcard):nth-child(odd){transform:rotate(-.45deg)}
+:root[data-theme="paper"] :is(.chs>.card,.opts>.opt,.gcards>.gcard):nth-child(even){transform:rotate(.4deg)}
+:root[data-theme="paper"] .btn{border:2px solid var(--pen);border-radius:13px 6px 14px 5px/6px 14px 5px 13px;box-shadow:2px 2px 0 color-mix(in srgb,var(--pen) 35%,transparent)}
+:root[data-theme="paper"] .btn.ghost{background:transparent;border-style:dashed}
+:root[data-theme="paper"] .badge{background:var(--soft);border:1.5px solid var(--pen);border-radius:14px 8px 15px 7px/8px 15px 7px 14px}
+:root[data-theme="paper"] .opt.ok{background:var(--card);border:2.6px solid var(--ok);border-radius:46% 54% 50% 50%/62% 50% 50% 40%;box-shadow:none}
+:root[data-theme="paper"] .opt.bad{background:var(--card);border:2px dashed var(--bad);box-shadow:none}
+:root[data-theme="paper"] .opt.bad .tx{text-decoration:line-through 2.5px var(--bad)}
+:root[data-theme="paper"] .fb{position:relative;margin-top:24px;background:#FFF1A6;border:0;border-radius:3px;box-shadow:0 12px 14px -10px rgba(70,50,0,.45);transform:rotate(-.9deg)}
+:root[data-theme="paper"] .fb::before{content:"";position:absolute;top:-12px;inset-inline-start:50%;width:86px;height:24px;transform:translateX(50%) rotate(2deg);background:rgba(255,255,255,.6);border:1px solid rgba(0,0,0,.07)}
+:root[data-theme="paper"][dir="ltr"] .fb::before{transform:translateX(-50%) rotate(2deg)}
+:root[data-theme="paper"] .stem mark{background:linear-gradient(transparent 42%,#FFE36E 42% 90%,transparent 90%)}
 :root[data-theme="paper"] .bar span,:root[data-theme="paper"] .pbar span{background:repeating-linear-gradient(-45deg,var(--gold) 0 3px,transparent 3px 6px);border-inline-end:2px solid var(--gold)}
-:root[data-theme="paper"] .stem mark{background:linear-gradient(transparent 45%,#FFE36E 45% 88%,transparent 88%)}
-:root[data-theme="paper"] .dock button[aria-current="page"] b{background:linear-gradient(transparent 55%,#FFE36E 55%);padding:0 6px}
-:root[data-theme="paper"] h1,:root[data-theme="paper"] h2{transform:rotate(-.6deg)}
+:root[data-theme="paper"] .dock{background:color-mix(in srgb,var(--bg) 97%,transparent);border-top:2px dashed color-mix(in srgb,var(--pen) 45%,transparent)}
+:root[data-theme="paper"] .dock button[aria-current="page"] [data-i18n]{background:linear-gradient(transparent 48%,#FFE36E 48% 92%,transparent 92%);padding:0 5px}
+:root[data-theme="paper"] .dock .ind::after{background:var(--rust)}
+:root[data-theme="paper"] .ring .fg{stroke:var(--rust)}
+:root[data-theme="paper"] .qtip{background:#FFF1A6;transform:rotate(.6deg)}
+:root[data-theme="paper"] .logo{border-radius:22% 30% 24% 32%/30% 22% 32% 24%;transform:rotate(-4deg)}
+:root[data-theme="paper"] .t-card{background:#FFF1A6;border:0;border-radius:3px;transform:rotate(-.6deg)}
+:root[data-theme="pen"] :is(h1,h2,.btn,.fb h3,.i-name){font-family:"Playpen Sans Arabic",Vazirmatn,system-ui,sans-serif}
 :root[data-theme="pen"] body{background:radial-gradient(55% 45% at 15% 15%,#CFE0F5 0,transparent 70%),radial-gradient(50% 40% at 90% 40%,#F5D3E3 0,transparent 70%),radial-gradient(60% 50% at 40% 95%,#D8EDDD 0,transparent 70%),var(--bg) fixed}
 :root[data-theme="pen"]{--card:color-mix(in srgb,#FFFFFF 62%,transparent)}
 :root[data-theme="pen"] .card,:root[data-theme="pen"] .opt,:root[data-theme="pen"] .gcard{border-color:#FFFFFF}
@@ -201,14 +263,14 @@ input[type=range]{width:100%;accent-color:var(--gold);min-height:40px}
 <body>
 <div id="app">
 <section id="pick" hidden>
- <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="var(--btn)"/><path fill="var(--btn-ink)" d="M42.4 25.4 42.1 31Q41.1 31 40.5 31Q39.8 31 39.2 31Q34.8 31 31.5 31.9Q28.2 32.8 26.4 34.6Q24.5 36.5 24.5 39.4Q24.5 41.7 25.8 43.2Q27.1 44.7 29.1 45.4Q31.2 46.2 33.5 46.2Q36.2 46.2 38.6 45.6Q41 45.1 43.2 44.2L44.8 49.8Q42.3 50.8 39.4 51.4Q36.6 52 33.8 52Q30.9 52 28.3 51.3Q25.7 50.6 23.6 49.1Q21.6 47.6 20.4 45.2Q19.2 42.9 19.2 39.5Q19.2 31.8 26.2 27.6Q25.2 26.4 24.6 24.9Q24 23.4 24 21.6Q24 19 25.4 16.8Q26.7 14.6 29 13.3Q31.2 12 33.7 12Q35.9 12 38 12.8Q40.2 13.7 42.4 15.2L40.2 20.1Q38.6 19.2 37.2 18.6Q35.8 18 34.1 18Q32.3 18 30.9 19Q29.5 20.1 29.5 21.9Q29.5 23.2 30.2 24.2Q30.9 25.2 31.6 25.7Q33.7 25.5 35.3 25.3Q37 25.2 38.7 25.2Q39.6 25.2 40.5 25.2Q41.3 25.3 42.4 25.4Z"/><circle cx="47.5" cy="17" r="2.6" fill="var(--btn-ink)" opacity=".8"/></svg>
+ <span class="logo" aria-hidden="true"><svg viewBox="0 0 64 64"><path fill="currentColor" d="M42.4 25.4 42.1 31Q41.1 31 40.5 31Q39.8 31 39.2 31Q34.8 31 31.5 31.9Q28.2 32.8 26.4 34.6Q24.5 36.5 24.5 39.4Q24.5 41.7 25.8 43.2Q27.1 44.7 29.1 45.4Q31.2 46.2 33.5 46.2Q36.2 46.2 38.6 45.6Q41 45.1 43.2 44.2L44.8 49.8Q42.3 50.8 39.4 51.4Q36.6 52 33.8 52Q30.9 52 28.3 51.3Q25.7 50.6 23.6 49.1Q21.6 47.6 20.4 45.2Q19.2 42.9 19.2 39.5Q19.2 31.8 26.2 27.6Q25.2 26.4 24.6 24.9Q24 23.4 24 21.6Q24 19 25.4 16.8Q26.7 14.6 29 13.3Q31.2 12 33.7 12Q35.9 12 38 12.8Q40.2 13.7 42.4 15.2L40.2 20.1Q38.6 19.2 37.2 18.6Q35.8 18 34.1 18Q32.3 18 30.9 19Q29.5 20.1 29.5 21.9Q29.5 23.2 30.2 24.2Q30.9 25.2 31.6 25.7Q33.7 25.5 35.3 25.3Q37 25.2 38.7 25.2Q39.6 25.2 40.5 25.2Q41.3 25.3 42.4 25.4Z"/><circle cx="48" cy="16.5" r="2.6" fill="currentColor" opacity=".85"/></svg></span>
  <h1 data-i18n="pickTitle"></h1>
  <p data-i18n="tagline"></p>
  <div class="gcards"></div>
 </section>
 <div id="main" hidden>
  <header class="hdr">
-  <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="var(--btn)"/><path fill="var(--btn-ink)" d="M42.4 25.4 42.1 31Q41.1 31 40.5 31Q39.8 31 39.2 31Q34.8 31 31.5 31.9Q28.2 32.8 26.4 34.6Q24.5 36.5 24.5 39.4Q24.5 41.7 25.8 43.2Q27.1 44.7 29.1 45.4Q31.2 46.2 33.5 46.2Q36.2 46.2 38.6 45.6Q41 45.1 43.2 44.2L44.8 49.8Q42.3 50.8 39.4 51.4Q36.6 52 33.8 52Q30.9 52 28.3 51.3Q25.7 50.6 23.6 49.1Q21.6 47.6 20.4 45.2Q19.2 42.9 19.2 39.5Q19.2 31.8 26.2 27.6Q25.2 26.4 24.6 24.9Q24 23.4 24 21.6Q24 19 25.4 16.8Q26.7 14.6 29 13.3Q31.2 12 33.7 12Q35.9 12 38 12.8Q40.2 13.7 42.4 15.2L40.2 20.1Q38.6 19.2 37.2 18.6Q35.8 18 34.1 18Q32.3 18 30.9 19Q29.5 20.1 29.5 21.9Q29.5 23.2 30.2 24.2Q30.9 25.2 31.6 25.7Q33.7 25.5 35.3 25.3Q37 25.2 38.7 25.2Q39.6 25.2 40.5 25.2Q41.3 25.3 42.4 25.4Z"/><circle cx="47.5" cy="17" r="2.6" fill="var(--btn-ink)" opacity=".8"/></svg>
+  <span class="logo" aria-hidden="true"><svg viewBox="0 0 64 64"><path fill="currentColor" d="M42.4 25.4 42.1 31Q41.1 31 40.5 31Q39.8 31 39.2 31Q34.8 31 31.5 31.9Q28.2 32.8 26.4 34.6Q24.5 36.5 24.5 39.4Q24.5 41.7 25.8 43.2Q27.1 44.7 29.1 45.4Q31.2 46.2 33.5 46.2Q36.2 46.2 38.6 45.6Q41 45.1 43.2 44.2L44.8 49.8Q42.3 50.8 39.4 51.4Q36.6 52 33.8 52Q30.9 52 28.3 51.3Q25.7 50.6 23.6 49.1Q21.6 47.6 20.4 45.2Q19.2 42.9 19.2 39.5Q19.2 31.8 26.2 27.6Q25.2 26.4 24.6 24.9Q24 23.4 24 21.6Q24 19 25.4 16.8Q26.7 14.6 29 13.3Q31.2 12 33.7 12Q35.9 12 38 12.8Q40.2 13.7 42.4 15.2L40.2 20.1Q38.6 19.2 37.2 18.6Q35.8 18 34.1 18Q32.3 18 30.9 19Q29.5 20.1 29.5 21.9Q29.5 23.2 30.2 24.2Q30.9 25.2 31.6 25.7Q33.7 25.5 35.3 25.3Q37 25.2 38.7 25.2Q39.6 25.2 40.5 25.2Q41.3 25.3 42.4 25.4Z"/><circle cx="48" cy="16.5" r="2.6" fill="currentColor" opacity=".85"/></svg></span>
   <h1 data-i18n="app"></h1>
   <button class="badge" id="gradeBadge" data-act="grade"><i></i><span></span></button>
   <button class="icon" data-act="settings" data-i18n-aria="settings">⚙</button>
@@ -234,6 +296,7 @@ input[type=range]{width:100%;accent-color:var(--gold);min-height:40px}
  <div class="ptop"><button class="icon" data-act="quit" data-i18n-aria="quit">✕</button><div class="t" id="pT"></div><div class="streak" id="pS"></div></div>
  <div class="pbar"><span id="pB"></span></div>
  <div class="card qcard" id="qC"><p class="prompt" id="qP"></p><p class="stem" id="qS" lang="ar" dir="rtl"></p></div>
+ <p class="qtip" id="qTip" hidden></p>
  <div class="opts" id="qO"></div>
  <div class="fb" id="qF" hidden role="status" aria-live="polite"></div>
  <button class="btn wide" id="qN" data-act="next" hidden style="margin-top:12px"></button>
@@ -248,13 +311,15 @@ input[type=range]{width:100%;accent-color:var(--gold);min-height:40px}
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" hidden><div class="grab"></div><div class="shead"><h2 data-i18n="settings"></h2><button class="icon" data-act="closeSheet" data-i18n-aria="close">✕</button></div><div class="body"></div></div>
 <div class="scrim" id="dlgScrim" hidden></div>
 <div class="dlg" id="dlg" role="alertdialog" aria-modal="true" hidden><div class="card"></div></div>
+<div id="tour" hidden><div class="t-hole"></div><div class="t-b"></div><div class="t-b"></div><div class="t-b"></div><div class="t-b"></div><div class="t-cover"></div><div class="t-card" role="dialog" aria-live="polite"><p class="t-tx"></p><div class="t-foot"><span class="t-n"></span><button class="btn ghost" data-act="tourSkip"></button><button class="btn" data-act="tourNext"></button></div></div></div>
+<div id="intro" hidden><div class="i-stage"><div class="i-mark"><span class="logo i-logo" aria-hidden="true"><svg viewBox="0 0 64 64"><g class="i-glyph"><path fill="currentColor" d="M42.4 25.4 42.1 31Q41.1 31 40.5 31Q39.8 31 39.2 31Q34.8 31 31.5 31.9Q28.2 32.8 26.4 34.6Q24.5 36.5 24.5 39.4Q24.5 41.7 25.8 43.2Q27.1 44.7 29.1 45.4Q31.2 46.2 33.5 46.2Q36.2 46.2 38.6 45.6Q41 45.1 43.2 44.2L44.8 49.8Q42.3 50.8 39.4 51.4Q36.6 52 33.8 52Q30.9 52 28.3 51.3Q25.7 50.6 23.6 49.1Q21.6 47.6 20.4 45.2Q19.2 42.9 19.2 39.5Q19.2 31.8 26.2 27.6Q25.2 26.4 24.6 24.9Q24 23.4 24 21.6Q24 19 25.4 16.8Q26.7 14.6 29 13.3Q31.2 12 33.7 12Q35.9 12 38 12.8Q40.2 13.7 42.4 15.2L40.2 20.1Q38.6 19.2 37.2 18.6Q35.8 18 34.1 18Q32.3 18 30.9 19Q29.5 20.1 29.5 21.9Q29.5 23.2 30.2 24.2Q30.9 25.2 31.6 25.7Q33.7 25.5 35.3 25.3Q37 25.2 38.7 25.2Q39.6 25.2 40.5 25.2Q41.3 25.3 42.4 25.4Z"/><circle cx="48" cy="16.5" r="2.6" fill="currentColor" opacity=".85"/></g></svg><span class="i-shine"></span></span><i class="sp"></i><i class="sp"></i><i class="sp"></i><i class="sp"></i><i class="sp"></i><i class="sp"></i><i class="sp"></i><i class="sp"></i></div><div class="i-name" data-i18n="app"></div><div class="i-sub" data-i18n="introSub"></div></div></div>
 <div id="upd" hidden><p data-i18n="update"></p><button class="btn" data-act="upd" data-i18n="updateBtn"></button></div>
 </div>
 
-<script>var APP={"version":"1.0.0","target":"pwa","defTheme":"blossom","themes":{"dark":["Dark (Classic)","تیره (کلاسیک)","#101410","#D9A24B",0],"light":["Light","روشن","#F4F1E8","#B4802C",1],"underground":["Underground","زیرزمین","#0A0B0C","#6FC7CF",0],"hacker":["Hacker","هکر","#070B10","#39F2A6",0],"gaming":["Gaming","گیمینگ","#0A0A14","#FF2BD6",0],"cyberpunk":["Cyberpunk","سایبرپانک","#0A0612","#00F0FF",0],"vaporwave":["Vaporwave","ویپرویو","#190B2E","#FF6AD5",0],"minimal":["Minimal","مینیمال","#F7F5F0","#7C9473",1],"discord":["Discord","دیسکورد","#1E2124","#5865F2",0],"instagram":["Instagram","اینستاگرام","#120B10","#E1306C",0],"daybreak":["Daybreak","سپیده‌دم","#F7F8FC","#4F5FFF",1],"blossom":["Blossom","شکوفه","#FFF6F8","#E8638C",1],"midnight":["Midnight","نیمه‌شب","#06141B","#CCD0CF",0],"mauve":["Mauve","ارغوانی","#3E3239","#E8D2C4",0],"forest":["Forest","جنگل","#051F20","#DAF1DE",0],"glass":["Glass","شیشه","#E8DCCF","#E4572E",1],"paper":["Paper","کاغذ","#F6F1E3","#1F3A9F",1],"pen":["Glass + pen","شیشه و خودکار","#E7EEF7","#1B3798",1]},"chapters":{"10":{"1":"شناخت باب فعل","2":"الگوی ماضی، مضارع، امر و مصدر","3":"فعل غریبه"},"11":{"1":"نوع فعل را بشناس","2":"ترجمهٔ فعل","3":"انواع «لا»","4":"فعل مناسب جمله"},"12":{"1":"حروف مشبهة بالفعل","2":"لای نفی جنس و انواع «لا»","3":"حال","4":"استثنا و حصر","5":"مفعول مطلق"}}};
+<script>var APP={"version":"1.0.1","target":"pwa","defTheme":"blossom","themes":{"dark":["Dark (Classic)","تیره (کلاسیک)","#101410","#D9A24B",0],"light":["Light","روشن","#F4F1E8","#B4802C",1],"underground":["Underground","زیرزمین","#0A0B0C","#6FC7CF",0],"hacker":["Hacker","هکر","#070B10","#39F2A6",0],"gaming":["Gaming","گیمینگ","#0A0A14","#FF2BD6",0],"cyberpunk":["Cyberpunk","سایبرپانک","#0A0612","#00F0FF",0],"vaporwave":["Vaporwave","ویپرویو","#190B2E","#FF6AD5",0],"minimal":["Minimal","مینیمال","#F7F5F0","#7C9473",1],"discord":["Discord","دیسکورد","#1E2124","#5865F2",0],"instagram":["Instagram","اینستاگرام","#120B10","#E1306C",0],"daybreak":["Daybreak","سپیده‌دم","#F7F8FC","#4F5FFF",1],"blossom":["Blossom","شکوفه","#FFF6F8","#E8638C",1],"midnight":["Midnight","نیمه‌شب","#06141B","#CCD0CF",0],"mauve":["Mauve","ارغوانی","#3E3239","#E8D2C4",0],"forest":["Forest","جنگل","#051F20","#DAF1DE",0],"glass":["Glass","شیشه","#E8DCCF","#E4572E",1],"paper":["Paper","کاغذ","#F6F1E3","#1F3A9F",1],"pen":["Glass + pen","شیشه و خودکار","#E7EEF7","#1B3798",1]},"chapters":{"10":{"1":"شناخت باب فعل","2":"الگوی ماضی، مضارع، امر و مصدر","3":"فعل غریبه"},"11":{"1":"نوع فعل را بشناس","2":"ترجمهٔ فعل","3":"انواع «لا»","4":"فعل مناسب جمله"},"12":{"1":"حروف مشبهة بالفعل","2":"لای نفی جنس و انواع «لا»","3":"حال","4":"استثنا و حصر","5":"مفعول مطلق"}}};
 /* ---------- Texts (fa / en) ---------- */
 var STRINGS={
-fa:{app:"عربی‌بازی",tagline:"تمرین قواعد عربی؛ فقط سؤال‌های پایهٔ خودت",pickTitle:"پایه‌ات را انتخاب کن",g10:"دهم",g11:"یازدهم",g12:"دوازدهم",gradeOf:"پایهٔ {g}",
+fa:{introSub:"قواعد عربی، این بار بازی‌بازی!",tour1:"👋 خوش آمدی! این پایهٔ توست. هر وقت خواستی عوضش کنی، همین‌جا را بزن.",tour2:"⚙ تنظیمات اینجاست: رنگ اپ، صدا و زبان را از اینجا عوض کن.",tour3:"🎨 ۱۸ رنگ‌بندی داری! روی یکی از دایره‌ها بزن و ببین اپ چه شکلی می‌شود.",tour4:"🎯 تمرین ترکیبی: ۱۰ سؤال از همهٔ درس‌ها؛ برای شروع سریع عالی است.",tour5:"📚 یا یک درس را انتخاب کن. نوار زیرش نشان می‌دهد چقدرش را یاد گرفته‌ای.",tour6:"↺ سؤال‌هایی که غلط بزنی در «مرور غلط‌ها» جمع می‌شوند تا دوباره تمرینشان کنی. «آمار» هم پیشرفتت را نشان می‌دهد.",tourStep:"{i} از {n}",tourSkip:"رد شدن",tourDone:"بزن بریم! 🚀",qTip:"👆 گزینهٔ درست را لمس کن؛ بعد توضیح را بخوان و «بعدی» را بزن.",help:"راهنما",replay:"دیدن دوبارهٔ معرفی و راهنما",app:"عربی‌بازی",tagline:"تمرین قواعد عربی؛ فقط سؤال‌های پایهٔ خودت",pickTitle:"پایه‌ات را انتخاب کن",g10:"دهم",g11:"یازدهم",g12:"دوازدهم",gradeOf:"پایهٔ {g}",
  g10d:"باب‌های ثلاثی مزید",g11d:"انواع فعل، ترجمه، انواع «لا»",g12d:"حروف مشبهه، حال، استثنا، مفعول مطلق",
  home:"خانه",review:"مرور غلط‌ها",stats:"آمار",settings:"تنظیمات",mixed:"تمرین ترکیبی ۱۰ سؤالی",lessons:"درس‌ها",qCount:"{n} سؤال",mastered:"{a} از {b}",
  foot:"پیشرفت تو فقط روی همین گوشی یا مرورگر ذخیره می‌شود.",quit:"خروج",qOf:"سؤال {i} از {n}",right:"✓ درست",wrong:"✗ غلط",rightT:"✓ آفرین، درست بود",wrongT:"✗ غلط بود",next:"بعدی",finish:"دیدن نتیجه",
@@ -270,7 +335,7 @@ fa:{app:"عربی‌بازی",tagline:"تمرین قواعد عربی؛ فقط �
  update:"نسخهٔ جدید آماده است.",updateBtn:"به‌روزرسانی",quitQ:"از تمرین بیرون می‌روی؟",quitMsg:"جواب‌هایی که دادی ذخیره شده‌اند.",yesQuit:"بله، خروج",stay:"ادامه",
  iosTip:"برای نصب روی آیفون: دکمهٔ «اشتراک‌گذاری» را بزن، بعد «Add to Home Screen» و بعد «Add».",installHelp:"راهنمای نصب",loading:"در حال آماده‌سازی…",loadErr:"سؤال‌ها باز نشدند. اینترنت را بررسی کن و دوباره امتحان کن.",retry:"دوباره",
  streakMsg:"{n} تا پشت سر هم! 🔥",chapter:"فصل",mixedName:"ترکیبی",reviewName:"مرور"},
-en:{app:"Arabi Play",tagline:"Arabic grammar practice — only your own grade",pickTitle:"Choose your grade",g10:"Grade 10",g11:"Grade 11",g12:"Grade 12",gradeOf:"{g}",
+en:{introSub:"Arabic grammar — now it's a game!",tour1:"👋 Welcome! This is your grade. Tap here whenever you want to change it.",tour2:"⚙ Settings live here: colours, sounds and language.",tour3:"🎨 You have 18 colour themes! Tap a circle and see how the app changes.",tour4:"🎯 Mixed practice: 10 questions from every lesson — great for a quick start.",tour5:"📚 Or pick a lesson. The bar under it shows how much you've learned.",tour6:"↺ Questions you miss collect in Mistakes so you can practise them again. Stats shows your progress.",tourStep:"{i} of {n}",tourSkip:"Skip",tourDone:"Let's go! 🚀",qTip:"👆 Tap the right answer, read the explanation, then tap Next.",help:"Help",replay:"Replay the intro and tour",app:"Arabi Play",tagline:"Arabic grammar practice — only your own grade",pickTitle:"Choose your grade",g10:"Grade 10",g11:"Grade 11",g12:"Grade 12",gradeOf:"{g}",
  g10d:"Derived verb forms",g11d:"Verb types, translation, kinds of «لا»",g12d:"Particles, ḥāl, exception, absolute object",
  home:"Home",review:"Mistakes",stats:"Stats",settings:"Settings",mixed:"Mixed practice (10 questions)",lessons:"Lessons",qCount:"{n} questions",mastered:"{a} of {b}",
  foot:"Your progress is saved only on this phone or browser.",quit:"Exit",qOf:"Question {i} of {n}",right:"✓ Correct",wrong:"✗ Wrong",rightT:"✓ Well done — correct",wrongT:"✗ Not correct",next:"Next",finish:"See result",
@@ -412,12 +477,32 @@ function dialog(title,msg,btns){return new Promise(function(res){var d=$("#dlg")
 /* ---------- screens ---------- */
 var view="home",SES=null;
 function screen(id){["pick","main","play","result"].forEach(function(x){$("#"+x).hidden=x!==id});scrollTo(0,0)}
-function boot(){if(!S.grade){buildPick();screen("pick")}else{showMain()}}
+function boot(){if(!S.grade){buildPick();screen("pick")}else{showMain()}if(!S.ui.intro){S.ui.intro=1;save();intro()}}
+/* ---------- intro: first open only, under 1.5 s, one tap skips ---------- */
+function intro(done){var o=$("#intro");if(reduced||!o){done&&done();return}o.classList.remove("out");o.hidden=false;var fin=false,tm;
+ var end=function(){if(fin)return;fin=true;clearTimeout(tm);o.classList.add("out");setTimeout(function(){o.hidden=true;o.classList.remove("out");done&&done()},280)};
+ tm=setTimeout(end,1100);o.onclick=end}
+/* ---------- first-time tour ---------- */
+var TOUR=[["#gradeBadge","tour1"],['.hdr [data-act="settings"]',"tour2"],["#sheet .themes","tour3",1],['#v-home [data-m="mixed"]',"tour4"],["#v-home .ch","tour5"],[".dock","tour6"]],TI=-1;
+function startTour(){if(!S.grade||!$("#play").hidden||!$("#result").hidden)return;closeSheet();if(view!=="home")tab("home");TI=-1;$("#tour").hidden=false;tourNext()}
+function tourNext(){TI++;var s=TOUR[TI];if(!s){endTour();return}if(s[2])openSheet();else if(!$("#sheet").hidden)closeSheet();
+ var e=$(s[0]);if(!e){tourNext();return}try{e.scrollIntoView({block:"center"})}catch(x){}
+ setTimeout(function(){placeTour(e,s)},s[2]&&!reduced?340:60)}
+function box(e,l,tp,w,h){e.style.left=l+"px";e.style.top=tp+"px";e.style.width=Math.max(0,w)+"px";e.style.height=Math.max(0,h)+"px"}
+function placeTour(e,s){var r=e.getBoundingClientRect(),W=innerWidth,H=innerHeight,p=6,x=Math.max(4,r.left-p),y=Math.max(4,r.top-p),w=Math.min(W-4,r.right+p)-x,h=Math.min(H-4,r.bottom+p)-y;
+ box($("#tour .t-hole"),x,y,w,h);var B=document.querySelectorAll("#tour .t-b");box(B[0],0,0,W,y);box(B[1],0,y+h,W,H-y-h);box(B[2],0,y,x,h);box(B[3],x+w,y,W-x-w,h);
+ var cv=$("#tour .t-cover");cv.hidden=!!s[2];box(cv,x,y,w,h);
+ var c=$("#tour .t-card"),nb=$('#tour [data-act="tourNext"]');$("#tour .t-tx").textContent=t(s[1]);$("#tour .t-n").textContent=t("tourStep",{i:num(TI+1),n:num(TOUR.length)});
+ nb.textContent=TI===TOUR.length-1?t("tourDone"):t("next");$('#tour [data-act="tourSkip"]').textContent=t("tourSkip");
+ c.classList.remove("in");c.style.visibility="hidden";var ch=c.offsetHeight,cw=c.offsetWidth,top=y+h+12+ch<H-8?y+h+12:y-12-ch>=8?y-12-ch:H-8-ch;
+ c.style.top=top+"px";c.style.left=Math.min(Math.max(12,x+w/2-cw/2),W-12-cw)+"px";c.style.visibility="";void c.offsetWidth;c.classList.add("in");try{nb.focus({preventScroll:true})}catch(x){}}
+function endTour(){$("#tour").hidden=true;TI=-1;S.ui.tour=1;save();closeSheet()}
+addEventListener("resize",function(){if(!$("#tour").hidden&&TOUR[TI]){var e=$(TOUR[TI][0]);if(e)placeTour(e,TOUR[TI])}});
 function buildPick(){var c=$("#pick .gcards");c.textContent="";[10,11,12].forEach(function(g){var b=el("button","gcard");b.dataset.act="pickGrade";b.dataset.g=g;
  var n=el("span","gnum",num(g)),tx=el("span");tx.appendChild(el("b",null,GN(g)));tx.appendChild(el("small",null,t("g"+g+"d")));b.appendChild(n);b.appendChild(tx);c.appendChild(b)})}
 function showMain(){screen("main");$("#gradeBadge span").textContent=t("gradeOf",{g:GN(S.grade)});tab(view);loadGrade()}
 function loadGrade(){var g=S.grade,h=$("#v-home .chs");h.textContent="";h.appendChild(el("p","muted",t("loading")));
- Engine.load(g).then(function(){if(g===S.grade){renderHome();renderCount();if(view==="review")renderReview();if(view==="stats")renderStats()}})
+ Engine.load(g).then(function(){if(g===S.grade){renderHome();renderCount();if(view==="review")renderReview();if(view==="stats")renderStats();if(!S.ui.tour)setTimeout(function(){if(!S.ui.tour&&$("#tour").hidden&&$("#intro").hidden&&!$("#main").hidden)startTour()},450)}})
  .catch(function(){Engine.forget(g);h.textContent="";h.appendChild(el("p","muted",t("loadErr")));var b=el("button","btn",t("retry"));b.dataset.act="retry";h.appendChild(b)})}
 function chName(g,c){return(APP.chapters[g]||{})[c]||t("chapter")+" "+num(c)}
 function renderHome(){var g=S.grade,h=$("#v-home .chs"),pool=Engine.poolFor(g),p=gp(g);h.textContent="";
@@ -458,9 +543,9 @@ function renderQ(){var q=SES.qs[SES.i];if(!q||q.g!==S.grade||SES.g!==S.grade){SE
  SES.answered=false;var s=split(q.q);$("#pT").textContent=t("qOf",{i:num(SES.i+1),n:num(SES.qs.length)});$("#pS").textContent=SES.streak>1?"🔥"+num(SES.streak):"";
  $("#pB").style.width=(SES.i/SES.qs.length*100)+"%";$("#qP").textContent=s[0];var st=rich($("#qS"),s[1]);st.hidden=!s[1];st.classList.toggle("long",s[1].length>34);
  var o=$("#qO");o.textContent="";q.o.forEach(function(x,i){var b=el("button","opt"+(isAr(x)?" ar":""));b.dataset.act="ans";b.dataset.i=i;b.appendChild(el("span","k",num(i+1)));b.appendChild(el("span","tx",x));b.appendChild(el("span","mk",""));o.appendChild(b)});
- $("#qF").hidden=true;$("#qN").hidden=true;$("#qC").scrollIntoView({block:"nearest"})}
+ $("#qF").hidden=true;$("#qN").hidden=true;var qt=$("#qTip");qt.hidden=!!S.ui.qtip;if(!S.ui.qtip)qt.textContent=t("qTip");$("#qC").scrollIntoView({block:"nearest"})}
 function answer(i){if(!SES||SES.answered)return;var q=SES.qs[SES.i];if(q.g!==S.grade)return;SES.answered=true;var ok=i===q.a,g=SES.g,p=gp(g),x=p[q.id]||[0,0],w=gw(g),k=w.indexOf(q.id);
- x[ok?0:1]++;p[q.id]=x;if(ok){if(k>=0)w.splice(k,1);SES.ok++;SES.streak++;if(SES.streak>(S.best[g]||0))S.best[g]=SES.streak}else{if(k<0)w.push(q.id);SES.bad++;SES.streak=0}save();
+ x[ok?0:1]++;p[q.id]=x;if(!S.ui.qtip){S.ui.qtip=1;$("#qTip").hidden=true}if(ok){if(k>=0)w.splice(k,1);SES.ok++;SES.streak++;if(SES.streak>(S.best[g]||0))S.best[g]=SES.streak}else{if(k<0)w.push(q.id);SES.bad++;SES.streak=0}save();
  document.querySelectorAll("#qO .opt").forEach(function(b,j){b.disabled=true;if(j===q.a){b.classList.add("ok");b.querySelector(".mk").textContent=t("right")}else if(j===i){b.classList.add("bad");b.querySelector(".mk").textContent=t("wrong")}else b.classList.add("dim")});
  var f=$("#qF");f.className="fb "+(ok?"ok":"bad");f.textContent="";f.appendChild(el("h3",null,ok?(SES.streak>=5&&SES.streak%5===0?t("streakMsg",{n:num(SES.streak)}):t("rightT")):t("wrongT")));
  if(!ok)f.appendChild(el("p",null,t("correctAns",{a:q.o[q.a]})));f.appendChild(el("p",null,q.e));f.appendChild(el("p","src",q.src));f.hidden=false;
@@ -488,6 +573,7 @@ function buildSheet(){built=true;var s=$("#sheet .body"),sec=function(k){var d=e
  var vr=el("div","srow"),vl=el("label",null,t("vol"));vl.htmlFor="vol";var vi=el("input");vi.type="range";vi.id="vol";vi.min=0;vi.max=100;vi.step=5;vr.appendChild(vl);vr.appendChild(el("b","",""));sd.appendChild(vr);sd.appendChild(vi);
  sd.appendChild(swRow("tapSound","tapS"));if("vibrate" in navigator)sd.appendChild(swRow("vib","vibS"));sd.appendChild(el("p","note",t("muteNote")));sd.appendChild(el("p","note",t("deviceNote")));
  if(/^https?:/.test(location.protocol)){var ln=sec("share"),lr=el("div","link"),cd=el("code",null,location.origin+location.pathname.replace(/index\.html$/,""));var cb=el("button","btn ghost",t("copy"));cb.dataset.act="copyLink";lr.appendChild(cd);lr.appendChild(cb);ln.appendChild(lr)}
+ var hp=sec("help"),hb=el("button","btn ghost wide",t("replay"));hb.dataset.act="replay";hp.appendChild(hb);
  var rs=sec("reset"),rb=el("button","btn ghost wide",t("reset"));rb.dataset.act="reset";rs.appendChild(rb);
  s.appendChild(el("p","ver",t("version",{v:APP.version})));
  vi.addEventListener("input",function(){SND.vol=+vi.value;vr.querySelector("b").textContent=num(SND.vol)+"٪";saveSnd()});
@@ -523,10 +609,12 @@ document.addEventListener("click",function(ev){var b=ev.target.closest("[data-ac
  case"reset":dialog(t("reset"),t("resetQ"),[{label:t("resetGrade",{g:GN(S.grade)}),val:"g",primary:true},{label:t("resetAll"),val:"a",primary:true},{label:t("cancel"),val:null}]).then(function(v){
    if(!v)return;if(v==="g"){[S.prog,S.wrong,S.hist,S.best].forEach(function(o){delete o[S.grade]})}else{S.prog={};S.wrong={};S.hist={};S.best={};S.ui={}}save();renderHome();renderCount();tab(view)});break;
  case"copyLink":try{navigator.clipboard.writeText($("#sheet .link code").textContent).then(function(){b.textContent=t("copied")})}catch(e){}break;
+ case"tourNext":tourNext();break;case"tourSkip":endTour();break;
+ case"replay":closeSheet();S.ui.tour=0;S.ui.qtip=0;save();view="home";showMain();intro(function(){startTour()});break;
  case"tipClose":S.ui.iosTip=1;save();$("#tip").hidden=true;break;
  case"upd":window.__wantReload=true;if(window.__reg&&window.__reg.waiting)window.__reg.waiting.postMessage("skip");break;
  }});
-document.addEventListener("keydown",function(e){if(e.key==="Escape"){if(dlgDone)dlgDone();else if(!$("#sheet").hidden)closeSheet();return}
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){if(!$("#tour").hidden)endTour();else if(dlgDone)dlgDone();else if(!$("#sheet").hidden)closeSheet();return}
  if(!$("#play").hidden&&!dlgDone){var n=+e.key;if(n>=1&&n<=4&&!(SES&&SES.answered)){e.preventDefault();SFX.unlock();answer(n-1)}else if(e.key==="Enter"&&SES&&SES.answered&&document.activeElement===document.body){next()}}});
 $("#scrim").addEventListener("click",closeSheet);$("#dlgScrim").addEventListener("click",function(){dlgDone&&dlgDone()});
 /* ---------- service worker (web app only): never reload by itself ---------- */

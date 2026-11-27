@@ -1,6 +1,6 @@
 /* Service worker: caches the app; each grade's questions are cached when first asked for. */
-var V="1.0.0",PRE="arabibazi-v",CACHE=PRE+V;
-var CORE=["./","./index.html","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png","./icons/maskable-512.png","./icons/apple-touch-icon.png","./fonts/vazirmatn-Regular.woff2","./fonts/vazirmatn-Bold.woff2"];
+var V="1.0.1",PRE="arabibazi-v",CACHE=PRE+V;
+var CORE=["./","./index.html","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png","./icons/maskable-512.png","./icons/apple-touch-icon.png","./fonts/vazirmatn-Regular.woff2","./fonts/vazirmatn-Bold.woff2","./fonts/playpen-arabic.woff2"];
 var isBank=function(u){return/\/q1[012]\.json$/.test(new URL(u,self.location).pathname)};
 self.addEventListener("install",function(e){e.waitUntil(caches.open(CACHE).then(function(c){return c.addAll(CORE).then(function(){
  // carry over the grades this device already uses, fresh from the network

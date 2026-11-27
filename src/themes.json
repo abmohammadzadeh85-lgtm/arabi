@@ -1,365 +1,385 @@
 {
-"dark": {
-"bg": "#101410",
-"bg2": "#171B15",
-"card": "#1B211A",
-"ink": "#EDEADF",
-"dim": "#9AA394",
-"line": "#2B3226",
-"gold": "#D9A24B",
-"sage": "#7FAE86",
-"rust": "#C1653F",
-"on": "#101410",
-"r": 14,
-"light": 0,
-"ok": "#7FC98A",
-"bad": "#E8806A",
-"name": [
-"Dark (Classic)",
-"تیره (کلاسیک)"
-]
-},
-"light": {
-"bg": "#F4F1E8",
-"bg2": "#EDE9DB",
-"card": "#FFFDF7",
-"ink": "#1E2117",
-"dim": "#6b6f5f",
-"line": "#DBD5C2",
-"gold": "#B4802C",
-"sage": "#5C8563",
-"rust": "#A94E2C",
-"on": "#1E2117",
-"r": 14,
-"light": 1,
-"ok": "#2F7D3F",
-"bad": "#B3261E",
-"name": [
-"Light",
-"روشن"
-]
-},
-"underground": {
-"bg": "#0A0B0C",
-"bg2": "#141516",
-"card": "#17191A",
-"ink": "#D7DAD5",
-"dim": "#7D857F",
-"line": "#26292A",
-"gold": "#6FC7CF",
-"sage": "#5A6B68",
-"rust": "#8A5A52",
-"on": "#0A0B0C",
-"r": 2,
-"light": 0,
-"ok": "#5FD39A",
-"bad": "#F07A6E",
-"name": [
-"Underground",
-"زیرزمین"
-]
-},
-"hacker": {
-"bg": "#070B10",
-"bg2": "#0D141C",
-"card": "#0F1922",
-"ink": "#D8FCEA",
-"dim": "#5F8B79",
-"line": "#163226",
-"gold": "#39F2A6",
-"sage": "#2ED98E",
-"rust": "#F2578A",
-"on": "#070B10",
-"r": 18,
-"light": 0,
-"ok": "#39F2A6",
-"bad": "#F2578A",
-"name": [
-"Hacker",
-"هکر"
-]
-},
-"gaming": {
-"bg": "#0A0A14",
-"bg2": "#121226",
-"card": "#161631",
-"ink": "#F1EEFF",
-"dim": "#9490C2",
-"line": "#2A2A52",
-"gold": "#FF2BD6",
-"sage": "#2BE8FF",
-"rust": "#FF5A5A",
-"on": "#0A0A14",
-"r": 12,
-"light": 0,
-"ok": "#3DF59A",
-"bad": "#FF5A5A",
-"name": [
-"Gaming",
-"گیمینگ"
-]
-},
-"cyberpunk": {
-"bg": "#0A0612",
-"bg2": "#140B1F",
-"card": "#190F26",
-"ink": "#F2E9FF",
-"dim": "#8C7FA8",
-"line": "#331E4D",
-"gold": "#00F0FF",
-"sage": "#FF2E9F",
-"rust": "#FF5A36",
-"on": "#0A0612",
-"r": 4,
-"light": 0,
-"ok": "#3DFFA2",
-"bad": "#FF5A36",
-"name": [
-"Cyberpunk",
-"سایبرپانک"
-]
-},
-"vaporwave": {
-"bg": "#190B2E",
-"bg2": "#241140",
-"card": "#2B1550",
-"ink": "#FBEFFF",
-"dim": "#B49BD6",
-"line": "#432875",
-"gold": "#FF6AD5",
-"sage": "#8AFFF1",
-"rust": "#FF8585",
-"on": "#190B2E",
-"r": 20,
-"light": 0,
-"ok": "#7CFFB2",
-"bad": "#FF8585",
-"name": [
-"Vaporwave",
-"ویپرویو"
-]
-},
-"minimal": {
-"bg": "#F7F5F0",
-"bg2": "#F0EDE5",
-"card": "#FFFFFF",
-"ink": "#2B2B28",
-"dim": "#716E66",
-"line": "#E7E3D8",
-"gold": "#7C9473",
-"sage": "#8FA47F",
-"rust": "#B9746A",
-"on": "#242422",
-"r": 16,
-"light": 1,
-"ok": "#4E7A45",
-"bad": "#A84B3F",
-"name": [
-"Minimal",
-"مینیمال"
-]
-},
-"discord": {
-"bg": "#1E2124",
-"bg2": "#2B2D31",
-"card": "#313338",
-"ink": "#F2F3F5",
-"dim": "#949BA4",
-"line": "#3F4248",
-"gold": "#5865F2",
-"sage": "#23A55A",
-"rust": "#F23F42",
-"on": "#FFFFFF",
-"r": 10,
-"light": 0,
-"ok": "#2DC26B",
-"bad": "#F25456",
-"name": [
-"Discord",
-"دیسکورد"
-]
-},
-"instagram": {
-"bg": "#120B10",
-"bg2": "#1D1317",
-"card": "#24161C",
-"ink": "#FDEEF4",
-"dim": "#A98A96",
-"line": "#3B2530",
-"gold": "#E1306C",
-"sage": "#833AB4",
-"rust": "#F77737",
-"on": "#0C070A",
-"r": 16,
-"light": 0,
-"ok": "#4FD18B",
-"bad": "#FF5A5F",
-"name": [
-"Instagram",
-"اینستاگرام"
-]
-},
-"daybreak": {
-"bg": "#F7F8FC",
-"bg2": "#EEF0FA",
-"card": "#FFFFFF",
-"ink": "#1B1E2B",
-"dim": "#6B7090",
-"line": "#E2E4F3",
-"gold": "#4F5FFF",
-"sage": "#2FBFA6",
-"rust": "#E2574C",
-"on": "#FFFFFF",
-"r": 14,
-"light": 1,
-"ok": "#1E8E5E",
-"bad": "#D93D33",
-"name": [
-"Daybreak",
-"سپیده‌دم"
-]
-},
-"blossom": {
-"bg": "#FFF6F8",
-"bg2": "#FFEDF1",
-"card": "#FFFFFF",
-"ink": "#3A2430",
-"dim": "#876872",
-"line": "#FAD9E2",
-"gold": "#E8638C",
-"sage": "#B98FD4",
-"rust": "#D46A54",
-"on": "#37222D",
-"r": 18,
-"light": 1,
-"ok": "#2E8B57",
-"bad": "#C8423A",
-"name": [
-"Blossom",
-"شکوفه"
-]
-},
-"midnight": {
-"bg": "#06141B",
-"bg2": "#0B1C26",
-"card": "#11212D",
-"ink": "#CCD0CF",
-"dim": "#9BA8AB",
-"line": "#253745",
-"gold": "#CCD0CF",
-"sage": "#9BA8AB",
-"rust": "#E0957B",
-"on": "#06141B",
-"r": 14,
-"light": 0,
-"ok": "#7CC5A0",
-"bad": "#E8806C",
-"name": [
-"Midnight",
-"نیمه‌شب"
-]
-},
-"mauve": {
-"bg": "#3E3239",
-"bg2": "#463840",
-"card": "#4A3C44",
-"ink": "#F7EFE7",
-"dim": "#C7A9A3",
-"line": "#6B5560",
-"gold": "#E8D2C4",
-"sage": "#C7A9A3",
-"rust": "#F2A765",
-"on": "#3E3239",
-"r": 16,
-"light": 0,
-"ok": "#9FD8A8",
-"bad": "#F5907E",
-"name": [
-"Mauve",
-"ارغوانی"
-]
-},
-"forest": {
-"bg": "#051F20",
-"bg2": "#092928",
-"card": "#0B2B26",
-"ink": "#DAF1DE",
-"dim": "#8EB69B",
-"line": "#163832",
-"gold": "#DAF1DE",
-"sage": "#8EB69B",
-"rust": "#E39B6B",
-"on": "#051F20",
-"r": 14,
-"light": 0,
-"ok": "#8EDB9F",
-"bad": "#F08C6C",
-"name": [
-"Forest",
-"جنگل"
-]
-},
-"glass": {
-"bg": "#E8DCCF",
-"bg2": "#DDCDBE",
-"card": "#F4EDE6",
-"ink": "#1F1915",
-"dim": "#5B5048",
-"line": "#FFFFFF",
-"gold": "#E4572E",
-"sage": "#0E9A81",
-"rust": "#C9391F",
-"on": "#1F1915",
-"r": 18,
-"light": 1,
-"ok": "#0B7F6A",
-"bad": "#C9391F",
-"special": "glass",
-"name": [
-"Glass",
-"شیشه"
-]
-},
-"paper": {
-"bg": "#F6F1E3",
-"bg2": "#EFE8D5",
-"card": "#FBF7EC",
-"ink": "#1F3A9F",
-"dim": "#4B5A93",
-"line": "#C9C1AA",
-"gold": "#1F3A9F",
-"sage": "#2E7D46",
-"rust": "#C4302B",
-"on": "#FBF7EC",
-"r": 4,
-"light": 1,
-"ok": "#26703D",
-"bad": "#C4302B",
-"special": "paper",
-"name": [
-"Paper",
-"کاغذ"
-]
-},
-"pen": {
-"bg": "#E7EEF7",
-"bg2": "#F3E4EE",
-"card": "#F7F8FC",
-"ink": "#1B3798",
-"dim": "#4A5893",
-"line": "#FFFFFF",
-"gold": "#1B3798",
-"sage": "#2E7D46",
-"rust": "#C4302B",
-"on": "#FFFFFF",
-"r": 12,
-"light": 1,
-"ok": "#2E7D46",
-"bad": "#C4302B",
-"special": "pen",
-"name": [
-"Glass + pen",
-"شیشه و خودکار"
-]
-}
+ "ink": {
+  "bg": "#0D0E15",
+  "bg2": "#141624",
+  "card": "#181A2C",
+  "ink": "#EDEBFF",
+  "dim": "#A3A1C2",
+  "line": "#2A2D48",
+  "gold": "#7C3AED",
+  "sage": "#06B6D4",
+  "rust": "#F59E0B",
+  "on": "#FFFFFF",
+  "r": 18,
+  "light": 0,
+  "ok": "#34D399",
+  "bad": "#FB7185",
+  "name": [
+   "Glass & Ink",
+   "شیشه و جوهر"
+  ]
+ },
+ "dark": {
+  "bg": "#101410",
+  "bg2": "#171B15",
+  "card": "#1B211A",
+  "ink": "#EDEADF",
+  "dim": "#9AA394",
+  "line": "#2B3226",
+  "gold": "#D9A24B",
+  "sage": "#7FAE86",
+  "rust": "#C1653F",
+  "on": "#101410",
+  "r": 14,
+  "light": 0,
+  "ok": "#7FC98A",
+  "bad": "#E8806A",
+  "name": [
+   "Dark (Classic)",
+   "تیره (کلاسیک)"
+  ]
+ },
+ "light": {
+  "bg": "#F4F1E8",
+  "bg2": "#EDE9DB",
+  "card": "#FFFDF7",
+  "ink": "#1E2117",
+  "dim": "#6b6f5f",
+  "line": "#DBD5C2",
+  "gold": "#B4802C",
+  "sage": "#5C8563",
+  "rust": "#A94E2C",
+  "on": "#1E2117",
+  "r": 14,
+  "light": 1,
+  "ok": "#2F7D3F",
+  "bad": "#B3261E",
+  "name": [
+   "Light",
+   "روشن"
+  ]
+ },
+ "underground": {
+  "bg": "#0A0B0C",
+  "bg2": "#141516",
+  "card": "#17191A",
+  "ink": "#D7DAD5",
+  "dim": "#7D857F",
+  "line": "#26292A",
+  "gold": "#6FC7CF",
+  "sage": "#5A6B68",
+  "rust": "#8A5A52",
+  "on": "#0A0B0C",
+  "r": 2,
+  "light": 0,
+  "ok": "#5FD39A",
+  "bad": "#F07A6E",
+  "name": [
+   "Underground",
+   "زیرزمین"
+  ]
+ },
+ "hacker": {
+  "bg": "#070B10",
+  "bg2": "#0D141C",
+  "card": "#0F1922",
+  "ink": "#D8FCEA",
+  "dim": "#5F8B79",
+  "line": "#163226",
+  "gold": "#39F2A6",
+  "sage": "#2ED98E",
+  "rust": "#F2578A",
+  "on": "#070B10",
+  "r": 18,
+  "light": 0,
+  "ok": "#39F2A6",
+  "bad": "#F2578A",
+  "name": [
+   "Hacker",
+   "هکر"
+  ]
+ },
+ "gaming": {
+  "bg": "#0A0A14",
+  "bg2": "#121226",
+  "card": "#161631",
+  "ink": "#F1EEFF",
+  "dim": "#9490C2",
+  "line": "#2A2A52",
+  "gold": "#FF2BD6",
+  "sage": "#2BE8FF",
+  "rust": "#FF5A5A",
+  "on": "#0A0A14",
+  "r": 12,
+  "light": 0,
+  "ok": "#3DF59A",
+  "bad": "#FF5A5A",
+  "name": [
+   "Gaming",
+   "گیمینگ"
+  ]
+ },
+ "cyberpunk": {
+  "bg": "#0A0612",
+  "bg2": "#140B1F",
+  "card": "#190F26",
+  "ink": "#F2E9FF",
+  "dim": "#8C7FA8",
+  "line": "#331E4D",
+  "gold": "#00F0FF",
+  "sage": "#FF2E9F",
+  "rust": "#FF5A36",
+  "on": "#0A0612",
+  "r": 4,
+  "light": 0,
+  "ok": "#3DFFA2",
+  "bad": "#FF5A36",
+  "name": [
+   "Cyberpunk",
+   "سایبرپانک"
+  ]
+ },
+ "vaporwave": {
+  "bg": "#190B2E",
+  "bg2": "#241140",
+  "card": "#2B1550",
+  "ink": "#FBEFFF",
+  "dim": "#B49BD6",
+  "line": "#432875",
+  "gold": "#FF6AD5",
+  "sage": "#8AFFF1",
+  "rust": "#FF8585",
+  "on": "#190B2E",
+  "r": 20,
+  "light": 0,
+  "ok": "#7CFFB2",
+  "bad": "#FF8585",
+  "name": [
+   "Vaporwave",
+   "ویپرویو"
+  ]
+ },
+ "minimal": {
+  "bg": "#F7F5F0",
+  "bg2": "#F0EDE5",
+  "card": "#FFFFFF",
+  "ink": "#2B2B28",
+  "dim": "#716E66",
+  "line": "#E7E3D8",
+  "gold": "#7C9473",
+  "sage": "#8FA47F",
+  "rust": "#B9746A",
+  "on": "#242422",
+  "r": 16,
+  "light": 1,
+  "ok": "#4E7A45",
+  "bad": "#A84B3F",
+  "name": [
+   "Minimal",
+   "مینیمال"
+  ]
+ },
+ "discord": {
+  "bg": "#1E2124",
+  "bg2": "#2B2D31",
+  "card": "#313338",
+  "ink": "#F2F3F5",
+  "dim": "#949BA4",
+  "line": "#3F4248",
+  "gold": "#5865F2",
+  "sage": "#23A55A",
+  "rust": "#F23F42",
+  "on": "#FFFFFF",
+  "r": 10,
+  "light": 0,
+  "ok": "#2DC26B",
+  "bad": "#F25456",
+  "name": [
+   "Discord",
+   "دیسکورد"
+  ]
+ },
+ "instagram": {
+  "bg": "#120B10",
+  "bg2": "#1D1317",
+  "card": "#24161C",
+  "ink": "#FDEEF4",
+  "dim": "#A98A96",
+  "line": "#3B2530",
+  "gold": "#E1306C",
+  "sage": "#833AB4",
+  "rust": "#F77737",
+  "on": "#0C070A",
+  "r": 16,
+  "light": 0,
+  "ok": "#4FD18B",
+  "bad": "#FF5A5F",
+  "name": [
+   "Instagram",
+   "اینستاگرام"
+  ]
+ },
+ "daybreak": {
+  "bg": "#F7F8FC",
+  "bg2": "#EEF0FA",
+  "card": "#FFFFFF",
+  "ink": "#1B1E2B",
+  "dim": "#6B7090",
+  "line": "#E2E4F3",
+  "gold": "#4F5FFF",
+  "sage": "#2FBFA6",
+  "rust": "#E2574C",
+  "on": "#FFFFFF",
+  "r": 14,
+  "light": 1,
+  "ok": "#1E8E5E",
+  "bad": "#D93D33",
+  "name": [
+   "Daybreak",
+   "سپیده‌دم"
+  ]
+ },
+ "blossom": {
+  "bg": "#FFF6F8",
+  "bg2": "#FFEDF1",
+  "card": "#FFFFFF",
+  "ink": "#3A2430",
+  "dim": "#876872",
+  "line": "#FAD9E2",
+  "gold": "#E8638C",
+  "sage": "#B98FD4",
+  "rust": "#D46A54",
+  "on": "#37222D",
+  "r": 18,
+  "light": 1,
+  "ok": "#2E8B57",
+  "bad": "#C8423A",
+  "name": [
+   "Blossom",
+   "شکوفه"
+  ]
+ },
+ "midnight": {
+  "bg": "#06141B",
+  "bg2": "#0B1C26",
+  "card": "#11212D",
+  "ink": "#CCD0CF",
+  "dim": "#9BA8AB",
+  "line": "#253745",
+  "gold": "#CCD0CF",
+  "sage": "#9BA8AB",
+  "rust": "#E0957B",
+  "on": "#06141B",
+  "r": 14,
+  "light": 0,
+  "ok": "#7CC5A0",
+  "bad": "#E8806C",
+  "name": [
+   "Midnight",
+   "نیمه‌شب"
+  ]
+ },
+ "mauve": {
+  "bg": "#3E3239",
+  "bg2": "#463840",
+  "card": "#4A3C44",
+  "ink": "#F7EFE7",
+  "dim": "#C7A9A3",
+  "line": "#6B5560",
+  "gold": "#E8D2C4",
+  "sage": "#C7A9A3",
+  "rust": "#F2A765",
+  "on": "#3E3239",
+  "r": 16,
+  "light": 0,
+  "ok": "#9FD8A8",
+  "bad": "#F5907E",
+  "name": [
+   "Mauve",
+   "ارغوانی"
+  ]
+ },
+ "forest": {
+  "bg": "#051F20",
+  "bg2": "#092928",
+  "card": "#0B2B26",
+  "ink": "#DAF1DE",
+  "dim": "#8EB69B",
+  "line": "#163832",
+  "gold": "#DAF1DE",
+  "sage": "#8EB69B",
+  "rust": "#E39B6B",
+  "on": "#051F20",
+  "r": 14,
+  "light": 0,
+  "ok": "#8EDB9F",
+  "bad": "#F08C6C",
+  "name": [
+   "Forest",
+   "جنگل"
+  ]
+ },
+ "glass": {
+  "bg": "#E8DCCF",
+  "bg2": "#DDCDBE",
+  "card": "#F4EDE6",
+  "ink": "#1F1915",
+  "dim": "#5B5048",
+  "line": "#FFFFFF",
+  "gold": "#E4572E",
+  "sage": "#0E9A81",
+  "rust": "#C9391F",
+  "on": "#1F1915",
+  "r": 18,
+  "light": 1,
+  "ok": "#0B7F6A",
+  "bad": "#C9391F",
+  "special": "glass",
+  "name": [
+   "Glass",
+   "شیشه"
+  ]
+ },
+ "paper": {
+  "bg": "#F6F1E3",
+  "bg2": "#EFE8D5",
+  "card": "#FBF7EC",
+  "ink": "#1F3A9F",
+  "dim": "#4B5A93",
+  "line": "#C9C1AA",
+  "gold": "#1F3A9F",
+  "sage": "#2E7D46",
+  "rust": "#C4302B",
+  "on": "#FBF7EC",
+  "r": 4,
+  "light": 1,
+  "ok": "#26703D",
+  "bad": "#C4302B",
+  "special": "paper",
+  "name": [
+   "Paper",
+   "کاغذ"
+  ]
+ },
+ "pen": {
+  "bg": "#E7EEF7",
+  "bg2": "#F3E4EE",
+  "card": "#F7F8FC",
+  "ink": "#1B3798",
+  "dim": "#4A5893",
+  "line": "#FFFFFF",
+  "gold": "#1B3798",
+  "sage": "#2E7D46",
+  "rust": "#C4302B",
+  "on": "#FFFFFF",
+  "r": 12,
+  "light": 1,
+  "ok": "#2E7D46",
+  "bad": "#C4302B",
+  "special": "pen",
+  "name": [
+   "Glass + pen",
+   "شیشه و خودکار"
+  ]
+ }
 }

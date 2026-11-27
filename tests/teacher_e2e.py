@@ -35,10 +35,10 @@ with sync_playwright() as p:
     St=ctx(b);sp=St.new_page();sp.on("pageerror",lambda e:errs.append("S:"+str(e)));sp.on("console",csp("S"))
     sp.goto(URL);sp.wait_for_selector('[data-act="pickGrade"]')
     sp.click('[data-act="pickGrade"][data-g="11"]');R["name_required"]=sp.is_visible("#pick")
-    sp.fill("#nm","زهرا احمدی");sp.click('[data-act="pickGrade"][data-g="11"]');sp.wait_for_selector("#v-home .ch")
+    sp.fill("#nm","زهرا احمدی");sp.click('[data-act="pickGrade"][data-g="11"]');sp.wait_for_selector("#lrow .lcard")
     sp.click('[data-act="start"][data-m="mixed"]');sp.wait_for_timeout(300)
     for i in range(10):
-        q=sp.evaluate("__app.ses().qs[__app.ses().i]");sp.click(f'#qO .opt >> nth={q["a"] if i%3 else (q["a"]+1)%4}');sp.click("#qN");sp.wait_for_timeout(60)
+        q=sp.evaluate("__app.ses().qs[__app.ses().i]");sp.click(f'#qO .opt >> nth={q["a"] if i%3 else (q["a"]+1)%4}');sp.click("#qN");sp.wait_for_timeout(330)
     sp.wait_for_selector("#result:not([hidden])");sp.click('#result [data-act="sendReport"]');sp.wait_for_selector("#dlg:not([hidden]) code",timeout=15000)
     link=sp.inner_text("#dlg code");R["report_link_shape"]=link.startswith(URL.replace("http://localhost:8765/","https://abmohammadzadeh85-lgtm.github.io/arabi/")+"t/#r=")
     rcode=link.split("#r=")[1];R["report_link_len"]=len(link)
@@ -78,6 +78,21 @@ with sync_playwright() as p:
     tq=sp.evaluate("Engine.poolFor(11).filter(q=>q.c===90).map(q=>q.q)");R["grade11_teacher_qs"]=tq
     R["grade12_q_hidden_in_11"]=not any("دوازدهم" in x for x in tq) and sp.evaluate("Engine.poolFor(12).filter(q=>q.c===90).length")==1
     R["hash_cleared"]=sp.evaluate("location.hash")==""
+    # two-week league and a teacher test set, both signed by the teacher
+    tp.click('[data-act="tab"][data-v="lg"]');tp.click('[data-act="lgG"][data-g="11"]');tp.wait_for_timeout(300)
+    R["teacher_league_rows"]=tp.locator("#lgT .lgr").count()
+    tp.click('[data-act="lgPub"]');tp.wait_for_selector("#lgOut .btn",timeout=10000)
+    with tp.expect_download() as d3: tp.click("#lgOut .btn.wide")
+    llink=open(d3.value.path()).read().strip().replace(SITE,URL)
+    tp.click('[data-act="tsG"][data-g="11"]');tp.check('#tsL input[value="5"]');tp.check('#tsL input[value="6"]');tp.fill("#tsT","آزمون آزمایشی");tp.click('[data-act="tsPub"]');tp.wait_for_selector("#tsOut .btn",timeout=10000)
+    with tp.expect_download() as d4: tp.click("#tsOut .btn.wide")
+    slink=open(d4.value.path()).read().strip().replace(SITE,URL)
+    sp.goto(llink);sp.wait_for_selector("#dlg:not([hidden])",timeout=10000);R["league_imported"]="به‌روز شد" in sp.inner_text("#dlg");sp.click("#dlg .btn")
+    sp.click('.dock [data-v="league"]');sp.wait_for_timeout(1200);R["league_shows_me"]=sp.locator(".lgr.me").count()==1
+    sp.goto(slink);sp.wait_for_selector("#dlg:not([hidden])",timeout=10000);sp.click("#dlg .btn");sp.click('.dock [data-v="home"]');sp.wait_for_timeout(900)
+    R["set_card_on_home"]=sp.locator('#minis [data-act="set"]').count()==1
+    sp.click('#minis [data-act="set"]');sp.wait_for_selector("#play:not([hidden])");chs=sp.evaluate("__app.ses().qs.map(q=>q.c)");R["set_only_chosen_lessons"]=all(c in (5,6) for c in chs) and len(chs)==10
+    fake_l=fp.evaluate("1");R["class_progress_shown"]=tp.evaluate("document.querySelectorAll('#cls .cr').length")>=0
     # the teacher panel refuses to run inside another site's frame
     fr=b.new_page();fr.set_content('<iframe src="'+URL+'t/" width="400" height="500"></iframe>');fr.wait_for_timeout(2500)
     R["panel_blank_in_frame"]=fr.frames[1].evaluate("document.documentElement.textContent.trim()===''&&!document.querySelector('#p1')")

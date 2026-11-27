@@ -17,14 +17,14 @@ with sync_playwright() as p:
     open("src/teacher.json","w").write(json.dumps({"code":code}));subprocess.run(["node","build.mjs"],check=True,capture_output=True);subprocess.run("rm -rf /tmp/site && cp -r dist/pwa /tmp/site",shell=True,check=True)
     links=[]
     for name,g,good in (("زهرا احمدی",11,.8),("علی رضایی",11,.5),("مریم کریمی",12,.9),("حسین مرادی",10,.6)):
-        S=ctx(b,SEEN(name));sp=S.new_page();sp.goto(URL);sp.click(f'[data-act="pickGrade"][data-g="{g}"]');sp.wait_for_selector("#v-home .ch")
+        S=ctx(b,SEEN(name));sp=S.new_page();sp.goto(URL);sp.click(f'[data-act="pickGrade"][data-g="{g}"]');sp.wait_for_selector("#lrow .lcard")
         for rnd in range(3):
             sp.click('[data-act="start"][data-m="mixed"]');sp.wait_for_timeout(200)
             for i in range(10):
                 q=sp.evaluate("__app.ses().qs[__app.ses().i]");ok=((i*7+rnd*3)%10)/10<good
-                sp.click(f'#qO .opt >> nth={q["a"] if ok else (q["a"]+1)%4}');sp.click("#qN");sp.wait_for_timeout(40)
+                sp.click(f'#qO .opt >> nth={q["a"] if ok else (q["a"]+1)%4}');sp.click("#qN");sp.wait_for_timeout(330)
             sp.wait_for_selector("#result:not([hidden])")
-            if rnd<2:sp.click('#result [data-act="home"]');sp.wait_for_selector("#v-home .ch")
+            if rnd<2:sp.click('#result [data-act="home"]');sp.wait_for_selector("#lrow .lcard")
         if name=="زهرا احمدی":sp.screenshot(path="/tmp/s1_result.png")
         sp.click('#result [data-act="sendReport"]');sp.wait_for_selector("#dlg:not([hidden]) code",timeout=15000)
         if name=="زهرا احمدی":sp.screenshot(path="/tmp/s2_link.png")

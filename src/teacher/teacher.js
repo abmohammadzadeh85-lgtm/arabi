@@ -67,7 +67,8 @@ function bkAge(){var t=rd(BK,0);$("#bkAge").textContent=t?"آخرین پشتیب
 function clampReport(r){if(!r||r.t!=="r"||typeof r.id!=="string")return null;var g=+r.g;if([10,11,12].indexOf(g)<0)return null;
  var out={id:String(r.id).slice(0,40),n:String(r.n||"بی‌نام").slice(0,40),g:g,at:+r.at||0,ver:String(r.ver||"").slice(0,12),gr:{}};
  Object.keys(r.gr||{}).forEach(function(k){var x=r.gr[k],gg=+k;if([10,11,12].indexOf(gg)<0||!x)return;var ch={};Object.keys(x.ch||{}).forEach(function(c){var v=x.ch[c];if(Array.isArray(v)&&v.length===4)ch[+c]=v.map(function(z){return Math.max(0,Math.min(1e6,+z||0))})});
-  out.gr[gg]={ch:ch,ans:+x.ans||0,ok:+x.ok||0,ses:+x.ses||0,best:+x.best||0,wr:+x.wr||0,last:Array.isArray(x.last)?x.last.slice(-10):[]}});return out}
+  out.gr[gg]={ch:ch,ans:+x.ans||0,ok:+x.ok||0,ses:+x.ses||0,best:+x.best||0,wr:+x.wr||0,last:Array.isArray(x.last)?x.last.slice(-10):[]}});
+ out.xp=Math.max(0,Math.min(1e7,+r.xp||0));out.stk=Math.max(0,Math.min(9999,+r.stk||0));out.day=(Array.isArray(r.day)?r.day:[]).slice(-90).filter(function(d){return Array.isArray(d)&&d[0]>20200101&&d[0]<21000101}).map(function(d){return[+d[0],Math.max(0,Math.min(5000,+d[1]||0))]});return out}
 function addReport(r){var s=STUD[r.id];if(!s)s=STUD[r.id]={id:r.id,list:[]};if(s.list.some(function(x){return x.at===r.at}))return false;s.list.push(r);s.list.sort(function(a,b){return a.at-b.at});s.last=s.list[s.list.length-1];return true}
 function loadReports(){STUD={};var all=rd(RK,[]);return Promise.all(all.map(function(x){return AB.open(x.c,KEYS.dh).then(clampReport).catch(function(){return null})})).then(function(rs){rs.forEach(function(r){if(r)addReport(r)});renderList()})}
 function codesIn(text){var out=[],re=/#r=([A-Za-z0-9_-]{60,})/g,m;while((m=re.exec(text)))out.push(m[1]);if(!out.length){String(text).split(/\s+/).forEach(function(t){if(/^[A-Za-z0-9_-]{120,}$/.test(t))out.push(t)})}return out}
@@ -78,7 +79,7 @@ function importCodes(codes){var all=rd(RK,[]),have=new Set(all.map(function(x){r
 function toastImport(r){var t=[];if(r.added)t.push("✓ "+fa(r.added)+" کارنامه اضافه شد: "+r.names.slice(0,5).join("، ")+(r.names.length>5?"…":""));if(r.dup)t.push(fa(r.dup)+" تکراری بود.");if(r.bad)t.push(fa(r.bad)+" باز نشد (مال این پنل نیست یا خراب است).");
  msg("impMsg",t.join(" ")||"لینکی پیدا نشد.",r.added>0);if(r.added&&!$("#s-dash").hidden)tab("rep")}
 function summary(s,g){var x=s.last.gr[g]||{ch:{}},m=0,tot=0;Object.keys(x.ch).forEach(function(c){m+=x.ch[c][0];tot+=x.ch[c][1]});return{acc:x.ans?Math.round(x.ok/x.ans*100):null,m:m,tot:tot,ses:x.ses||0,ans:x.ans||0,wr:x.wr||0}}
-function renderList(){var box=$("#stList");if(!box)return;box.textContent="";var q=($("#q").value||"").trim(),list=Object.keys(STUD).map(function(k){return STUD[k]});
+function renderList(){renderClass();var box=$("#stList");if(!box)return;box.textContent="";var q=($("#q").value||"").trim(),list=Object.keys(STUD).map(function(k){return STUD[k]});
  $$("#gf button").forEach(function(b){b.setAttribute("aria-pressed",+b.dataset.g===GF)});
  if(!list.length){box.appendChild(el("p","empty card","هنوز کارنامه‌ای نرسیده. وقتی دانش‌آموزها از بخش «آمار» کارنامه بفرستند، اینجا به ترتیب پایه و اسم دیده می‌شوند."));return}
  var names={};list.forEach(function(s){var k=s.last.n.trim();names[k]=(names[k]||0)+1});
@@ -133,8 +134,35 @@ function publish(){var L=drafts(),todo=L.filter(function(x){return!x.pub});if(!t
   cb.onclick=function(){copy(url,cb,url.length>400?null:out.querySelector("code"))};sb.onclick=function(){if(navigator.share)navigator.share({title:"سؤال‌های تازهٔ معلم",text:"سؤال‌های تازهٔ معلم برای عربی‌بازی",url:url}).catch(function(){});else copy(url,sb)};r.appendChild(cb);r.appendChild(sb);out.appendChild(r);
   var fb=el("button","btn ghost wide","دانلود به‌صورت فایل");fb.onclick=function(){download("soal-moalem-"+pid+".txt",url)};out.appendChild(fb);
   if(url.length>6000)out.appendChild(el("p","note","این لینک بلند است؛ اگر پیام‌رسان آن را کوتاه کرد، فایل را بفرستید و دانش‌آموزها از «تنظیمات ← سؤال‌های معلم ← از فایل» واردش کنند."))})}
+function linkOut(box,url,file,title,help){box.textContent="";box.appendChild(el("p","note",help));var cd=el("code","codebox",url.length>400?url.slice(0,160)+"…":url);cd.dir="ltr";box.appendChild(cd);
+ var r=el("div","row2"),cb=el("button","btn","کپی لینک"),sb=el("button","btn ghost","فرستادن");cb.onclick=function(){copy(url,cb,url.length>400?null:box.querySelector("code"))};
+ sb.onclick=function(){if(navigator.share)navigator.share({title:title,text:title,url:url}).catch(function(){});else copy(url,sb)};r.appendChild(cb);r.appendChild(sb);box.appendChild(r);
+ var fb=el("button","btn ghost wide","دانلود به‌صورت فایل");fb.onclick=function(){download(file,url)};box.appendChild(fb)}
+/* ---------- class progress by lesson ---------- */
+function renderClass(){var box=$("#cls");if(!box)return;box.textContent="";var list=Object.keys(STUD).map(function(k){return STUD[k]});if(!list.length)return;
+ [10,11,12].forEach(function(g){if(GF&&GF!==g)return;var L=list.filter(function(s){return s.last.g===g&&s.last.gr[g]});if(!L.length)return;var c=el("div","card tbox cls");c.appendChild(el("b","","📊 پیشرفت کلاس به تفکیک درس · "+GN[g]+" ("+fa(L.length)+" نفر)"));
+  Object.keys(CH[g]||{}).map(Number).filter(function(x){return x!==90}).forEach(function(ch){var sum=0,n=0,act=0;L.forEach(function(s){var v=s.last.gr[g].ch[ch];if(!v||!v[1])return;sum+=v[0]/v[1];n++;if(v[2]+v[3]>0)act++});
+   var pc=n?Math.round(sum/n*100):0,r=el("div","cr");r.appendChild(el("span","",chName(g,ch)));r.appendChild(el("span","n",fa(pc)+"٪ · "+fa(act)+" نفر تمرین کرده"));var b=el("span","cb"),i=el("i");i.style.width=pc+"%";b.appendChild(i);r.appendChild(b);c.appendChild(r)});box.appendChild(c)})}
+/* ---------- two-week league (built from the XP in reports) and teacher test sets ---------- */
+var LG=10,TS=10;
+function dk(ms){var d=new Date(ms);return d.getFullYear()*1e4+(d.getMonth()+1)*100+d.getDate()}
+function lgRange(){var v=$("#lgS").value,s=v?new Date(v+"T00:00:00").getTime():Date.now()-13*864e5;return[s,s+14*864e5]}
+function lgRows(){var r=lgRange(),a=dk(r[0]),b=dk(r[1]-1);return Object.keys(STUD).map(function(k){return STUD[k]}).filter(function(s){return s.last.g===LG}).map(function(s){var xp=0;
+  (s.last.day||[]).forEach(function(d){if(d[0]>=a&&d[0]<=b)xp+=d[1]});return[s.last.n,xp,s.id]}).sort(function(x,y){return y[1]-x[1]||x[0].localeCompare(y[0],"fa")})}
+function renderLg(){$$("#lgG button").forEach(function(b){b.setAttribute("aria-pressed",+b.dataset.g===LG)});if(!$("#lgS").value){var d=new Date(Date.now()-13*864e5);$("#lgS").value=d.toISOString().slice(0,10)}
+ var box=$("#lgT"),rows=lgRows(),r=lgRange();box.textContent="";box.appendChild(el("p","note","از "+date(r[0])+" تا "+date(r[1]-864e5)+(Date.now()>=r[1]?" · فصل تمام شده":" · "+fa(Math.ceil((r[1]-Date.now())/864e5))+" روز مانده")));
+ if(!rows.length){box.appendChild(el("p","note","هنوز کارنامه‌ای از این پایه نرسیده."));return}
+ rows.slice(0,20).forEach(function(x,i){var d=el("div","cr lgr");d.appendChild(el("span","",(["🥇","🥈","🥉"][i]||fa(i+1)+".")+" "+x[0]));d.appendChild(el("span","n",fa(x[1])+" امتیاز"));box.appendChild(d)})}
+function lgPub(){var rows=lgRows(),r=lgRange();if(!rows.length){$("#lgOut").textContent="هنوز کارنامه‌ای از این پایه نرسیده.";return}var id=AB.rand(6);
+ AB.sign({v:1,t:"l",id:"L"+dk(r[0])+LG,g:LG,s:r[0],e:r[1],at:Date.now(),rows:rows.slice(0,40)},KEYS.sig).then(function(code){var url=APP.site+"#p="+code;
+  linkOut($("#lgOut"),url,"league-"+LG+"-"+id+".txt","جدول لیگ "+GN[LG],"✓ لینک جدول لیگ "+GN[LG]+" آماده است. در گروه کلاس بفرستید؛ دانش‌آموز با باز کردن لینک (یا چسباندنش در بخش «لیگ» اپ) جدول را می‌بیند.")})}
+function renderTs(){$$("#tsG button").forEach(function(b){b.setAttribute("aria-pressed",+b.dataset.g===TS)});var box=$("#tsL");box.textContent="";
+ Object.keys((APP.lessons||{})[TS]||{}).forEach(function(c){var l=el("label","chk"),i=el("input");i.type="checkbox";i.value=c;l.appendChild(i);l.appendChild(el("span","",chName(TS,+c)));box.appendChild(l)})}
+function tsPub(){var cs=$$("#tsL input:checked").map(function(i){return+i.value});if(!cs.length){$("#tsOut").textContent="دست‌کم یک درس را انتخاب کنید.";return}var id=AB.rand(6),title=($("#tsT").value||"").trim()||"آزمون معلم",n=+$("#tsN").value||10;
+ AB.sign({v:1,t:"s",id:id,g:TS,cs:cs,n:n,title:title,at:Date.now()},KEYS.sig).then(function(code){var url=APP.site+"#p="+code;
+  linkOut($("#tsOut"),url,"azmoon-"+id+".txt",title,"✓ لینک «"+title+"» ("+GN[TS]+"، "+fa(n)+" سؤال) آماده است. دانش‌آموز با باز کردن لینک، آزمون را در صفحهٔ اول اپ می‌بیند.")})}
 /* ---------- tabs and actions ---------- */
-function tab(v){["rep","qs","set"].forEach(function(x){$("#v-"+x).hidden=x!==v});$$(".tabs button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.v===v)});if(v==="qs"){setEG(EG);renderDrafts()}if(v==="rep")renderList()}
+function tab(v){["rep","qs","lg","set"].forEach(function(x){$("#v-"+x).hidden=x!==v});if(v==="lg"){renderLg();renderTs()}$$(".tabs button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.v===v)});if(v==="qs"){setEG(EG);renderDrafts()}if(v==="rep")renderList()}
 document.addEventListener("click",function(ev){var b=ev.target.closest("[data-act]");if(!b)return;var a=b.dataset.act;switch(a){
  case"create":var p1=$("#p1").value,p2=$("#p2").value,w=strong(p1);if(w)return msg("setupMsg",w);if(p1!==p2)return msg("setupMsg","دو رمز یکی نیستند.");
   msg("setupMsg","در حال ساختن کلید…",true);makeVault(p1).then(function(x){VAULT=x.vault;wr(VK,VAULT);return importPriv(x.priv)}).then(function(k){KEYS=k;$("#p1").value="";$("#p2").value="";$("#bk").textContent=backupCode();show("s-backup")}).catch(function(){msg("setupMsg","این مرورگر کلید نساخت؛ مرورگر را به‌روز کنید.")});break;
@@ -148,6 +176,7 @@ document.addEventListener("click",function(ev){var b=ev.target.closest("[data-ac
  case"lock":lockScreen();break;
  case"tab":tab(b.dataset.v);break;
  case"gf":GF=+b.dataset.g;renderList();break;
+ case"lgG":LG=+b.dataset.g;renderLg();break;case"lgPub":lgPub();break;case"tsG":TS=+b.dataset.g;renderTs();break;case"tsPub":tsPub();break;
  case"stu":showStudent(b.dataset.id);break;
  case"import":var cs=codesIn($("#imp").value);if(!cs.length){msg("impMsg","لینک کارنامه‌ای پیدا نشد.");break}importCodes(cs).then(function(r){$("#imp").value="";toastImport(r)});break;
  case"csv":csv();break;

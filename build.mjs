@@ -2,10 +2,10 @@
 // Usage: node build.mjs [--url=https://user.github.io/repo/] [--poison]
 import fs from "node:fs";import path from "node:path";import {createRequire} from "node:module";import {createHash} from "node:crypto";
 import {gen10,CHAPTERS10} from "./src/bank/gen10.mjs";import {gen11,CHAPTERS11} from "./src/bank/gen11.mjs";import {gen12,CHAPTERS12} from "./src/bank/gen12.mjs";
-import {validate} from "./src/bank/common.mjs";
+import {validate} from "./src/bank/common.mjs";import {LESSONS} from "./src/bank/lessons.mjs";
 const args=Object.fromEntries(process.argv.slice(2).map(a=>{const[k,v]=a.replace(/^--/,"").split("=");return[k,v??true]}));
 const rd=p=>fs.readFileSync(p,"utf8"),ROOT=path.dirname(new URL(import.meta.url).pathname);
-const VER=JSON.parse(rd("src/version.json")),THEMES=JSON.parse(rd("src/themes.json")),DEF="blossom";
+const VER=JSON.parse(rd("src/version.json")),THEMES=JSON.parse(rd("src/themes.json")),DEF="ink";
 // ---------- banks ----------
 let banks={10:gen10(),11:gen11(),12:gen12()};
 // manual grade corrections (question id → grade, or null to hold back); applied before validation
@@ -19,7 +19,12 @@ if(errs.length){console.error("✗ ساخت متوقف شد — بانک سؤا�
 const themeCSS=Object.entries(THEMES).map(([id,t])=>`${id===DEF?":root,":""}:root[data-theme="${id}"]{--bg:${t.bg};--bg2:${t.bg2};--card:${t.card};--ink:${t.ink};--ink-dim:${t.dim};--line:${t.line};--gold:${t.gold};--sage:${t.sage};--rust:${t.rust};--on-accent:${t.on};--radius:${t.r}px;--ok:${t.ok};--bad:${t.bad}}`).join("\n");
 const fontCSS=(pre="./")=>`@font-face{font-family:Vazirmatn;src:url(${pre}fonts/vazirmatn-Regular.woff2) format("woff2");font-weight:400;font-display:swap}@font-face{font-family:Vazirmatn;src:url(${pre}fonts/vazirmatn-Bold.woff2) format("woff2");font-weight:700;font-display:swap}@font-face{font-family:"Playpen Sans Arabic";src:url(${pre}fonts/playpen-arabic.woff2) format("woff2");font-weight:400 700;font-display:swap;unicode-range:U+0600-06FF,U+200C}`;
 const strip=t=>t.replace(/\/\*[\s\S]*?\*\//g,"").replace(/\n\s*/g,"\n");
-const css=(withFont,pre="./",extra="")=>(withFont?fontCSS(pre)+"\n":"")+themeCSS+"\n"+strip(rd("src/app/style.css"))+(extra?"\n"+strip(extra):"");
+// Older Android WebViews (Chrome < 87) ignore inset/margin-inline/padding-inline/dvh: add plain fallbacks in front.
+const one=v=>{let d=0;for(const ch of v.trim()){if(ch==="(")d++;else if(ch===")")d--;else if(/\s/.test(ch)&&!d)return false}return true};
+const FB={"inset":v=>`top:${v};right:${v};bottom:${v};left:${v}`,"inset-inline":v=>`left:${v};right:${v}`,"inset-block":v=>`top:${v};bottom:${v}`,"margin-inline":v=>`margin-left:${v};margin-right:${v}`,"padding-inline":v=>`padding-left:${v};padding-right:${v}`};
+const compat=c=>c.replace(/([;{\s])(inset|inset-inline|inset-block|margin-inline|padding-inline):([^;}]+)/g,(m,pre,prop,val)=>one(val)&&!/!important/.test(val)?`${pre}${FB[prop](val.trim())};${prop}:${val}`:m)
+ .replace(/([;{\s])(min-height|height):100dvh/g,"$1$2:100vh;$2:100dvh");
+const css=(withFont,pre="./",extra="")=>compat((withFont?fontCSS(pre)+"\n":"")+themeCSS+"\n"+strip(rd("src/app/style.css"))+(extra?"\n"+strip(extra):""));
 const MASCOT=rd("src/mascot.svg.txt").trim();
 const LOGO=`<span class="logo">${MASCOT}</span>`;
 const LETTERS="ا ب ت ث ج ح خ د ر س ص ع ق ک ل م ن ه".split(" ");
@@ -31,9 +36,9 @@ const SITE="https://abmohammadzadeh85-lgtm.github.io/arabi/";
 // The Android download link appears in the app only once a release signed with the permanent key exists (src/apk.json → {"ready":true}).
 const APK=(()=>{try{return JSON.parse(rd("src/apk.json")).ready?"https://github.com/abmohammadzadeh85-lgtm/arabi/releases/latest/download/arabibazi.apk":null}catch(e){return null}})();
 const TCH="سؤال‌های معلم",CHS={10:{...CHAPTERS10,90:TCH},11:{...CHAPTERS11,90:TCH},12:{...CHAPTERS12,90:TCH}};
-const APPDATA=target=>({version:VER.version,target,site:SITE,apk:APK,teacher:TEACHER,defTheme:DEF,themes:Object.fromEntries(Object.entries(THEMES).map(([id,t])=>[id,[t.name[0],t.name[1],t.bg,t.gold,t.light]])),chapters:CHS});
+const APPDATA=target=>({version:VER.version,target,site:SITE,apk:APK,teacher:TEACHER,defTheme:DEF,themes:Object.fromEntries(Object.entries(THEMES).map(([id,t])=>[id,[t.name[0],t.name[1],t.bg,t.gold,t.light]])),lessons:LESSONS,chapters:CHS});
 const js=target=>`var APP=${JSON.stringify(APPDATA(target)).replace(/</g,"\\u003c")};\n`+["i18n","engine","sound","crypto","ui"].map(f=>rd(`src/app/${f}.js`)).join("\n");
-function teacherPage(){const app={version:VER.version,site:SITE,chapters:CHS};
+function teacherPage(){const app={version:VER.version,site:SITE,chapters:CHS,lessons:LESSONS};
  return lockCSP(rd("src/teacher/index.html").replace("{{THEME}}",DEF).replace("{{LIGHT}}",THEMES[DEF].light?"1":"0").replace("{{THEMECOLOR}}",THEMES[DEF].bg).split("{{LOGO}}").join(LOGO)
   .replace("{{CSS}}",()=>css(true,"../",rd("src/teacher/teacher.css"))).replace("{{JS}}",()=>`var APP=${JSON.stringify(app)};\n`+rd("src/app/crypto.js")+"\n"+rd("src/teacher/teacher.js")))}
 // Lock the page's CSP to the exact inline script(s) it ships: injected markup can't run code even if it ever got in.

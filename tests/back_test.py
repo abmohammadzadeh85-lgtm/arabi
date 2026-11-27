@@ -6,10 +6,10 @@ SEEN="if(!localStorage.getItem('arabibazi:state'))localStorage.setItem('arabibaz
 with sync_playwright() as p:
     b=p.chromium.launch(executable_path="/usr/bin/google-chrome",args=["--no-sandbox"])
     c=b.new_context(viewport={"width":390,"height":844},is_mobile=True,has_touch=True);c.add_init_script(SEEN);pg=c.new_page();errs=[];pg.on("pageerror",lambda e:errs.append(str(e)))
-    pg.goto("about:blank");pg.goto(URL);pg.wait_for_selector("#intro",state="hidden",timeout=6000);pg.wait_for_selector("#v-home .ch")
+    pg.goto("about:blank");pg.goto(URL);pg.wait_for_selector("#intro",state="hidden",timeout=6000);pg.wait_for_selector("#lrow .lcard")
     back=lambda:(pg.evaluate("history.back()"),pg.wait_for_timeout(350))
     pg.click('.hdr [data-act="settings"]');pg.wait_for_timeout(300);back();R["back_closes_settings"]=pg.is_hidden("#sheet") and pg.url.startswith(URL)
-    pg.click('[data-act="tab"][data-v="stats"]');pg.wait_for_timeout(300);back();R["back_goes_home_tab"]=pg.is_visible("#v-home") and pg.url.startswith(URL)
+    pg.click('[data-act="tab"][data-v="league"]');pg.wait_for_timeout(300);back();R["back_goes_home_tab"]=pg.is_visible("#v-home") and pg.url.startswith(URL)
     pg.click('[data-act="start"][data-m="mixed"]');pg.wait_for_timeout(300);back();R["back_in_quiz_asks_first"]=pg.is_visible("#dlg") and pg.is_visible("#play")
     back();R["back_again_keeps_quiz"]=pg.is_hidden("#dlg") and pg.is_visible("#play")
     back();pg.click("#dlg .btn >> nth=0");pg.wait_for_timeout(350);R["quit_returns_home"]=pg.is_visible("#main") and pg.is_hidden("#play")

@@ -31,7 +31,7 @@ with sync_playwright() as p:
     pg.goto(URL);pg.click('[data-act="pickGrade"][data-g="12"]');pg.wait_for_timeout(600)
     pg.click('[data-act="start"][data-m="mixed"]');pg.wait_for_timeout(300)
     q=pg.evaluate("__app.ses().qs[0]");wrong=(q["a"]+1)%4
-    pg.click(f'#qO .opt >> nth={wrong}');pg.wait_for_timeout(200)
+    pg.click(f'#qO .opt >> nth={wrong}');pg.click('#qN');pg.wait_for_timeout(400)
     g12_wrong=pg.evaluate("__app.S.wrong[12]")
     pg.evaluate("__app.setGrade(10)");pg.wait_for_timeout(600)
     R["queue_cleared_on_switch"]=pg.evaluate("__app.ses()") is None
@@ -39,16 +39,16 @@ with sync_playwright() as p:
     ses=pg.evaluate("__app.ses()");R["next_question_after_12to10"]=ses["qs"][0]["id"]
     R["switch_ok"]=all(x["g"]==10 for x in ses["qs"])
     pg.evaluate("document.querySelector('[data-act=quit]').click()");pg.wait_for_timeout(200);pg.evaluate("document.querySelector('#dlg .btn').click()");pg.wait_for_timeout(300)
-    pg.click('[data-act="tab"][data-v="review"]');pg.wait_for_timeout(300)
-    R["grade12_mistake_hidden_in_10"]=pg.locator('#v-review [data-m="review"]').count()==0 and len(g12_wrong)==1
-    pg.evaluate("__app.setGrade(12)");pg.wait_for_timeout(500);pg.click('[data-act="tab"][data-v="review"]');pg.wait_for_timeout(300)
-    R["grade12_mistake_still_in_12"]=pg.locator('#v-review [data-m="review"]').count()==1
+    pg.click('[data-act="tab"][data-v="me"]');pg.wait_for_timeout(300)
+    R["grade12_mistake_hidden_in_10"]=pg.locator('#v-me [data-m="review"]').count()==0 and len(g12_wrong)==1
+    pg.evaluate("__app.setGrade(12)");pg.wait_for_timeout(500);pg.click('[data-act="tab"][data-v="me"]');pg.wait_for_timeout(300)
+    R["grade12_mistake_still_in_12"]=pg.locator('#v-me [data-m="review"]').count()==1
     R["errors"]=errs;c.close()
     # --- offline after first visit
     c=mobile(b);pg=c.new_page();pg.goto(URL);pg.evaluate("navigator.serviceWorker.ready");pg.wait_for_timeout(800)
     pg.click('[data-act="pickGrade"][data-g="11"]');pg.wait_for_timeout(1000)
     c.set_offline(True);pg.reload();pg.wait_for_timeout(1200)
-    R["offline_home_chapters"]=pg.locator("#v-home .ch").count()
+    R["offline_home_chapters"]=pg.locator("#lrow .lcard").count()
     pg.click('[data-act="start"][data-m="mixed"]');pg.wait_for_timeout(400);R["offline_question_shown"]=pg.locator("#qO .opt").count()==4
     c.set_offline(False)
     # --- update flow: publish a new version, page must offer it and never reload by itself
@@ -70,14 +70,14 @@ with sync_playwright() as p:
         c=mobile(b);pg=c.new_page();cdp=c.new_cdp_session(pg);cdp.send("Emulation.setCPUThrottlingRate",{"rate":rate})
         pg.add_init_script("window.__lt=[];new PerformanceObserver(l=>l.getEntries().forEach(e=>window.__lt.push(Math.round(e.duration)))).observe({type:'longtask',buffered:true})")
         t0=time.time();pg.goto(URL);pg.wait_for_selector('[data-act="pickGrade"]');load=time.time()-t0
-        pg.click('[data-act="pickGrade"][data-g="11"]');pg.wait_for_selector("#v-home .ch")
+        pg.click('[data-act="pickGrade"][data-g="11"]');pg.wait_for_selector("#lrow .lcard")
         boot_lt=pg.evaluate("window.__lt.slice()");pg.evaluate("window.__lt=[]")
         n=0
         while n<50:
             pg.click('[data-act="start"][data-m="mixed"]') if pg.is_visible('[data-act="start"][data-m="mixed"]') else None
             for i in range(10):
-                pg.click('#qO .opt >> nth=0');n+=1;pg.click('#qN')
-            pg.wait_for_selector('#result:not([hidden])');pg.click('[data-act="home"]');pg.wait_for_selector("#v-home .ch")
+                pg.click('#qO .opt >> nth=0');n+=1;pg.click('#qN');[pg.wait_for_timeout(40) for _ in range(40) if pg.evaluate("!!(__app.ses()&&__app.ses().answered&&document.querySelector('#result').hidden)")]
+            pg.wait_for_selector('#result:not([hidden])');pg.click('[data-act="home"]');pg.wait_for_selector("#lrow .lcard")
         R[f"cpu{rate}x"]={"open_s":round(load,2),"long_tasks_open_ms":boot_lt,"answers":n,"long_tasks_during_answers_ms":pg.evaluate("window.__lt")}
         c.close()
     b.close()

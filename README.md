@@ -17,7 +17,7 @@ python3 tools/android_icons.py      # redraws the Android launcher icons from sr
 
 | Path | What |
 |---|---|
-| `src/bank/` | question generators (gen10/11/12), validation, normalisation |
+| `src/bank/` | question generators (gen10/11/12), `lessons.mjs` (one generator per textbook lesson + lesson titles), `vocab.mjs` (each lesson's glossary words from عربی ۱ و ۲), validation, normalisation |
 | `src/app/` | `index.html` template, `style.css`, `i18n.js`, `engine.js` (grade lock: only `poolFor(g)` reads the bank, teacher questions included), `sound.js`, `crypto.js`, `ui.js`, `sw.js` |
 | `src/teacher/` | teacher panel: keys are made and kept (passphrase-wrapped) on the teacher's device; reports arrive sealed for her key; question packs leave signed with it |
 | `src/teacher.json` | the teacher's **public** code `{"code":"AB1…"}`, built into the app. Missing → reports and teacher questions are off |

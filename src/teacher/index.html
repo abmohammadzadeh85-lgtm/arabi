@@ -53,7 +53,7 @@
   <details><summary>دستگاه یا مرورگر عوض شده؟ بازگردانی از کد پشتیبان</summary><div class="restore"></div></details>
  </div></section>
  <section id="s-dash" hidden>
-  <div class="seg tabs"><button data-act="tab" data-v="rep">کارنامه‌ها</button><button data-act="tab" data-v="qs">سؤال‌ها</button><button data-act="tab" data-v="set">تنظیمات</button></div>
+  <div class="seg tabs"><button data-act="tab" data-v="rep">کارنامه‌ها</button><button data-act="tab" data-v="qs">سؤال‌ها</button><button data-act="tab" data-v="lg">لیگ و آزمون</button><button data-act="tab" data-v="set">تنظیمات</button></div>
   <div id="v-rep" class="tv">
    <div class="card tbox">
     <b>افزودن کارنامه</b>
@@ -62,10 +62,32 @@
     <div class="row2"><button class="btn" data-act="import">افزودن</button><label class="btn ghost">از فایل<input type="file" id="impFile" multiple hidden accept=".txt,.json,text/plain"></label></div>
     <p class="msg" id="impMsg"></p>
    </div>
+   <div id="cls"></div>
    <div class="seg" id="gf"><button data-act="gf" data-g="0">همه</button><button data-act="gf" data-g="10">دهم</button><button data-act="gf" data-g="11">یازدهم</button><button data-act="gf" data-g="12">دوازدهم</button></div>
    <input class="inp search" id="q" type="search" placeholder="جست‌وجوی اسم…">
    <div id="stList"></div>
    <button class="btn ghost wide" data-act="csv">دانلود جدول برای اکسل (CSV)</button>
+  </div>
+  <div id="v-lg" class="tv" hidden>
+   <div class="card tbox">
+    <b>🏆 لیگ دوهفته‌ای</b>
+    <p class="note">رتبه‌ها از امتیازهایی ساخته می‌شود که در کارنامه‌های رسیده آمده؛ هر پایه جدا. هر وقت کارنامه‌های تازه رسید دوباره منتشر کنید. وقتی فصل تمام شد و جدول آخر را فرستادید، نفرهای اول تا سوم در اپ خودشان تقویت امتیاز می‌گیرند (۵۰٪ سه روز، ۳۰٪ دو روز، ۲۰٪ یک روز).</p>
+    <div class="seg" id="lgG"><button data-act="lgG" data-g="10">دهم</button><button data-act="lgG" data-g="11">یازدهم</button><button data-act="lgG" data-g="12">دوازدهم</button></div>
+    <label class="fl">شروع فصل<input class="inp" id="lgS" type="date"></label>
+    <div id="lgT"></div>
+    <button class="btn wide" data-act="lgPub">انتشار جدول لیگ این پایه</button>
+    <div id="lgOut"></div>
+   </div>
+   <div class="card tbox">
+    <b>📝 آزمون معلم از درس‌های کتاب</b>
+    <p class="note">درس‌ها را انتخاب کنید؛ اپ هر دانش‌آموز از بانک سؤال همان درس‌ها یک آزمون می‌سازد و نتیجه در کارنامه‌اش می‌آید.</p>
+    <div class="seg" id="tsG"><button data-act="tsG" data-g="10">دهم</button><button data-act="tsG" data-g="11">یازدهم</button><button data-act="tsG" data-g="12">دوازدهم</button></div>
+    <div id="tsL" class="chks"></div>
+    <label class="fl">عنوان (اختیاری)<input class="inp" id="tsT" maxlength="60" placeholder="مثلاً: آزمون میان‌ترم"></label>
+    <label class="fl">تعداد سؤال<select class="inp" id="tsN"><option>5</option><option selected>10</option><option>15</option><option>20</option><option>30</option></select></label>
+    <button class="btn wide" data-act="tsPub">ساختن لینک آزمون</button>
+    <div id="tsOut"></div>
+   </div>
   </div>
   <div id="v-qs" class="tv" hidden>
    <div class="card tbox" id="ed">

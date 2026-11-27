@@ -1,7 +1,9 @@
 // Grade 12 — written for this app at the user's explicit request (needs a teacher's check).
 import {VB,AR,FAP,ALL,AL,PR,VOC,JAV,JIN} from "./ar11core.mjs";
 import {rng,pick,shuffle,stamp} from "./common.mjs";
-export const CHAPTERS12={1:"حروف مشبهة بالفعل",2:"لای نفی جنس و انواع «لا»",3:"حال",4:"استثنا و حصر",5:"مفعول مطلق"};
+import {CHAPTERS,SRC as LSRC} from "./lessons.mjs";
+export const CHAPTERS12=CHAPTERS(12);
+const TO={1:1,2:1,3:2,4:3,5:4};   // old topic → book lesson (درس ۱: حروف مشبهه + لای نفی جنس)
 const SRC={1:"عربی (۳) دوازدهم · درس ۱",2:"عربی (۳) دوازدهم · درس ۱",3:"عربی (۳) دوازدهم · درس ۲",4:"عربی (۳) دوازدهم · درس ۳",5:"عربی (۳) دوازدهم · درس ۴"};
 // ---- c1: حروف مشبهة بالفعل
 const HM={inna:["إِنَّ","همانا / قطعاً"],anna:["أَنَّ","که"],kaanna:["كَأَنَّ","گویی"],lakinna:["لكِنَّ","ولی / اما"],layta:["لَيْتَ","کاش"],laalla:["لَعَلَّ","شاید / امید است"]};
@@ -102,4 +104,5 @@ export function gen12(){const r=rng(1212),items=[],K=Object.keys(HM);
  for(const [s,w,t,oth,tr] of MM){if(oth){const o=shuffle(r,[w,...oth]);items.push({c:5,q:`مفعول مطلق در این جمله کدام است؟\n${s}`,o,a:o.indexOf(w),e:`«${w}» مصدرِ هم‌ریشهٔ فعل جمله است ← ${TT[t]}. ترجمه: ${tr}`})}
   const o=shuffle(r,[TT.t,TT.n,"مفعول به","حال"]),ans=TT[t];
   items.push({c:5,q:`کلمهٔ مشخص‌شده چه نقشی دارد؟\n${mark(s,w)}`,o,a:o.indexOf(ans),e:t==="t"?`مصدر هم‌ریشه بدون صفت یا مضاف‌الیه آمده ← تأکیدی («قطعاً»). ترجمه: ${tr}`:`مصدر هم‌ریشه با صفت یا مضاف‌الیه آمده و چگونگی کار را می‌گوید ← نوعی. ترجمه: ${tr}`})}
- return stamp(12,"arabic",items,SRC)}
+ for(const it of items)it.c=TO[it.c];
+ return stamp(12,"dars",items.sort((a,b)=>a.c-b.c),{1:LSRC(12,1),2:LSRC(12,2),3:LSRC(12,3),4:LSRC(12,4)})}

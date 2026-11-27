@@ -28,3 +28,7 @@ textarea.inp{resize:vertical;width:100%;line-height:1.7}
 details summary{cursor:pointer;font-weight:700;font-size:14px;color:var(--ink-dim);padding:6px 0}
 .restore{display:grid;gap:8px;margin-top:8px}
 .dlg .card{max-height:88dvh;overflow:auto}
+.cls{display:grid;gap:8px}.cr{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;font-size:14px}.cr .n{color:var(--dim);font-size:13px}
+.cb{grid-column:1/-1;height:7px;border-radius:7px;background:color-mix(in srgb,var(--ink) 12%,transparent);overflow:hidden}.cb i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--gold),var(--sage))}
+.lgr{padding:8px 10px;border-radius:12px;background:color-mix(in srgb,var(--ink) 5%,transparent)}
+.chks{display:grid;gap:6px;margin:8px 0}.chks .chk{display:flex;gap:8px;align-items:center;font-size:14px}

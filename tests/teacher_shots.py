@@ -2,7 +2,8 @@
 import json,subprocess,os,atexit
 from playwright.sync_api import sync_playwright
 URL="http://localhost:8765/";SITE="https://abmohammadzadeh85-lgtm.github.io/arabi/"
-atexit.register(lambda: os.path.exists("src/teacher.json") and os.remove("src/teacher.json"))
+_REAL=open("src/teacher.json").read() if os.path.exists("src/teacher.json") else None   # the real teacher key: put back after the test
+atexit.register(lambda: open("src/teacher.json","w").write(_REAL) if _REAL else (os.path.exists("src/teacher.json") and os.remove("src/teacher.json")))
 SEEN=lambda n:"if(!localStorage.getItem('arabibazi:state'))localStorage.setItem('arabibazi:state',JSON.stringify({name:%s,ui:{intro:1,tour:1,qtip:1}}))"%json.dumps(n)
 def ctx(b,init=None):
     c=b.new_context(viewport={"width":390,"height":844},device_scale_factor=2,is_mobile=True,has_touch=True)

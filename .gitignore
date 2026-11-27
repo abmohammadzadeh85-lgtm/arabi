@@ -7,6 +7,6 @@ android/android/
 android/out/
 # downloaded packages
 node_modules/
-# never commit a test teacher key: src/teacher.json must hold only the real teacher's public code
+# src/teacher.json holds the real teacher's PUBLIC code (safe to publish); tests put it back after using a test key
 __pycache__/
 *.pyc

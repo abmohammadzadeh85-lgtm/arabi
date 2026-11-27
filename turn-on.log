@@ -1,0 +1,39 @@
+::add-mask::***
+npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+
+ ⛅️ wrangler 4.168.0
+────────────────────
+Total Upload: 6.06 KiB / gzip: 2.41 KiB
+Your Worker has access to the following bindings:
+Binding                                                 Resource                  
+env.KV (***)               KV Namespace              
+env.TEACHER_SIG ("(hidden)")                            Environment Variable      
+
+Uploaded arabibazi (1.63 sec)
+Deployed arabibazi triggers (1.60 sec)
+  https://arabibazi.arabibazi.workers.dev
+Current Version ID: 522a816c-455e-496d-8a1e-35e7508a314a
+mailbox: https://arabibazi.arabibazi.workers.dev/
+✓ نسخهٔ 2.0.5 (کد 9) ساخته شد. سؤال‌ها: دهم 1274 · یازدهم 1205 · دوازدهم 150
+خود اپ (بدون سؤال‌ها): 144.7 KB / سقف 150 KB
+dist/standalone.html: 1272.9 KB
+dist/pwa/fonts/OFL-playpen-sans.txt      4.3 KB
+dist/pwa/fonts/OFL-vazirmatn.txt         4.3 KB
+dist/pwa/fonts/playpen-arabic.woff2      10.6 KB
+dist/pwa/fonts/vazirmatn-Bold.woff2      22.7 KB
+dist/pwa/fonts/vazirmatn-Regular.woff2   22.5 KB
+dist/pwa/icons/apple-touch-icon.png      6.5 KB
+dist/pwa/icons/icon-192.png              9.2 KB
+dist/pwa/icons/icon-512.png              33.3 KB
+dist/pwa/icons/maskable-512.png          23.8 KB
+dist/pwa/index.html                      144.7 KB
+dist/pwa/manifest.webmanifest            0.6 KB
+dist/pwa/q10.json                        494.2 KB
+dist/pwa/q11.json                        544.9 KB
+dist/pwa/q12.json                        88.1 KB
+dist/pwa/sw.js                           2.3 KB
+dist/pwa/t/index.html                    103.2 KB
+dist/pwa/t/manifest.webmanifest          0.5 KB
+android/www: 1409.6 KB
+https://github.com/abmohammadzadeh85-lgtm/arabi/actions/runs/46000895240
+✅ صندوق خودکار روشن شد: https://arabibazi.arabibazi.workers.dev/ — نسخهٔ 2.0.5. سایت هم به‌روز شد. ساخت فایل اندروید هم شروع شد.

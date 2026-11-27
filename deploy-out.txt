@@ -1,0 +1,14 @@
+npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+
+ ⛅️ wrangler 4.168.0
+────────────────────
+Total Upload: 6.06 KiB / gzip: 2.41 KiB
+Your Worker has access to the following bindings:
+Binding                                                 Resource                  
+env.KV (***)               KV Namespace              
+env.TEACHER_SIG ("(hidden)")                            Environment Variable      
+
+Uploaded arabibazi (1.63 sec)
+Deployed arabibazi triggers (1.60 sec)
+  https://arabibazi.arabibazi.workers.dev
+Current Version ID: 522a816c-455e-496d-8a1e-35e7508a314a

@@ -19,7 +19,12 @@ setsid $WR dev /tmp/mbx_ci_worker.js --local --port 8787 --var "\${5}" > /tmp/mb
 echo "  https://arabibazi.\$(echo \$5 | head -c0)sub.workers.dev"
 W
 chmod +x "$T/wrangler"
-mkdir -p "$T/bin"; printf '#!/usr/bin/env bash\necho "gh $*" >> %s/gh.log\n' "$T" > "$T/bin/gh"; chmod +x "$T/bin/gh"
+mkdir -p "$T/bin"; cat > "$T/bin/gh" <<G
+#!/usr/bin/env bash
+echo "gh \$*" >> $T/gh.log
+case "\$*" in *pages/builds/latest*) echo "built \$(git -C $T/remote.git rev-parse gh-pages)";; esac
+G
+chmod +x "$T/bin/gh"
 # a local "GitHub": main = this project, gh-pages = an older site with README and .nojekyll
 git init -q --bare "$T/remote.git"
 git clone -q "$T/remote.git" "$T/seed" 2>/dev/null; ( cd "$T/seed" && git checkout -q -b main
@@ -29,7 +34,7 @@ git clone -q "$T/remote.git" "$T/seed" 2>/dev/null; ( cd "$T/seed" && git checko
   git checkout -q --orphan gh-pages && git rm -rqf . && echo "# site" > README.md && touch .nojekyll && echo old > stale.txt
   git add -A && git -c user.name=t -c user.email=t@t commit -qm oldsite && git push -q origin gh-pages )
 git clone -q -b main "$T/remote.git" "$T/work"
-run(){ ( cd "$T/work" && PATH="$T/bin:$PATH" CF_API=http://localhost:8790/client/v4 WRANGLER="$T/wrangler" MAILBOX_TEST_URL=http://localhost:8787/ PING_WAIT=1 GH_TOKEN=x "$@" bash server/turn-on.sh ) ; }
+run(){ ( cd "$T/work" && PATH="$T/bin:$PATH" CF_API=http://localhost:8790/client/v4 WRANGLER="$T/wrangler" MAILBOX_TEST_URL=http://localhost:8787/ PING_WAIT=1 GH_TOKEN=x GITHUB_REPOSITORY=test/repo "$@" bash server/turn-on.sh ) ; }
 # 1) no secret yet → nothing happens
 out=$(run env CLOUDFLARE_API_TOKEN= 2>&1); echo "$out" | grep -c "هنوز خاموش" >/dev/null && ok "no secret: stays off" || no "no secret: $out"
 [ "$(git -C "$T/remote.git" rev-list --count main)" = 1 ] && ok "…and nothing was pushed" || no "pushed without a secret"
@@ -47,6 +52,7 @@ git -C "$T/remote.git" show gh-pages:t/index.html | grep -c "connect-src 'self' 
 git -C "$T/remote.git" ls-tree --name-only gh-pages | grep -cx README.md >/dev/null && git -C "$T/remote.git" ls-tree --name-only gh-pages | grep -cx .nojekyll >/dev/null && ok "site: README and .nojekyll kept" || no "site extras"
 git -C "$T/remote.git" ls-tree --name-only gh-pages | grep -cx stale.txt >/dev/null && no "old file left on the site" || ok "site: old files removed"
 grep -q "gh workflow run android.yml --ref main" "$T/gh.log" && ok "APK build started" || no "APK build"
+grep -q "gh api -X POST repos/test/repo/pages/builds" "$T/gh.log" && echo "$out" | grep -c "سایت هم به‌روز شد" >/dev/null && ok "asked GitHub to rebuild the site and saw it built" || no "pages build"
 git -C "$T/work" status --porcelain | grep -v '^??' | grep -c . >/dev/null && no "work tree left dirty" || ok "nothing left half-committed"
 grep -q "__KV_ID__" "$T/work/server/wrangler.toml" && ok "committed wrangler.toml stays the same for everyone" || no "wrangler.toml changed"
 grep -rq "0123456789abcdef0123456789abcdef" "$T/work/server/deploy-out.txt" && no "account id in the log" || ok "account id hidden in the log"

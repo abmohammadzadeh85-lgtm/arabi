@@ -13,6 +13,7 @@ on:
 permissions:
   contents: write
   actions: write
+  pages: write
 concurrency:
   group: mailbox
   cancel-in-progress: false

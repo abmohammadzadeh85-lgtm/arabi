@@ -37,8 +37,21 @@ git worktree add -q --detach "$SITE" FETCH_HEAD
 find "$SITE" -mindepth 1 -maxdepth 1 ! -name .git ! -name .nojekyll ! -name README.md -exec rm -rf {} +
 cp -R dist/pwa/. "$SITE"/
 ( cd "$SITE" && git add -A && git commit -q -m "نسخهٔ $VER: صندوق خودکار روشن شد" && git push -q origin HEAD:gh-pages )
+PAGES_SHA=$(git -C "$SITE" rev-parse HEAD)
 git worktree remove --force "$SITE"
+# the push starts the Pages build; ask for one as well (harmless if already running) and wait until the new site is built
+PG="سایت هم به‌روز شد."
+if [ -n "${GITHUB_REPOSITORY:-}" ]; then
+  PG="⚠️ سایت هنوز ساخته نشده بود؛ معمولاً چند دقیقه بعد خودش به‌روز می‌شود."
+  gh api -X POST "repos/$GITHUB_REPOSITORY/pages/builds" >/dev/null 2>&1 || true
+  for i in $(seq 1 40); do
+    st=$(gh api "repos/$GITHUB_REPOSITORY/pages/builds/latest" --jq '.status+" "+.commit' 2>/dev/null || true)
+    [ "$st" = "built $PAGES_SHA" ] && { PG="سایت هم به‌روز شد."; break; }
+    case "$st" in errored*) PG="⚠️ ساخت سایت در GitHub خطا داد."; break;; esac
+    sleep 6
+  done
+fi
 
 # the Android app
 if gh workflow run android.yml --ref main; then APK="ساخت فایل اندروید هم شروع شد."; else APK="ساخت فایل اندروید خودکار شروع نشد؛ با تغییر بعدی ساخته می‌شود."; fi
-say "✅ صندوق خودکار روشن شد: $OUT — نسخهٔ $VER روی سایت است. $APK"
+say "✅ صندوق خودکار روشن شد: $OUT — نسخهٔ $VER. $PG $APK"

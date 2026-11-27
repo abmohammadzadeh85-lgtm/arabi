@@ -1,0 +1,2 @@
+    topResumedActivity=ActivityRecord{60ebc4c u0 ir.arabibazi.app/.MainActivity t8}
+  ResumedActivity: ActivityRecord{60ebc4c u0 ir.arabibazi.app/.MainActivity t8}

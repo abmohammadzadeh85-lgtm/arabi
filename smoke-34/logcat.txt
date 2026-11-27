@@ -1,0 +1,80 @@
+11-27 12:46:39.306  3345  3345 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-27 12:46:39.310  3345  3345 I AndroidRuntime: Using default boot image
+11-27 12:46:39.310  3345  3345 I AndroidRuntime: Leaving lock profiling enabled
+11-27 12:46:39.445  3345  3345 D nativeloader: InitDefaultPublicLibraries for_preload=1: libandroid.so:libaaudio.so:libamidi.so:libbinder_ndk.so:libc.so:libcamera2ndk.so:libdl.so:libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libicu.so:libicui18n.so:libicuuc.so:libjnigraphics.so:liblog.so:libmediandk.so:libm.so:libnativehelper.so:libnativewindow.so:libOpenMAXAL.so:libOpenSLES.so:libRS.so:libstdc++.so:libsync.so:libvulkan.so:libwebviewchromium_plat_support.so:libz.so
+11-27 12:46:39.550  3345  3345 D AndroidRuntime: Calling main entry com.android.commands.monkey.Monkey
+11-27 12:46:39.551  3345  3345 W Monkey  : args: [-p, ir.arabibazi.app, -c, android.intent.category.LAUNCHER, 1]
+11-27 12:46:39.551  3345  3345 W Monkey  :  arg: "ir.arabibazi.app"
+11-27 12:46:39.551  3345  3345 W Monkey  : data="ir.arabibazi.app"
+11-27 12:46:39.844   842   842 I SafetyLabelChangedBroadcastReceiver: received broadcast packageName: ir.arabibazi.app, current user: UserHandle{0}, packageChangeEvent: NEW_INSTALL, intent user: UserHandle{0}
+11-27 12:46:39.999   521   912 V SplashScreenExceptionList: SplashScreen checking exception for package ir.arabibazi.app (target sdk:34) -> false
+11-27 12:46:40.036   841   872 V WindowManagerShell: Transition requested: android.os.BinderProxy@fe6c1d9 TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=ir.arabibazi.app/.MainActivity } baseActivity=ComponentInfo{ir.arabibazi.app/ir.arabibazi.app.MainActivity} topActivity=ComponentInfo{ir.arabibazi.app/ir.arabibazi.app.MainActivity} origActivity=null realActivity=ComponentInfo{ir.arabibazi.app/ir.arabibazi.app.MainActivity} numActivities=1 lastActiveTime=59431 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@b26d79e} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 136 - 0, 0) topActivityInfo=ActivityInfo{770227f ir.arabibazi.app.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+11-27 12:46:40.238   521   912 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=ir.arabibazi.app/.MainActivity} with LAUNCH_SINGLE_TASK from uid 2000 (BAL_ALLOW_PERMISSION) result code=0
+11-27 12:46:40.255   521   595 D CoreBackPreview: Window{24afbf6 u0 Splash Screen ir.arabibazi.app}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@ddb6a64, mPriority=0, mIsAnimationCallback=false}
+11-27 12:46:40.554   521   542 V WindowManager: Sent Transition #8 createdAt=11-27 12:46:39.880 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=ir.arabibazi.app/.MainActivity } baseActivity=ComponentInfo{ir.arabibazi.app/ir.arabibazi.app.MainActivity} topActivity=ComponentInfo{ir.arabibazi.app/ir.arabibazi.app.MainActivity} origActivity=null realActivity=ComponentInfo{ir.arabibazi.app/ir.arabibazi.app.MainActivity} numActivities=1 lastActiveTime=59431 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{fe4a7a9 Task{dfd07c #8 type=standard A=10192:ir.arabibazi.app}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 136 - 0, 0) topActivityInfo=ActivityInfo{527112e ir.arabibazi.app.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+11-27 12:46:40.554   521   542 V WindowManager:     info={id=8 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{fe4a7a9 Task{dfd07c #8 type=standard A=10192:ir.arabibazi.app}}} m=OPEN f=NONE leash=Surface(name=Task=8)/@0x1e51473 sb=Rect(0, 0 - 1080, 2340) eb=Rect(0, 0 - 1080, 2340) d=0},{WCT{RemoteToken{7284cf Task{ce685ee #1 type=home}}} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xdf9cf63 sb=Rect(0, 0 - 1080, 2340) eb=Rect(0, 0 - 1080, 2340) d=0}]}
+11-27 12:46:40.811  3345  3345 I AndroidRuntime: VM exiting with result code 0.
+11-27 12:46:41.173   521   554 I ActivityManager: Start proc 3417:ir.arabibazi.app/u0a192 for next-top-activity {ir.arabibazi.app/ir.arabibazi.app.MainActivity}
+11-27 12:46:41.424  3417  3417 D nativeloader: Configuring clns-6 for other apk /data/app/~~liF_gkQ-l14fTT-plMs_8Q==/ir.arabibazi.app-7LvqimABQjC5AUfW7c34SA==/base.apk. target_sdk_version=34, uses_libraries=, library_path=/data/app/~~liF_gkQ-l14fTT-plMs_8Q==/ir.arabibazi.app-7LvqimABQjC5AUfW7c34SA==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/ir.arabibazi.app
+11-27 12:46:41.444   521   811 I SdkSandboxManager: No SDKs used. Skipping SDK data reconcilation for CallingInfo{mUid=10192, mPackageName='ir.arabibazi.app, mAppProcessToken='null'}
+11-27 12:46:41.470  3417  3417 V GraphicsEnvironment: ANGLE GameManagerService for ir.arabibazi.app: false
+11-27 12:46:41.470  3417  3417 V GraphicsEnvironment: ir.arabibazi.app is not listed in per-application setting
+11-27 12:46:42.091  1055  1055 D CarrierSvcBindHelper: onPackageAdded: ir.arabibazi.app
+11-27 12:46:42.531  1055  1358 D ImsResolver: maybeAddedImsService, packageName: ir.arabibazi.app
+11-27 12:46:42.675  3417  3494 I cr_VariationsUtils: Failed reading seed file "/data/user/0/ir.arabibazi.app/app_webview/variations_seed_new"
+11-27 12:46:42.677  3417  3494 I cr_VariationsUtils: Failed reading seed file "/data/user/0/ir.arabibazi.app/app_webview/variations_seed"
+11-27 12:46:43.560   521   595 I ActivityManager: Start proc 3558:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0ai9000 for  {ir.arabibazi.app/org.chromium.content.app.SandboxedProcessService0:0}
+11-27 12:46:43.572  3558  3558 I cr_WebViewApkApp: Launched version=113.0.5672.136 minSdkVersion=29 isBundle=false processName=com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+11-27 12:46:43.642  1055  1055 D CarrierSvcBindHelper: onPackageModified: ir.arabibazi.app
+11-27 12:46:43.743  3417  3544 W chromium: [WARNING:dns_config_service_android.cc(115)] Failed to read DnsConfig.
+11-27 12:46:43.775  1055  1358 D ImsResolver: maybeAddedImsService, packageName: ir.arabibazi.app
+11-27 12:46:43.915   521   554 I ActivityManager: Start proc 3623:com.google.android.webview:webview_apk/u0a134 for service {com.google.android.webview/org.chromium.android_webview.nonembedded.AwComponentUpdateService}
+11-27 12:46:44.507  1419  1501 W .gms.persistent: Verification of void org.chromium.net.impl.CronetUrlRequestContext.<init>(hr) took 113.048ms (8934.24 bytecodes/s) (27720B approximate peak alloc)
+11-27 12:46:44.527  3417  3417 D Capacitor: Starting BridgeActivity
+11-27 12:46:45.320   521   601 D CoreBackPreview: Window{73b7b1a u0 ir.arabibazi.app/ir.arabibazi.app.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@94d609c, mPriority=0, mIsAnimationCallback=false}
+11-27 12:46:45.873   521  2267 W InputManager-JNI: Input channel object '73b7b1a ir.arabibazi.app/ir.arabibazi.app.MainActivity (client)' was disposed without first being removed with the input manager!
+11-27 12:46:45.935   521  2253 I WindowManager: setOnBackInvokedCallback(): No window state for package:ir.arabibazi.app
+11-27 12:46:46.246   521   601 D CoreBackPreview: Window{ac221a8 u0 ir.arabibazi.app/ir.arabibazi.app.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@d9544d8, mPriority=0, mIsAnimationCallback=false}
+11-27 12:46:46.415   521  2348 I WindowManager: finishDrawing of relaunch: Window{ac221a8 u0 ir.arabibazi.app/ir.arabibazi.app.MainActivity} 4774ms
+11-27 12:46:46.433  3417  3417 W cr_AwContents: 	at org.chromium.android_webview.AwContents.m(chromium-TrichromeWebViewGoogle6432.apk-stable-567263637:10)
+11-27 12:46:46.433  3417  3417 W cr_AwContents: 	at org.chromium.android_webview.AwContents.h(chromium-TrichromeWebViewGoogle6432.apk-stable-567263637:2)
+11-27 12:46:46.433  3417  3417 W cr_AwContents: 	at com.android.webview.chromium.WebViewChromium.evaluateJavaScript(chromium-TrichromeWebViewGoogle6432.apk-stable-567263637:37)
+11-27 12:46:46.457   521   542 I ActivityTaskManager: Displayed ir.arabibazi.app/.MainActivity for user 0: +6s580ms
+11-27 12:46:46.515   521  2384 I ImeTracker: ir.arabibazi.app:b14f12f1: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+11-27 12:46:46.515   521  2384 I ImeTracker: ir.arabibazi.app:b14f12f1: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-27 12:46:46.684  1564  1564 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=ir.arabibazi.app fieldId=2131230911 fieldName=null extras=null}, false)
+11-27 12:46:47.108  3623  3710 W cr_AWNetworkFetcherTask: 	at org.chromium.android_webview.nonembedded.NetworkFetcherTask.download(chromium-TrichromeWebViewGoogle6432.apk-stable-567263637:48)
+11-27 12:46:47.228   521   912 W InputManager-JNI: Input channel object '24afbf6 Splash Screen ir.arabibazi.app (client)' was disposed without first being removed with the input manager!
+11-27 12:46:47.261   521  2253 D CoreBackPreview: Window{24afbf6 u0 Splash Screen ir.arabibazi.app EXITING}: Setting back callback null
+11-27 12:46:49.382  3851  3851 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-27 12:46:49.422  3851  3851 I AndroidRuntime: Using default boot image
+11-27 12:46:49.429  3851  3851 I AndroidRuntime: Leaving lock profiling enabled
+11-27 12:46:49.689  3851  3851 D nativeloader: InitDefaultPublicLibraries for_preload=1: libandroid.so:libaaudio.so:libamidi.so:libbinder_ndk.so:libc.so:libcamera2ndk.so:libdl.so:libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libicu.so:libicui18n.so:libicuuc.so:libjnigraphics.so:liblog.so:libmediandk.so:libm.so:libnativehelper.so:libnativewindow.so:libOpenMAXAL.so:libOpenSLES.so:libRS.so:libstdc++.so:libsync.so:libvulkan.so:libwebviewchromium_plat_support.so:libz.so
+11-27 12:46:49.927  3851  3851 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+11-27 12:46:50.352  3417  3931 D ProfileInstaller: Installing profile for ir.arabibazi.app
+11-27 12:46:51.434  3851  3851 D AndroidRuntime: Shutting down VM
+11-27 12:46:53.149  4109  4109 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-27 12:46:53.155  4109  4109 I AndroidRuntime: Using default boot image
+11-27 12:46:53.155  4109  4109 I AndroidRuntime: Leaving lock profiling enabled
+11-27 12:46:53.250  4109  4109 D nativeloader: InitDefaultPublicLibraries for_preload=1: libandroid.so:libaaudio.so:libamidi.so:libbinder_ndk.so:libc.so:libcamera2ndk.so:libdl.so:libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libicu.so:libicui18n.so:libicuuc.so:libjnigraphics.so:liblog.so:libmediandk.so:libm.so:libnativehelper.so:libnativewindow.so:libOpenMAXAL.so:libOpenSLES.so:libRS.so:libstdc++.so:libsync.so:libvulkan.so:libwebviewchromium_plat_support.so:libz.so
+11-27 12:46:53.304  4109  4109 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+11-27 12:46:54.540  4109  4109 D AndroidRuntime: Shutting down VM
+11-27 12:46:56.642  3509  3684 I Launcher.IconCache: Database bulk icon loading failed, using fallback bulk icon loading for: ComponentInfo{ir.arabibazi.app/ir.arabibazi.app.MainActivity}
+11-27 12:47:00.108  3558  3583 E chromium: [ERROR:font_unique_name_lookup_android.cc(219)] Received platform font handle invalid, fd: -1
+11-27 12:47:01.498  4700  4700 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-27 12:47:01.526  4700  4700 I AndroidRuntime: Using default boot image
+11-27 12:47:01.526  4700  4700 I AndroidRuntime: Leaving lock profiling enabled
+11-27 12:47:01.684  1470  4120 I BlockstoreStorage: Clearing Blockstore Data for package ir.arabibazi.app [CONTEXT service_id=258 ]
+11-27 12:47:01.716  1419  3824 I FontLog : Package ir.arabibazi.app has no metadata [CONTEXT service_id=132 ]
+11-27 12:47:01.794  4700  4700 D nativeloader: InitDefaultPublicLibraries for_preload=1: libandroid.so:libaaudio.so:libamidi.so:libbinder_ndk.so:libc.so:libcamera2ndk.so:libdl.so:libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libicu.so:libicui18n.so:libicuuc.so:libjnigraphics.so:liblog.so:libmediandk.so:libm.so:libnativehelper.so:libnativewindow.so:libOpenMAXAL.so:libOpenSLES.so:libRS.so:libstdc++.so:libsync.so:libvulkan.so:libwebviewchromium_plat_support.so:libz.so
+11-27 12:47:01.974  4700  4700 D AndroidRuntime: Calling main entry com.android.commands.monkey.Monkey
+11-27 12:47:01.977  4700  4700 W Monkey  : args: [-p, ir.arabibazi.app, -c, android.intent.category.LAUNCHER, 1]
+11-27 12:47:01.978  4700  4700 W Monkey  :  arg: "ir.arabibazi.app"
+11-27 12:47:01.979  4700  4700 W Monkey  : data="ir.arabibazi.app"
+11-27 12:47:02.455   521  2182 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=ir.arabibazi.app/.MainActivity} with LAUNCH_SINGLE_TASK from uid 2000 (BAL_ALLOW_PERMISSION) result code=3
+11-27 12:47:02.463   841   872 D WindowManagerShell: onActivityRestartAttempt: ComponentInfo{ir.arabibazi.app/ir.arabibazi.app.MainActivity}
+11-27 12:47:02.763  4700  4700 I AndroidRuntime: VM exiting with result code 0.
+11-27 12:47:03.684  1634  1634 I AiAiEcho: AppFetcherImplV2 updateApps package:[ir.arabibazi.app], userId:[0], reason:[package is added.].
+11-27 12:47:03.785  1634  1634 I AiAiEcho: AppFetcherImpl onPackageChanged ir.arabibazi.app.
+11-27 12:47:03.789  1634  3125 I AiAiEcho: AppIndexer Package:[ir.arabibazi.app] UserProfile:[0] Enabled:[true].
+11-27 12:47:03.789  1634  3125 I AiAiEcho: AppFetcherImplV2 updateApps package:[ir.arabibazi.app], userId:[0], reason:[package is updated.].

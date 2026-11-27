@@ -1,0 +1,72 @@
+11-27 12:46:23.772   422   562 V installd: DexInv: --- END '/data/app/~~dER6HgPu-VkahvgZ9VkZfA==/ir.arabibazi.app-DW41w439cg83mAvasmkTkw==/base.apk' (success) ---
+11-27 12:46:23.801   492   547 V BackupManagerService: [UserID:0] restoreAtInstall pkg=ir.arabibazi.app token=1 restoreSet=0
+11-27 12:46:24.648  1658  1658 I MediaProvider: Invalidating LocalCallingIdentity cache for package ir.arabibazi.app. Reason: package android.intent.action.PACKAGE_ADDED
+11-27 12:46:24.650  1700  1700 I GsaVoiceInteractionSrv: O received Intent { act=android.intent.action.PACKAGE_ADDED dat=package:ir.arabibazi.app flg=0x4000010 (has extras) }
+11-27 12:46:24.654   686   686 D AvrcpMediaPlayerList: Name of package changed: ir.arabibazi.app
+11-27 12:46:25.038   492   532 I ActivityManager: Start proc 4277:com.android.chrome/u0a132 for service {com.android.chrome/org.chromium.chrome.browser.customtabs.CustomTabsConnectionService}
+11-27 12:46:25.752  1357  3366 I ChromeSync: [Sync,SyncIntentOperation] Handling the intent: Intent { act=android.intent.action.PACKAGE_ADDED dat=package:ir.arabibazi.app flg=0x4000010 cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }.
+11-27 12:46:25.754  1357  1664 I FontsPackageChangeOp: Package ir.arabibazi.app has no metadata
+11-27 12:46:25.767  1357  3366 I ChromeSync: [Persistence,AffiliationManager] One of affiliation or grouping data for android://K8YXc0A4IL77n_g5XQh8QStiwpo-Acpxo9dgEF4mKPuBLndmC3DbowNEFfVTsKThRrZG6XUYAwWmtahmghBYHg==@ir.arabibazi.app/ was not found. Marking affiliation data as stale...
+11-27 12:46:25.815  1123  4320 W GCM     : Unexpected forwarded intent: Intent { act=android.intent.action.PACKAGE_ADDED dat=package:ir.arabibazi.app flg=0x4000010 cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) }
+11-27 12:46:25.816  1123  4320 W GCM     : Unexpected forwarded intent: Intent { act=android.intent.action.PACKAGE_ADDED dat=package:ir.arabibazi.app flg=0x4000010 cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) }
+11-27 12:46:26.256  4277  4310 W .android.chrom: Long monitor contention with owner CrAsyncTask #1 (4325) at boolean hj.g(java.lang.String)(chromium-TrichromeChromeGoogle.aab-stable-410410686:13) waiters=0 in boolean hj.g(java.lang.String) for 871ms
+11-27 12:46:26.461  4493  4493 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-27 12:46:26.515  4493  4493 I AndroidRuntime: Using default boot image
+11-27 12:46:26.515  4493  4493 I AndroidRuntime: Leaving lock profiling enabled
+11-27 12:46:26.834  4493  4493 D AndroidRuntime: Calling main entry com.android.commands.monkey.Monkey
+11-27 12:46:26.834  4493  4493 W Monkey  : args: [-p, ir.arabibazi.app, -c, android.intent.category.LAUNCHER, 1]
+11-27 12:46:26.835  4493  4493 W Monkey  :  arg: "ir.arabibazi.app"
+11-27 12:46:26.835  4493  4493 W Monkey  : data="ir.arabibazi.app"
+11-27 12:46:26.868   492  2156 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=ir.arabibazi.app/.MainActivity} from uid 2000
+11-27 12:46:27.006   492   532 I ActivityManager: Start proc 4583:ir.arabibazi.app/u0a167 for pre-top-activity {ir.arabibazi.app/ir.arabibazi.app.MainActivity}
+11-27 12:46:27.009  4493  4493 I AndroidRuntime: VM exiting with result code 0.
+11-27 12:46:27.678   492   532 I ActivityManager: Start proc 4683:com.google.android.webview:webview_service/u0a144 for service {com.google.android.webview/org.chromium.android_webview.services.VariationsSeedServer}
+11-27 12:46:27.809  4583  4583 E chromium: [ERROR:filesystem_posix.cc(62)] mkdir /data/user/0/ir.arabibazi.app/cache/WebView/Crashpad: No such file or directory (2)
+11-27 12:46:27.839   492   532 I ActivityManager: Start proc 4703:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0ai9000 for  {ir.arabibazi.app/org.chromium.content.app.SandboxedProcessService0:0}
+11-27 12:46:27.885  4583  4583 I TetheringManager: registerTetheringEventCallback:ir.arabibazi.app
+11-27 12:46:27.916  4583  4728 W chromium: [WARNING:dns_config_service_posix.cc(341)] Failed to read DnsConfig.
+11-27 12:46:28.007  4583  4583 D Capacitor: Starting BridgeActivity
+11-27 12:46:29.107   492   530 D ArtManagerInternalImpl: /data/misc/iorapd/ir.arabibazi.app/9/ir.arabibazi.app.MainActivity/compiled_traces/compiled_trace.pb doesn't exist
+11-27 12:46:29.157   492   530 I ActivityTaskManager: Displayed ir.arabibazi.app/.MainActivity: +1s518ms
+11-27 12:46:29.395  1123  2656 I anhw    : Scheduling Phenotype for a PhenotypeSyncImmediately(6, org.chromium.net.cronet) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-27 12:46:33.617   423  4579 I iorapd  : Perfetto TraceBuffer saved to file: /data/misc/iorapd/ir.arabibazi.app/9/ir.arabibazi.app.MainActivity/raw_traces/1795783593567052983.perfetto_trace.pb
+11-27 12:46:34.719  4583  5255 D ProfileInstaller: Installing profile for ir.arabibazi.app
+11-27 12:46:36.387  5392  5392 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-27 12:46:36.394  5392  5392 I AndroidRuntime: Using default boot image
+11-27 12:46:36.394  5392  5392 I AndroidRuntime: Leaving lock profiling enabled
+11-27 12:46:36.665  5392  5392 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+11-27 12:46:37.062   492  1883 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:ir.arabibazi.app flg=0x4000010 (has extras) } to com.google.android.packageinstaller/com.android.packageinstaller.PackageInstalledReceiver
+11-27 12:46:37.062   492   531 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:ir.arabibazi.app flg=0x4000010 (has extras) } to com.google.android.gms/.games.chimera.GamesSystemBroadcastReceiverProxy
+11-27 12:46:37.062   492   531 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:ir.arabibazi.app flg=0x4000010 (has extras) } to com.google.android.gms/.gass.chimera.PackageChangeBroadcastReceiver
+11-27 12:46:37.062   492   531 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:ir.arabibazi.app flg=0x4000010 (has extras) } to com.google.android.gms/.chimera.GmsIntentOperationService$PersistentTrustedReceiver
+11-27 12:46:37.062   492   531 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:ir.arabibazi.app flg=0x4000010 (has extras) } to com.google.android.googlequicksearchbox/com.google.android.apps.gsa.googlequicksearchbox.GelStubAppWatcher
+11-27 12:46:37.062   492   531 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:ir.arabibazi.app flg=0x4000010 (has extras) } to com.google.android.ims/.receivers.RcsAutoStartReceiver
+11-27 12:46:37.832  5392  5392 D AndroidRuntime: Shutting down VM
+11-27 12:46:38.826  5697  5697 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-27 12:46:38.835  5697  5697 I AndroidRuntime: Using default boot image
+11-27 12:46:38.835  5697  5697 I AndroidRuntime: Leaving lock profiling enabled
+11-27 12:46:38.892  5697  5697 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+11-27 12:46:39.929  5697  5697 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@8f4a; boundsInParent: Rect(0, 0 - 394, 4); boundsInScreen: Rect(0, 145 - 1083, 156); packageName: ir.arabibazi.app; className: android.view.View; text: ; error: ; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: padC; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_NEXT_HTML_ELEMENT - null, AccessibilityAction: ACTION_PREVIOUS_HTML_ELEMENT - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null, AccessibilityAction: ACTION_CONTEXT_CLICK - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null]
+11-27 12:46:39.934  5697  5697 D AndroidRuntime: Shutting down VM
+11-27 12:46:41.091  5908  5908 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-27 12:46:41.096  5908  5908 I AndroidRuntime: Using default boot image
+11-27 12:46:41.096  5908  5908 I AndroidRuntime: Leaving lock profiling enabled
+11-27 12:46:41.222  5908  5908 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-27 12:46:41.264  5908  5908 D AndroidRuntime: Shutting down VM
+11-27 12:46:41.278   492  1724 I ActivityTaskManager: moveTaskToBack: Task{6151612 #9 visible=true type=standard mode=fullscreen translucent=false A=10167:ir.arabibazi.app U=0 StackId=9 sz=1}
+11-27 12:46:43.727  5967  5967 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-27 12:46:43.735  5967  5967 I AndroidRuntime: Using default boot image
+11-27 12:46:43.735  5967  5967 I AndroidRuntime: Leaving lock profiling enabled
+11-27 12:46:43.814  5967  5967 D AndroidRuntime: Calling main entry com.android.commands.input.Input
+11-27 12:46:43.825  5967  5967 D AndroidRuntime: Shutting down VM
+11-27 12:46:43.833  5967  5980 I AndroidRuntime: NOTE: attach of thread 'Binder:5967_1' failed
+11-27 12:46:46.200  5994  5994 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-27 12:46:46.201  5994  5994 I AndroidRuntime: Using default boot image
+11-27 12:46:46.201  5994  5994 I AndroidRuntime: Leaving lock profiling enabled
+11-27 12:46:46.267  5994  5994 D AndroidRuntime: Calling main entry com.android.commands.monkey.Monkey
+11-27 12:46:46.268  5994  5994 W Monkey  : args: [-p, ir.arabibazi.app, -c, android.intent.category.LAUNCHER, 1]
+11-27 12:46:46.268  5994  5994 W Monkey  :  arg: "ir.arabibazi.app"
+11-27 12:46:46.268  5994  5994 W Monkey  : data="ir.arabibazi.app"
+11-27 12:46:46.294   492  1873 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=ir.arabibazi.app/.MainActivity} from uid 2000
+11-27 12:46:46.430  5994  5994 I AndroidRuntime: VM exiting with result code 0.
+11-27 12:46:47.124   492   530 D ArtManagerInternalImpl: /data/misc/iorapd/ir.arabibazi.app/9/ir.arabibazi.app.MainActivity/compiled_traces/compiled_trace.pb doesn't exist

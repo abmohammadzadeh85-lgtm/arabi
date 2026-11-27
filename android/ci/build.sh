@@ -65,9 +65,12 @@ fi
 "$BT/apksigner" sign --ks "$TMP/ks.p12" --ks-key-alias arabibazi --ks-pass env:KS_PASS --key-pass env:KS_PASS \
   --out out/arabibazi.apk "$TMP/aligned.apk"
 "$BT/apksigner" verify --verbose --print-certs out/arabibazi.apk | tee "$TMP/verify.txt"
-CERT=$(awk -F': ' '/certificate SHA-256 digest/{print $2; exit}' "$TMP/verify.txt")
+CERT=$(awk -F': ' '/certificate SHA-256 digest/{print $NF; exit}' "$TMP/verify.txt")
 SHA=$(sha256sum out/arabibazi.apk | cut -d' ' -f1)
-printf 'KIND=%s\nVERSION=%s\nCODE=%s\nNEW_KEY=%s\nSHA256=%s\nCERT=%s\nSIZE=%s\n' \
-  "$KIND" "$VER" "$CODE" "$NEW_KEY" "$SHA" "$CERT" "$(stat -c %s out/arabibazi.apk)" > out/result.env
+rm -f out/arabibazi.apk.idsig
+# shell-quoted, because the workflow reads this file with `source`
+{ printf 'KIND=%q\n' "$KIND"; printf 'VERSION=%q\n' "$VER"; printf 'CODE=%q\n' "$CODE"; printf 'NEW_KEY=%q\n' "$NEW_KEY"
+  printf 'SHA256=%q\n' "$SHA"; printf 'CERT=%q\n' "$CERT"; printf 'SIZE=%q\n' "$(stat -c %s out/arabibazi.apk)"; } > out/result.env
+( set -e; source out/result.env; [ -n "$SHA256" ] )
 cat out/result.env
 say "ready: android/out/arabibazi.apk ($KIND)"

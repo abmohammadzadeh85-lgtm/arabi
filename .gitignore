@@ -1,0 +1,12 @@
+# built files (made again by `node build.mjs`)
+dist/
+android/www/
+android/version.json
+# Android project and outputs (made by android/ci/build.sh)
+android/android/
+android/out/
+# downloaded packages
+node_modules/
+# never commit a test teacher key: src/teacher.json must hold only the real teacher's public code
+__pycache__/
+*.pyc

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Launch background on Android 11 and older: the same glow the in-app intro starts with. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient android:type="radial" android:centerX="0.5" android:centerY="0.38" android:gradientRadius="143%p"
+        android:startColor="#FF9E6E" android:centerColor="#FF5A92" android:endColor="#7A4DFF"/>
+</shape>

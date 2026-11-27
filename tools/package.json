@@ -1,0 +1,17 @@
+{
+  "name": "tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fontsource/playpen-sans-arabic": "^5.3.0",
+    "qrcode-generator": "^2.0.4",
+    "vazirmatn": "^33.0.3"
+  }
+}

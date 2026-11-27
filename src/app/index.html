@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="{{THEME}}" data-light="{{LIGHT}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="{{THEMECOLOR}}">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; worker-src 'self'; style-src 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="apple-mobile-web-app-title" content="عربی‌بازی">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>عربی‌بازی</title>
+{{HEAD}}
+<style>{{CSS}}</style>
+</head>
+<body>
+<div id="app">
+<section id="pick" hidden>
+ {{LOGO}}
+ <h1 data-i18n="pickTitle"></h1>
+ <p data-i18n="tagline"></p>
+ <label class="namebox" id="nb"><span aria-hidden="true">🧑‍🎓</span><input id="nm" maxlength="40" autocomplete="name" data-i18n-ph="namePh"></label>
+ <div class="gcards"></div>
+</section>
+<div id="main" hidden>
+ <header class="hdr">
+  {{LOGO}}
+  <h1 data-i18n="app"></h1>
+  <button class="badge" id="gradeBadge" data-act="grade"><i></i><span></span></button>
+  <button class="icon" data-act="settings" data-i18n-aria="settings">⚙</button>
+ </header>
+ <div class="card tip" id="tip" hidden><p data-i18n="iosTip"></p><button class="icon" data-act="tipClose" data-i18n-aria="close">✕</button></div>
+ <main id="views" class="wrap">
+  <section class="view" id="v-home"><h2></h2>
+   <div class="hero"><button class="btn wide" data-act="start" data-m="mixed" data-i18n="mixed"></button></div>
+   <div class="chs"></div>
+   <p class="foot" data-i18n="foot"></p>
+  </section>
+  <section class="view" id="v-review" hidden><h2></h2><div class="rv"></div></section>
+  <section class="view" id="v-stats" hidden><h2></h2><div class="sx"></div></section>
+ </main>
+ <nav class="dock">
+  <span class="ind"></span>
+  <button data-act="tab" data-v="home"><b>⌂</b><span data-i18n="home"></span></button>
+  <button data-act="tab" data-v="review"><b>↺</b><span data-i18n="review"></span><span class="cnt" id="rvCnt" hidden></span></button>
+  <button data-act="tab" data-v="stats"><b>▤</b><span data-i18n="stats"></span></button>
+ </nav>
+</div>
+<section id="play" class="wrap" hidden>
+ <div class="ptop"><button class="icon" data-act="quit" data-i18n-aria="quit">✕</button><div class="t" id="pT"></div><div class="streak" id="pS"></div></div>
+ <div class="pbar"><span id="pB"></span></div>
+ <div class="card qcard" id="qC"><p class="prompt" id="qP"></p><p class="stem" id="qS" lang="ar" dir="rtl"></p></div>
+ <p class="qtip" id="qTip" hidden></p>
+ <div class="opts" id="qO"></div>
+ <div class="fb" id="qF" hidden role="status" aria-live="polite"></div>
+ <button class="btn wide" id="qN" data-act="next" hidden style="margin-top:12px"></button>
+</section>
+<section id="result" class="wrap" hidden>
+ <h2 data-i18n="resTitle" style="text-align:center"></h2>
+ <svg class="ring" id="rR" viewBox="0 0 160 160" aria-hidden="true"><circle class="bgc" cx="80" cy="80" r="64" fill="none" stroke-width="12"/><circle class="fg" cx="80" cy="80" r="64" fill="none" stroke-width="12" stroke-linecap="round" transform="rotate(-90 80 80)"/><text x="80" y="92" text-anchor="middle"></text></svg>
+ <div class="stats3"><div class="card stat ok"><b id="rOk"></b><small data-i18n="ok"></small></div><div class="card stat bad"><b id="rBad"></b><small data-i18n="bad"></small></div><div class="card stat"><b id="rT"></b><small data-i18n="time"></small></div></div>
+ <div style="display:grid;gap:10px"><button class="btn wide" id="rRv" data-act="toReview" data-i18n="reviewWrong"></button><button class="btn ghost wide" data-act="sendReport" data-i18n="sendReport"></button><div class="row2"><button class="btn ghost" data-act="again" data-i18n="again"></button><button class="btn ghost" data-act="home" data-i18n="backHome"></button></div></div>
+</section>
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" hidden><div class="grab"></div><div class="shead"><h2 data-i18n="settings"></h2><button class="icon" data-act="closeSheet" data-i18n-aria="close">✕</button></div><div class="body"></div></div>
+<div class="scrim" id="dlgScrim" hidden></div>
+<div class="dlg" id="dlg" role="alertdialog" aria-modal="true" hidden><div class="card"></div></div>
+<div id="tour" hidden><div class="t-hole"></div><div class="t-b"></div><div class="t-b"></div><div class="t-b"></div><div class="t-b"></div><div class="t-cover"></div><div class="t-card" role="dialog" aria-live="polite"><p class="t-tx"></p><div class="t-foot"><span class="t-n"></span><button class="btn ghost" data-act="tourSkip"></button><button class="btn" data-act="tourNext"></button></div></div></div>
+<div id="intro" hidden aria-hidden="true"><div class="i-bg"><i></i><i></i><i></i></div><div class="i-stage"><div class="i-mark">{{INTRO}}</div><div class="i-name" data-i18n="app"></div><div class="i-sub" data-i18n="introSub"></div><div class="i-bar"><span></span></div></div></div>
+<div id="upd" hidden><p data-i18n="update"></p><button class="btn" data-act="upd" data-i18n="updateBtn"></button></div>
+</div>
+{{BANKS}}
+<script>{{JS}}</script>
+</body>
+</html>

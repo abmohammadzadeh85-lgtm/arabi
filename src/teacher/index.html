@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="{{THEME}}" data-light="{{LIGHT}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="{{THEMECOLOR}}">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; worker-src 'self'; style-src 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="apple-mobile-web-app-title" content="پنل معلم">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>پنل معلم · عربی‌بازی</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="../icons/icon-192.png">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<style>{{CSS}}</style>
+</head>
+<body>
+<header class="hdr">{{LOGO}}<h1>پنل معلم</h1><button class="icon" id="lockBtn" data-act="lock" hidden aria-label="قفل کردن">🔒</button></header>
+<main class="wrap tp">
+ <section id="s-setup" hidden><div class="card tbox">
+  <h2>راه‌اندازی پنل معلم</h2>
+  <p>این پنل فقط مال شماست. یک رمز قوی بگذارید (دست‌کم ۱۰ حرف). با این رمز، «کلید معلم» روی همین دستگاه ساخته و قفل می‌شود. بدون این رمز هیچ‌کس، حتی سازندهٔ اپ، نمی‌تواند وارد بخش معلم شود.</p>
+  <label class="fl">رمز<input class="inp" id="p1" type="password" autocomplete="new-password" dir="ltr"></label>
+  <label class="fl">تکرار رمز<input class="inp" id="p2" type="password" autocomplete="new-password" dir="ltr"></label>
+  <p class="msg" id="setupMsg"></p>
+  <button class="btn wide" data-act="create">ساختن کلید معلم</button>
+  <p class="note">رمز را جای امنی یادداشت کنید. رمز فراموش‌شده قابل بازیابی نیست.</p>
+  <details><summary>قبلاً پنل داشته‌ام: بازگردانی از کد پشتیبان</summary><div class="restore"></div></details>
+ </div></section>
+ <section id="s-backup" hidden><div class="card tbox">
+  <h2>۱) پشتیبان کلید</h2>
+  <p>این «کد پشتیبان» قفل است و فقط با رمز شما باز می‌شود. کپی‌اش کنید و جای امنی نگه دارید، مثلاً در پیام‌های ذخیره‌شدهٔ تلگرام یا یادداشت‌های گوشی. اگر دستگاه عوض شد یا اطلاعات مرورگر پاک شد، پنل با همین کد و رمزتان برمی‌گردد.</p>
+  <code class="codebox" id="bk"></code>
+  <div class="row2"><button class="btn ghost" data-act="copyBk">کپی کد</button><button class="btn ghost" data-act="dlBk">دانلود فایل</button></div>
+  <label class="chk"><input type="checkbox" id="bkOk"> پشتیبان را جای امنی نگه داشتم</label>
+  <button class="btn wide" data-act="bkNext">ادامه</button>
+ </div></section>
+ <section id="s-code" hidden><div class="card tbox">
+  <h2>۲) کد معلم</h2>
+  <p>این کد محرمانه نیست. آن را برای سازندهٔ اپ بفرستید تا اپ دانش‌آموزها فقط به همین پنل وصل شود. تا این کد داخل اپ گذاشته نشود، دانش‌آموزها نمی‌توانند کارنامه بفرستند و سؤال‌های شما را بگیرند.</p>
+  <code class="codebox" id="tcode" dir="ltr"></code>
+  <div class="row2"><button class="btn ghost" data-act="copyCode">کپی کد</button><button class="btn ghost" data-act="shareCode">فرستادن</button></div>
+  <button class="btn wide" data-act="codeNext">رفتن به پنل</button>
+ </div></section>
+ <section id="s-unlock" hidden><div class="card tbox">
+  <h2>ورود معلم</h2>
+  <label class="fl">رمز<input class="inp" id="pu" type="password" autocomplete="current-password" dir="ltr"></label>
+  <p class="msg" id="unMsg"></p>
+  <button class="btn wide" data-act="unlock">ورود</button>
+  <p class="note" id="pendNote" hidden></p>
+  <details><summary>دستگاه یا مرورگر عوض شده؟ بازگردانی از کد پشتیبان</summary><div class="restore"></div></details>
+ </div></section>
+ <section id="s-dash" hidden>
+  <div class="seg tabs"><button data-act="tab" data-v="rep">کارنامه‌ها</button><button data-act="tab" data-v="qs">سؤال‌ها</button><button data-act="tab" data-v="set">تنظیمات</button></div>
+  <div id="v-rep" class="tv">
+   <div class="card tbox">
+    <b>افزودن کارنامه</b>
+    <p class="note">دانش‌آموزها لینک کارنامه را برایتان می‌فرستند. اگر لینک را لمس کنید خودش اضافه می‌شود؛ یا لینک‌ها را (حتی چندتا با هم) اینجا بچسبانید.</p>
+    <textarea class="inp" id="imp" rows="3" dir="ltr" placeholder="https://…/t/#r=…"></textarea>
+    <div class="row2"><button class="btn" data-act="import">افزودن</button><label class="btn ghost">از فایل<input type="file" id="impFile" multiple hidden accept=".txt,.json,text/plain"></label></div>
+    <p class="msg" id="impMsg"></p>
+   </div>
+   <div class="seg" id="gf"><button data-act="gf" data-g="0">همه</button><button data-act="gf" data-g="10">دهم</button><button data-act="gf" data-g="11">یازدهم</button><button data-act="gf" data-g="12">دوازدهم</button></div>
+   <input class="inp search" id="q" type="search" placeholder="جست‌وجوی اسم…">
+   <div id="stList"></div>
+   <button class="btn ghost wide" data-act="csv">دانلود جدول برای اکسل (CSV)</button>
+  </div>
+  <div id="v-qs" class="tv" hidden>
+   <div class="card tbox" id="ed">
+    <b id="edTitle">سؤال تازه</b>
+    <div class="seg" id="eg"><button data-act="eg" data-g="10">دهم</button><button data-act="eg" data-g="11">یازدهم</button><button data-act="eg" data-g="12">دوازدهم</button></div>
+    <label class="fl">صورت سؤال<input class="inp" id="eq" maxlength="200" placeholder="مثلاً: ترجمهٔ درست کدام است؟"></label>
+    <label class="fl">عبارت عربی (اختیاری)<textarea class="inp ar" id="es" rows="2" maxlength="300" placeholder="مثلاً: قَدْ كَتَبْنا"></textarea></label>
+    <div class="opts4">
+     <label class="op"><input type="radio" name="ea" value="0"><input class="inp" id="eo0" maxlength="150" placeholder="گزینهٔ ۱"></label>
+     <label class="op"><input type="radio" name="ea" value="1"><input class="inp" id="eo1" maxlength="150" placeholder="گزینهٔ ۲"></label>
+     <label class="op"><input type="radio" name="ea" value="2"><input class="inp" id="eo2" maxlength="150" placeholder="گزینهٔ ۳"></label>
+     <label class="op"><input type="radio" name="ea" value="3"><input class="inp" id="eo3" maxlength="150" placeholder="گزینهٔ ۴"></label>
+    </div>
+    <p class="note">دایرهٔ کنار گزینهٔ درست را بزنید.</p>
+    <label class="fl">توضیح جواب<textarea class="inp" id="ee" rows="2" maxlength="400" placeholder="چرا این گزینه درست است؟"></textarea></label>
+    <label class="fl">موضوع یا منبع<input class="inp" id="esrc" maxlength="80" placeholder="مثلاً: عربی (۲) یازدهم · درس ۵"></label>
+    <p class="msg" id="edMsg"></p>
+    <div class="row2"><button class="btn" data-act="saveQ">افزودن به فهرست</button><button class="btn ghost" data-act="clearQ">فرم تازه</button></div>
+   </div>
+   <div id="dList"></div>
+   <div class="card tbox">
+    <b>فرستادن برای دانش‌آموزها</b>
+    <p class="note">سؤال‌های تازهٔ فهرست در یک «لینک امضاشده» جمع می‌شوند. لینک را در گروه کلاس بفرستید؛ هر دانش‌آموز فقط سؤال‌های پایهٔ خودش را می‌بیند. لینکی که کس دیگری بسازد، در اپ دانش‌آموزها پذیرفته نمی‌شود.</p>
+    <button class="btn wide" data-act="publish">ساختن لینک سؤال‌های تازه</button>
+    <div id="pubOut"></div>
+   </div>
+  </div>
+  <div id="v-set" class="tv" hidden>
+   <div class="card tbox"><b>کد معلم</b><p class="note">این کد محرمانه نیست؛ برای قفل کردن اپ دانش‌آموزها به همین پنل به کار می‌رود.</p><code class="codebox" id="tcode2" dir="ltr"></code><button class="btn ghost" data-act="copyCode">کپی کد</button></div>
+   <div class="card tbox"><b>پشتیبان</b><p class="note" id="bkAge"></p><div class="row2"><button class="btn ghost" data-act="copyBk">کپی کد پشتیبان</button><button class="btn ghost" data-act="dlBk">دانلود فایل</button></div><p class="note">کارنامه‌ها جزو پشتیبان نیستند؛ دانش‌آموزها می‌توانند دوباره بفرستند.</p></div>
+   <div class="card tbox"><b>عوض کردن رمز</b>
+    <label class="fl">رمز فعلی<input class="inp" id="c0" type="password" autocomplete="current-password" dir="ltr"></label>
+    <label class="fl">رمز تازه<input class="inp" id="c1" type="password" autocomplete="new-password" dir="ltr"></label>
+    <label class="fl">تکرار رمز تازه<input class="inp" id="c2" type="password" autocomplete="new-password" dir="ltr"></label>
+    <p class="msg" id="chMsg"></p><button class="btn ghost wide" data-act="chpass">عوض کردن رمز</button><p class="note">بعد از عوض کردن رمز، یک کد پشتیبان تازه بگیرید.</p></div>
+   <div class="card tbox danger"><b>پاک کردن پنل از این دستگاه</b><p class="note">کلید معلم از این دستگاه پاک می‌شود. فقط وقتی این کار را بکنید که کد پشتیبان و رمز را دارید.</p><button class="btn ghost wide" data-act="wipe">پاک کردن از این دستگاه</button></div>
+  </div>
+ </section>
+</main>
+<div class="scrim" id="dlgScrim" hidden></div>
+<div class="dlg" id="dlg" role="alertdialog" aria-modal="true" hidden><div class="card"></div></div>
+<script>{{JS}}</script>
+</body>
+</html>

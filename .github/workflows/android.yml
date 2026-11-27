@@ -1,0 +1,142 @@
+# Builds the Android app (APK) of عربی‌بازی from this repository and publishes it as a GitHub release.
+#  - With the repository secret APK_KEY_PASSWORD: signed with the permanent key → release "vX.Y.Z" (latest).
+#  - Without it: signed with a throw-away key → pre-release "preview" (for trying only).
+# The result, a few emulator screenshots and the logs are also pushed to the "ci-logs" branch.
+name: Android APK
+on:
+  push:
+    branches: [main]
+    paths: ["src/**", "android/**", "build.mjs", ".github/workflows/android.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: android-apk
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    outputs:
+      kind: ${{ steps.res.outputs.kind }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Build and sign the APK
+        shell: bash
+        env:
+          APK_KEY_PASSWORD: ${{ secrets.APK_KEY_PASSWORD }}
+        run: bash android/ci/build.sh 2>&1 | tee build.log
+      - name: Read the result
+        id: res
+        shell: bash
+        run: |
+          source android/out/result.env
+          echo "kind=$KIND" >> "$GITHUB_OUTPUT"
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          "$BT/aapt2" dump badging android/out/arabibazi.apk > android/out/badging.txt 2>&1 || true
+          unzip -l android/out/arabibazi.apk > android/out/contents.txt || true
+      - name: Keep the new signing key (encrypted with the secret password) in the repository
+        shell: bash
+        run: |
+          source android/out/result.env
+          if [ "$NEW_KEY" = 1 ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add android/ci/keystore.p12.enc
+            git commit -m "کلید امضای اندروید (رمزگذاری‌شده با رمز مخفی مخزن)"
+            git push origin HEAD:main
+          fi
+      - name: Publish the release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          source android/out/result.env
+          MB=$(awk "BEGIN{printf \"%.1f\", $SIZE/1048576}")
+          if [ "$KIND" = release ]; then
+            TAG="v$VERSION"
+            printf '%s\n' "نسخهٔ $VERSION (کد $CODE) — حجم $MB مگابایت." "" \
+              "روی گوشی اندروید فایل arabibazi.apk را دانلود و نصب کنید. اگر نسخهٔ قبلی نصب است، بدون پاک شدن اطلاعات به‌روز می‌شود." "" \
+              "اثر انگشت کلید امضا (SHA-256): \`$CERT\`" "SHA-256 فایل: \`$SHA256\`" > notes.md
+            gh release view "$TAG" >/dev/null 2>&1 && gh release delete "$TAG" --yes --cleanup-tag
+            gh release create "$TAG" android/out/arabibazi.apk --target "$GITHUB_SHA" --title "عربی‌بازی $VERSION" --notes-file notes.md --latest
+          else
+            printf '%s\n' "پیش‌نمایش نسخهٔ $VERSION (کد $CODE) — حجم $MB مگابایت." "" \
+              "⚠️ این فایل با کلید موقت امضا شده و فقط برای امتحان است. برای دانش‌آموزها نفرستید: نسخه‌ای که از این فایل نصب شود بعداً به‌روز نمی‌شود و باید پاک و دوباره نصب شود." "" \
+              "SHA-256 فایل: \`$SHA256\`" > notes.md
+            gh release view preview >/dev/null 2>&1 && gh release delete preview --yes --cleanup-tag
+            gh release create preview android/out/arabibazi.apk --target "$GITHUB_SHA" --prerelease --title "پیش‌نمایش $VERSION (کلید موقت)" --notes-file notes.md
+          fi
+      - name: Keep files for the next jobs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: |
+            build.log
+            android/out/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  smoke:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        api: [30, 34]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: build
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Open the app on an emulator (Android API ${{ matrix.api }})
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api }}
+          arch: x86_64
+          target: google_apis
+          profile: pixel_5
+          disable-animations: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: bash android/ci/smoke.sh ${{ matrix.api }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: smoke-${{ matrix.api }}
+          path: smoke-${{ matrix.api }}/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  report:
+    needs: [build, smoke]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: ci
+      - name: Push the report to the ci-logs branch
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd ci
+          rm -f build/android/out/arabibazi.apk
+          printf 'run=%s\nsha=%s\nbuild=%s\nsmoke=%s\n' "$GITHUB_RUN_ID" "$GITHUB_SHA" "${{ needs.build.result }}" "${{ needs.smoke.result }}" > run.txt
+          git init -q && git checkout -q -b ci-logs && git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -qm "گزارش ساخت $GITHUB_RUN_ID"
+          git push -q -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" ci-logs

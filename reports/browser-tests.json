@@ -1,0 +1,48 @@
+{
+ "intro_shown": true,
+ "intro_tap_does_not_skip": true,
+ "intro_ms": 3001,
+ "name_needed_before_grade": true,
+ "tour_steps": 6,
+ "tour_saved": true,
+ "intro_again_on_next_open": true,
+ "no_tour_second_time": true,
+ "queue_cleared_on_switch": true,
+ "next_question_after_12to10": "10-arabic-02-031",
+ "switch_ok": true,
+ "grade12_mistake_hidden_in_10": true,
+ "grade12_mistake_still_in_12": true,
+ "errors": [],
+ "offline_home_chapters": 4,
+ "offline_question_shown": true,
+ "update_bar_shown": true,
+ "no_auto_reload": true,
+ "reloaded_after_tap": true,
+ "new_cache": [
+  "arabibazi-v1.1.0-test"
+ ],
+ "manifest_errors": [],
+ "installability_errors": [
+  "in-incognito"
+ ],
+ "cpu4x": {
+  "open_s": 0.4,
+  "long_tasks_open_ms": [
+   83
+  ],
+  "answers": 50,
+  "long_tasks_during_answers_ms": []
+ },
+ "cpu6x": {
+  "open_s": 0.46,
+  "long_tasks_open_ms": [
+   96
+  ],
+  "answers": 50,
+  "long_tasks_during_answers_ms": [
+   59,
+   62,
+   52
+  ]
+ }
+}

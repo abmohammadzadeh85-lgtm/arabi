@@ -1,0 +1,26 @@
+{
+ "weak_pass_refused": true,
+ "teacher_code_ok": true,
+ "backup_code_ok": true,
+ "vault_has_no_plain_private_key": true,
+ "name_required": true,
+ "report_link_shape": true,
+ "report_link_len": 439,
+ "report_unreadable_without_key": true,
+ "fake_teacher_cannot_open_report": true,
+ "wrong_pass_refused": true,
+ "teacher_sees_student_by_grade": true,
+ "report_detail_has_chapters": true,
+ "tampered_report_refused": true,
+ "pack_link_len": 491,
+ "forged_pack_refused": true,
+ "real_pack_accepted": true,
+ "grade11_sees_teacher_chapter": true,
+ "grade11_teacher_qs": [
+  "سؤال آزمایشی یازدهم\nقَدْ کَتَبْنا"
+ ],
+ "grade12_q_hidden_in_11": true,
+ "hash_cleared": true,
+ "panel_blank_in_frame": true,
+ "errors": []
+}

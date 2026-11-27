@@ -1,0 +1,16 @@
+{
+  "name": "arabibazi-android",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Android shell (Capacitor 6) around the عربی‌بازی web app",
+  "dependencies": {
+    "@capacitor/android": "6.2.4",
+    "@capacitor/app": "6.0.3",
+    "@capacitor/core": "6.2.4",
+    "@capacitor/share": "6.0.4",
+    "@capacitor/status-bar": "6.0.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "6.2.4"
+  }
+}

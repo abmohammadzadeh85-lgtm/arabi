@@ -1,0 +1,10 @@
+{
+  "appId": "ir.arabibazi.app",
+  "appName": "عربی‌بازی",
+  "webDir": "www",
+  "backgroundColor": "#FF5A92",
+  "android": { "allowMixedContent": false, "captureInput": true, "webContentsDebuggingEnabled": false },
+  "plugins": {
+    "StatusBar": { "overlaysWebView": false, "style": "DARK", "backgroundColor": "#E357A8" }
+  }
+}

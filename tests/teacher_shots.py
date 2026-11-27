@@ -39,5 +39,7 @@ with sync_playwright() as p:
     for i,o in enumerate(["لَيْتَ","الشَّبابَ","يَعودُ","هیچ‌کدام"]):tp.fill(f"#eo{i}",o)
     tp.check('input[name="ea"][value="0"]');tp.fill("#ee","«لیت» از حروف مشبهة بالفعل است.");tp.screenshot(path="/tmp/t6_editor.png")
     tp.click('[data-act="saveQ"]');tp.wait_for_timeout(300);tp.click('[data-act="publish"]');tp.wait_for_selector("#pubOut .btn",timeout=10000);tp.wait_for_timeout(300);tp.screenshot(path="/tmp/t7_publish.png",full_page=True)
+    tp.click('[data-act="tab"][data-v="lg"]');tp.click('[data-act="lgG"][data-g="11"]');tp.wait_for_timeout(400);tp.click('[data-act="tsG"][data-g="10"]');tp.wait_for_timeout(200);tp.screenshot(path="/tmp/t8_league.png",full_page=True)
+    tp.click('[data-act="tab"][data-v="rep"]');tp.wait_for_timeout(300);tp.screenshot(path="/tmp/t9_class.png",full_page=True)
     print(json.dumps(R,ensure_ascii=False))
     b.close()

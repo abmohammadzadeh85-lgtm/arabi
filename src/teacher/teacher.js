@@ -142,7 +142,7 @@ function linkOut(box,url,file,title,help){box.textContent="";box.appendChild(el(
 function renderClass(){var box=$("#cls");if(!box)return;box.textContent="";var list=Object.keys(STUD).map(function(k){return STUD[k]});if(!list.length)return;
  [10,11,12].forEach(function(g){if(GF&&GF!==g)return;var L=list.filter(function(s){return s.last.g===g&&s.last.gr[g]});if(!L.length)return;var c=el("div","card tbox cls");c.appendChild(el("b","","📊 پیشرفت کلاس به تفکیک درس · "+GN[g]+" ("+fa(L.length)+" نفر)"));
   Object.keys(CH[g]||{}).map(Number).filter(function(x){return x!==90}).forEach(function(ch){var sum=0,n=0,act=0;L.forEach(function(s){var v=s.last.gr[g].ch[ch];if(!v||!v[1])return;sum+=v[0]/v[1];n++;if(v[2]+v[3]>0)act++});
-   var pc=n?Math.round(sum/n*100):0,r=el("div","cr");r.appendChild(el("span","",chName(g,ch)));r.appendChild(el("span","n",fa(pc)+"٪ · "+fa(act)+" نفر تمرین کرده"));var b=el("span","cb"),i=el("i");i.style.width=pc+"%";b.appendChild(i);r.appendChild(b);c.appendChild(r)});box.appendChild(c)})}
+   var pc=n?Math.round(sum/n*100):0,r=el("div","cr");r.appendChild(el("span","",chName(g,ch)));r.appendChild(el("span","n","میانگین "+fa(pc)+"٪، تمرین‌کرده: "+fa(act)+" نفر"));var b=el("span","cb"),i=el("i");i.style.width=pc+"%";b.appendChild(i);r.appendChild(b);c.appendChild(r)});box.appendChild(c)})}
 /* ---------- two-week league (built from the XP in reports) and teacher test sets ---------- */
 var LG=10,TS=10;
 function dk(ms){var d=new Date(ms);return d.getFullYear()*1e4+(d.getMonth()+1)*100+d.getDate()}

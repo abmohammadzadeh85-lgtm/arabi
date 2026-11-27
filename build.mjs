@@ -34,19 +34,22 @@ const FAV=`data:image/svg+xml,${encodeURIComponent(MASCOT.replace('<svg ','<svg 
 const TEACHER=(()=>{try{const t=JSON.parse(rd("src/teacher.json"));const m=String(t.code||"").match(/^AB1\.([A-Za-z0-9_-]{80,90})\.([A-Za-z0-9_-]{80,90})$/);return m?{sig:m[1],dh:m[2]}:null}catch(e){return null}})();
 const SITE="https://abmohammadzadeh85-lgtm.github.io/arabi/";
 // The Android download link appears in the app only once a release signed with the permanent key exists (src/apk.json → {"ready":true}).
+// The mailbox (Cloudflare Worker) once it is deployed: src/server.json → {"url":"https://…workers.dev/"}; missing → links only.
+const SERVER=(()=>{try{const u=JSON.parse(rd("src/server.json")).url;if(/^https:\/\/[a-z0-9.-]+\.workers\.dev\/$|^http:\/\/localhost:\d+\/$/.test(u))return u;throw new Error("bad url "+u)}catch(e){if(fs.existsSync("src/server.json"))throw e;return null}})();
+const withServer=html=>SERVER?html.replace("connect-src 'self'","connect-src 'self' "+SERVER.replace(/\/$/,"")):html;
 const APK=(()=>{try{return JSON.parse(rd("src/apk.json")).ready?"https://github.com/abmohammadzadeh85-lgtm/arabi/releases/latest/download/arabibazi.apk":null}catch(e){return null}})();
 const TCH="سؤال‌های معلم",CHS={10:{...CHAPTERS10,90:TCH},11:{...CHAPTERS11,90:TCH},12:{...CHAPTERS12,90:TCH}};
-const APPDATA=target=>({version:VER.version,target,site:SITE,apk:APK,teacher:TEACHER,defTheme:DEF,themes:Object.fromEntries(Object.entries(THEMES).map(([id,t])=>[id,[t.name[0],t.name[1],t.bg,t.gold,t.light]])),lessons:LESSONS,chapters:CHS});
+const APPDATA=target=>({version:VER.version,target,site:SITE,apk:APK,teacher:TEACHER,defTheme:DEF,themes:Object.fromEntries(Object.entries(THEMES).map(([id,t])=>[id,[t.name[0],t.name[1],t.bg,t.gold,t.light]])),server:SERVER,lessons:LESSONS,chapters:CHS});
 const js=target=>`var APP=${JSON.stringify(APPDATA(target)).replace(/</g,"\\u003c")};\n`+["i18n","engine","sound","crypto","ui"].map(f=>rd(`src/app/${f}.js`)).join("\n");
-function teacherPage(){const app={version:VER.version,site:SITE,chapters:CHS,lessons:LESSONS};
- return lockCSP(rd("src/teacher/index.html").replace("{{THEME}}",DEF).replace("{{LIGHT}}",THEMES[DEF].light?"1":"0").replace("{{THEMECOLOR}}",THEMES[DEF].bg).split("{{LOGO}}").join(LOGO)
-  .replace("{{CSS}}",()=>css(true,"../",rd("src/teacher/teacher.css"))).replace("{{JS}}",()=>`var APP=${JSON.stringify(app)};\n`+rd("src/app/crypto.js")+"\n"+rd("src/teacher/teacher.js")))}
+function teacherPage(){const app={version:VER.version,site:SITE,chapters:CHS,lessons:LESSONS,server:SERVER};
+ return lockCSP(withServer(rd("src/teacher/index.html").replace("{{THEME}}",DEF).replace("{{LIGHT}}",THEMES[DEF].light?"1":"0").replace("{{THEMECOLOR}}",THEMES[DEF].bg).split("{{LOGO}}").join(LOGO)
+  .replace("{{CSS}}",()=>css(true,"../",rd("src/teacher/teacher.css"))).replace("{{JS}}",()=>`var APP=${JSON.stringify(app)};\n`+rd("src/app/crypto.js")+"\n"+rd("src/teacher/teacher.js"))))}
 // Lock the page's CSP to the exact inline script(s) it ships: injected markup can't run code even if it ever got in.
 // The Android build keeps 'unsafe-inline' because Capacitor adds its own bridge script to the page.
 function lockCSP(html){const hs=[];html.replace(/<script>([\s\S]*?)<\/script>/g,(m,c)=>{if(/\r/.test(c))throw new Error("CR in inline script");hs.push(`'sha256-${createHash("sha256").update(c,"utf8").digest("base64")}'`);return m});
  if(!hs.length||!html.includes("script-src 'unsafe-inline'"))throw new Error("CSP lock failed");return html.replace("script-src 'unsafe-inline'","script-src "+hs.join(" "))}
 const jsonTag=(id,data)=>`<script type="application/json" id="${id}">${JSON.stringify(data).replace(/</g,"\\u003c")}</script>`;
-function page(target){const html=page0(target);return target==="apk"?html:lockCSP(html)}
+function page(target){const html=withServer(page0(target));return target==="apk"?html:lockCSP(html)}
 function page0(target){const pwa=target!=="standalone";
  const head=pwa?`<link rel="manifest" href="./manifest.webmanifest">\n<link rel="icon" href="./icons/icon-192.png">\n<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">\n<link rel="preload" href="./fonts/vazirmatn-Regular.woff2" as="font" type="font/woff2" crossorigin>\n<link rel="preload" href="./fonts/vazirmatn-Bold.woff2" as="font" type="font/woff2" crossorigin>`:`<link rel="icon" href="${FAV}">`;
  return rd("src/app/index.html").replace("{{THEME}}",DEF).replace("{{LIGHT}}",THEMES[DEF].light?"1":"0").replace("{{INTRO}}",INTRO).replace("{{THEMECOLOR}}",THEMES[DEF].bg).replace("{{HEAD}}",head).replace("{{CSS}}",()=>css(pwa))

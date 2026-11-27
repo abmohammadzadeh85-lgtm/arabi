@@ -50,6 +50,7 @@ with sync_playwright() as p:
     tp.click('[data-act="lock"]');tp.goto(URL+"t/#r="+rcode);tp.wait_for_selector("#s-unlock:not([hidden])")
     tp.fill("#pu","wrong-password-1");tp.click('[data-act="unlock"]');tp.wait_for_timeout(2500);R["wrong_pass_refused"]="درست نیست" in tp.inner_text("#unMsg")
     tp.fill("#pu","Arabi-Test-2026!");tp.click('[data-act="unlock"]');tp.wait_for_selector("#s-dash:not([hidden])",timeout=20000);tp.wait_for_timeout(1500)
+    R["links_note_when_no_mailbox"]=tp.is_visible("#impLink") and not tp.is_visible("#impAuto") and not tp.is_visible('[data-act="pull"]')
     lst=tp.inner_text("#stList");R["teacher_sees_student_by_grade"]="زهرا احمدی" in lst and "یازدهم" in lst
     tp.click('#stList [data-act="stu"]');tp.wait_for_selector("#dlg:not([hidden])");R["report_detail_has_chapters"]="انواع «لا»" in tp.inner_text("#dlg") or "نوع فعل" in tp.inner_text("#dlg")
     tp.click("#dlg .btn >> nth=0")

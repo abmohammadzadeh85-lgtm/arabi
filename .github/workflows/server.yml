@@ -1,0 +1,40 @@
+# The mailbox between the students and the teacher (a small Cloudflare Worker, see server/).
+# Turns on by itself once the repository secret CLOUDFLARE_API_TOKEN exists (server-wait.yml checks every 20 minutes):
+#   deploys the Worker; the first time it answers, puts its address in src/server.json, raises the version,
+#   rebuilds the site (gh-pages) and starts a new APK build.
+# Also runs when server/ changes (redeploys the Worker) and by hand: Actions → Mailbox → Run workflow.
+# A short log goes to the ci-server branch (no secrets in it).
+name: Mailbox
+on:
+  push:
+    branches: [main]
+    paths: ["server/**", ".github/workflows/server.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: mailbox
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Deploy the mailbox and turn it on in the apps
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          GH_TOKEN: ${{ github.token }}
+        run: bash server/turn-on.sh 2>&1 | tee turn-on.log
+      - name: Push the log to the ci-server branch
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash server/log.sh "${{ job.status }}"

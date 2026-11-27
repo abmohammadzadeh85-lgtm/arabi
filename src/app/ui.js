@@ -42,7 +42,7 @@ function dialog(title,msg,btns,extra){return new Promise(function(res){var d=$("
 /* ---------- screens ---------- */
 var view="home",SES=null,VIEWS=["home","path","farm","league","me"];
 function screen(id){["pick","main","play","result"].forEach(function(x){$("#"+x).hidden=x!==id});scrollTo(0,0)}
-function boot(){loadPacks();if(!S.grade){buildPick();screen("pick")}else{showMain()}checkHash();intro(function(){if(S.grade&&!S.ui.tour&&$("#play").hidden)startTour()})}
+function boot(){loadPacks();devHash();setTimeout(function(){syncFeed(true)},3500);setTimeout(function(){autoSend("boot")},8000);if(!S.grade){buildPick();screen("pick")}else{showMain()}checkHash();intro(function(){if(S.grade&&!S.ui.tour&&$("#play").hidden)startTour()})}
 /* ---------- intro: plays on every launch, 3 s, cannot be skipped (the app gets ready underneath) ---------- */
 var introOn=false;
 function intro(done){var o=$("#intro");if(!o){done&&done();return}introOn=true;nativeBar("#E357A8",false);o.classList.remove("out");o.hidden=false;
@@ -101,7 +101,7 @@ function renderPath(){var g=S.grade,box=$("#v-path .path"),st=chStats(g),now=st.
   s.appendChild(bar(x.pc));s.appendChild(el("small",null,t("progressOf",{a:num(x.done),b:num(x.total)})+" · "+x.src));b.appendChild(s);box.appendChild(b)})}
 function renderMe(){var g=S.grade,box=$("#v-me .sx"),p=gp(g),pool=Engine.poolFor(g),ans=0,ok=0,ml=0;box.textContent="";
  var rc=el("div","glass card rcard");rc.appendChild(el("b",null,t("myReport",{n:S.name||"…"})));rc.appendChild(el("p","muted",t("gradeOf",{g:GN(g)})+" · "+t("xpAll",{n:num(S.xp||0)})+" · 🔥"+num(streakNow())));
- var sb=el("button","btn wide",t("sendReport"));sb.dataset.act="sendReport";rc.appendChild(sb);box.appendChild(rc);
+ var sb=el("button","btn wide",t("sendReport"));sb.dataset.act="sendReport";rc.appendChild(sb);if(SRV&&APP.teacher)rc.appendChild(el("small","muted",t("autoSent")+(S.sentAt?" · "+t("lastSent",{d:new Date(S.sentAt).toLocaleString(LANG==="fa"?"fa-IR":"en-GB",{dateStyle:"short",timeStyle:"short"})}):"")));box.appendChild(rc);
  pool.forEach(function(q){var x=p[q.id];if(x){ans+=x[0]+x[1];ok+=x[0];if(x[0]>0)ml++}});
  var hs=S.hist[g]||[],grid=el("div","stats3");[[t("stAnswered"),ans],[t("stAcc"),ans?Math.round(ok/ans*100)+"٪":"–"],[t("stBest"),S.best[g]||0]].forEach(function(x){var s=el("div","card stat"),b=el("b",null,"");countUp(b,x[1]);s.appendChild(b);s.appendChild(el("small",null,x[0]));grid.appendChild(s)});box.appendChild(grid);
  var cc=el("div","glass card chs");cc.appendChild(el("b",null,t("stMastered")+": "+num(ml)+" / "+num(pool.length)));
@@ -158,7 +158,7 @@ function reveal(){var s=SES,g=s.g,ms=Date.now()-s.t0,n=s.qs.length,h=S.hist[g]=S
  h.push({d:Date.now(),m:s.mode,c:s.c||null,ok:s.ok,n:n,ms:ms,set:s.set||undefined});if(h.length>30)h.splice(0,h.length-30);
  var sk=bumpStreak(),base=s.ok*10,perf=s.ok===n&&n>=5?20:0,sb=Math.min(sk,7)*2,bx=boostX(),tot=Math.round((base+perf+sb)*bx),feed=s.ok+(perf?5:0),today=dayKey(Date.now());
  S.xp=(S.xp||0)+tot;S.day=S.day||{};S.day[today]=(S.day[today]||0)+tot;Object.keys(S.day).forEach(function(k){if(+k<dayKey(Date.now()-60*864e5))delete S.day[k]});
- var F=farm();F.feed+=feed;F.last=Date.now();save();
+ var F=farm();F.feed+=feed;F.last=Date.now();S.mbxD=Date.now();save();
  screen("result");var pc=Math.round(s.ok/n*100),C=2*Math.PI*64,fg=$("#rR .fg");$("#rR text").textContent=num(pc)+"٪";fg.style.strokeDasharray=C;fg.style.strokeDashoffset=C;
  requestAnimationFrame(function(){requestAnimationFrame(function(){fg.style.strokeDashoffset=C*(1-pc/100)})});
  $("#rOk").textContent=num(s.ok);$("#rBad").textContent=num(s.bad);var sec=Math.round(ms/1000);$("#rT").textContent=num(Math.floor(sec/60))+":"+num(String(sec%60).padStart(2,"0"));
@@ -167,7 +167,7 @@ function reveal(){var s=SES,g=s.g,ms=Date.now()-s.t0,n=s.qs.length,h=S.hist[g]=S
  var L=$("#rList");L.textContent="";s.qs.forEach(function(q,i){var pk=s.picks[i],ok=pk===q.a,c=el("div","glass rq "+(ok?"ok":"bad")),hd=el("div","hd"),sp=split(q.q);
   hd.appendChild(el("i",null,ok?"✓":"✗"));hd.appendChild(el("span",null,num(i+1)+". "+sp[0]));c.appendChild(hd);if(sp[1])c.appendChild(rich(el("p","st"),sp[1]));
   c.appendChild(el("p","ya",t("yourAns")+": "+(pk==null?t("noAns"):q.o[pk])));if(!ok)c.appendChild(el("p","ra",t("rightAns")+": "+q.o[q.a]));c.appendChild(el("p","ex",q.e));L.appendChild(c)});
- $("#rRv").hidden=!s.bad;SFX.play(perf?"streak":"end");header()}
+ $("#rRv").hidden=!s.bad;SFX.play(perf?"streak":"end");header();autoSend("end")}
 /* ---------- scratchpad ---------- */
 var padCtx=null,padDraw=false;
 function padToggle(){var p=$("#pad");p.hidden=!p.hidden;if(!p.hidden){var c=$("#padC"),r=c.getBoundingClientRect(),d=window.devicePixelRatio||1;if(c.width!==Math.round(r.width*d)){c.width=Math.round(r.width*d);c.height=Math.round(r.height*d);padCtx=c.getContext("2d");padCtx.scale(d,d);padCtx.lineWidth=2.6;padCtx.lineCap="round";padCtx.lineJoin="round";padCtx.strokeStyle="#1F3A9F"}}}
@@ -217,9 +217,9 @@ function renderLeague(){var g=S.grade,box=$("#v-league .lg");box.textContent="";
  if(boostX()>1){var bt=el("span","boost",t("lgBoost",{x:num(boostX()),d:new Date(S.boost.until).toLocaleDateString(LANG==="fa"?"fa-IR":"en-GB")}));box.appendChild(bt)}
  var L=(S.lg||{})[g],lc=el("div","glass card");lc.style.marginTop="12px";lc.appendChild(el("b",null,t("lgSeason",{g:GN(g)})));
  if(!L){lc.appendChild(el("p","muted",t("lgNone")))}else{var left=L.e-Date.now();lc.appendChild(el("p","muted",left>0?t("lgEnds",{d:num(Math.floor(left/864e5)),h:num(Math.floor(left%864e5/36e5))}):t("lgEnded")));
-  var me=-1,tb=el("div","lgt");L.rows.slice(0,20).forEach(function(r,i){var you=r[2]===S.dev,row=el("div","lgr"+(you?" me":""));if(you)me=i;row.appendChild(el("span","rk",["🥇","🥈","🥉"][i]||num(i+1)));
+  var me=-1,tb=el("div","lgt");L.rows.slice(0,20).forEach(function(r,i){var you=mine(r),row=el("div","lgr"+(you?" me":""));if(you)me=i;row.appendChild(el("span","rk",["🥇","🥈","🥉"][i]||num(i+1)));
    row.appendChild(el("span",null,r[0]+(you?" ("+t("lgYou")+")":"")));row.appendChild(el("b",null,num(r[1])+" XP"));tb.appendChild(row)});lc.appendChild(tb);
-  if(me<0){L.rows.forEach(function(r,i){if(r[2]===S.dev)me=i})}if(me>=0)lc.appendChild(el("p","muted",t("lgRank",{r:num(me+1),n:num(L.rows.length)})));lc.appendChild(el("small","muted",t("lgAt",{d:new Date(L.at).toLocaleDateString(LANG==="fa"?"fa-IR":"en-GB")})))}
+  if(me<0){L.rows.forEach(function(r,i){if(mine(r))me=i})}if(me>=0)lc.appendChild(el("p","muted",t("lgRank",{r:num(me+1),n:num(L.rows.length)})));lc.appendChild(el("small","muted",t("lgAt",{d:new Date(L.at).toLocaleDateString(LANG==="fa"?"fa-IR":"en-GB")})))}
  var pr=el("div","link"),pi=el("input","inp");pi.id="lgIn";pi.placeholder=t("lgPaste");pi.dir="ltr";var pb=el("button","btn ghost",t("add"));pb.dataset.act="addLeague";pr.appendChild(pi);pr.appendChild(pb);pr.style.marginTop="10px";lc.appendChild(pr);box.appendChild(lc)}
 var WD={fa:["ی","د","س","چ","پ","ج","ش"],en:["S","M","T","W","T","F","S"]};
 function chartSVG(){var W=320,H=150,px=18,days=[],mx=0;for(var i=13;i>=0;i--){var ms=Date.now()-i*864e5,v=(S.day||{})[dayKey(ms)]||0;days.push([ms,v]);if(v>mx)mx=v}
@@ -236,6 +236,31 @@ function chartSVG(){var W=320,H=150,px=18,days=[],mx=0;for(var i=13;i>=0;i--){va
  return o+"</svg>"}
 function setsFor(g){var o=S.sets||{};return Object.keys(o).map(function(k){return o[k]}).filter(function(s){return s.g===g}).sort(function(a,b){return b.at-a.at}).slice(0,3)}
 
+/* ---------- mailbox: report cards go to the teacher by themselves; the teacher's questions, league and tests arrive by themselves ---------- */
+var SRV=APP.server||null,feedBusy=false,sendBusy=false;
+function devHash(){if(S.devh||!window.crypto||!crypto.subtle)return;crypto.subtle.digest("SHA-256",AB.te.encode("arabibazi:"+S.dev)).then(function(b){S.devh=AB.b64u(b).slice(0,16);save()}).catch(function(){})}
+function mine(r){return!!r&&(r[2]===S.devh||r[2]===S.dev)}
+// text/plain: no extra "preflight" round trip, and it still goes out while the app is closing (keepalive)
+function post(path,o,keep){return fetch(SRV+path,{method:"POST",headers:{"content-type":"text/plain;charset=UTF-8"},body:JSON.stringify(o),keepalive:!!keep}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})}
+function srvSend(keep){if(!SRV||!APP.teacher||!AB.ok||!S.name)return Promise.reject(new Error("off"));if(!S.mbx){S.mbx=AB.rand(18);save()}var t0=Date.now();sendBusy=true;
+ return buildReport().then(function(r){return AB.seal(r,APP.teacher.dh)}).then(function(c){return post("r",{s:S.mbx,c:c},keep)})
+  .then(function(){sendBusy=false;S.sentAt=t0;save();return true},function(e){sendBusy=false;throw e})}
+// sent by itself after a sprint (at most every 20 min) and when the app is closed or opened (at most every 3 min), only if there is new progress
+function unsent(){return(S.mbxD||0)>(S.sentAt||0)||(!S.sentAt&&(S.xp||0)>0)}
+function autoSend(why){if(!SRV||!APP.teacher||!AB.ok||!S.name||sendBusy||!unsent())return;if(Date.now()-(S.sentAt||0)<(why==="end"?12e5:18e4))return;
+ srvSend(why==="hide").then(function(){if(view==="me"&&!document.hidden)renderMe()}).catch(function(){})}
+function syncFeed(force){if(!SRV||!APP.teacher||!AB.ok||feedBusy||!S.grade)return;if(!force&&Date.now()-(S.feedAt||0)<90000)return;feedBusy=true;
+ var g=S.grade,fs=S.fsv||{},since=+fs[g]||0,all=[],pages=0;
+ function more(){return fetch(SRV+"f?g="+g+"&since="+since,{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(o){var L=o&&Array.isArray(o.items)?o.items:[];
+   L.forEach(function(x){if(x&&+x.at>since)since=+x.at;all.push(x)});if(o&&o.more&&L.length&&++pages<10)return more()})}
+ more().then(function(){var seen=S.feedSeen||[],todo=all.filter(function(x){return x&&x.c&&seen.indexOf(x.id+":"+x.at)<0});
+  return todo.reduce(function(p,x){return p.then(function(acc){return importPack(String(x.c)).then(function(r){acc.push(r);return acc},function(){return acc})})},Promise.resolve([])).then(function(rs){
+   todo.forEach(function(x){seen.push(x.id+":"+x.at)});S.feedSeen=seen.slice(-200);fs[g]=since;S.fsv=fs;S.feedAt=Date.now();save();var q=0,parts=[];
+   rs.forEach(function(r){q+=r.mine||0;if(r.set===S.grade&&parts.indexOf(t("tSet"))<0)parts.push(t("tSet"));if(r.league===S.grade&&parts.indexOf(t("league"))<0)parts.push(t("league"))});if(q)parts.unshift(t("feedQ",{n:num(q)}));
+   if(parts.length){toast("📬 "+t("feedNew")+": "+parts.join("، "));renderHome();renderCount();if(view!=="home")renderView(view)}})})
+ .catch(function(){}).then(function(){feedBusy=false})}
+document.addEventListener("visibilitychange",function(){if(document.hidden)autoSend("hide");else syncFeed(false)});
+addEventListener("pagehide",function(){autoSend("hide")});
 /* ---------- report card for the teacher (sealed: only the teacher panel can open it) ---------- */
 function ensureName(){if(S.name)return Promise.resolve(S.name);var box=el("label","namebox"),inp=el("input");inp.maxLength=40;inp.placeholder=t("namePh");box.appendChild(inp);
  setTimeout(function(){inp.focus()},60);return dialog(t("nameSec"),t("nameNeed"),[{label:t("save"),val:1,primary:true},{label:t("cancel"),val:0}],box).then(function(v){var n=inp.value.trim().replace(/\s+/g," ").slice(0,40);if(!v||n.length<2)return"";S.name=n;save();return n})}
@@ -258,7 +283,9 @@ function showLink(url){var box=el("div","link"),cd=el("code",null,url),cb=el("bu
  box.appendChild(cd);box.appendChild(cb);dialog(t("linkReady"),t("linkHelp"),[{label:t("close"),val:1}],box)}
 var sendingReport=false;
 function sendReport(){if(sendingReport)return;if(!APP.teacher||!AB.ok){dialog(t("noTeacherT"),t("noTeacherM"),[{label:t("ok2"),val:1,primary:true}]);return}
- ensureName().then(function(n){if(!n)return;sendingReport=true;return buildReport().then(function(r){return AB.seal(r,APP.teacher.dh)})
+ if(SRV){ensureName().then(function(n){if(!n)return;sendingReport=true;return srvSend(false).then(function(){sendingReport=false;dialog(t("sentT"),t("sentOk"),[{label:t("ok2"),val:1,primary:true}]);if(view==="me")renderMe()},function(){sendingReport=false;linkReport()})});return}
+ linkReport()}
+function linkReport(){ensureName().then(function(n){if(!n)return;sendingReport=true;return buildReport().then(function(r){return AB.seal(r,APP.teacher.dh)})
   .then(function(code){sendingReport=false;shareLink(t("reportShareT",{n:S.name,g:GN(S.grade)}),APP.site+"t/#r="+code)})}).catch(function(){sendingReport=false})}
 /* ---------- teacher question packs: accepted only if signed with the teacher's key ---------- */
 var PKEY="arabibazi:packs";
@@ -278,7 +305,7 @@ function importPack(code){if(!APP.teacher||!AB.ok)return Promise.reject(new Erro
   var mine=qs.filter(function(q){return q.g===S.grade}).length;return{mine:mine,other:qs.length-mine}})}
 function importLeague(p){var g=+p.g;if([10,11,12].indexOf(g)<0||!Array.isArray(p.rows)||!(p.e>p.s))throw new Error("shape");
  var rows=p.rows.slice(0,60).map(function(r){return[String(r[0]||"").slice(0,40),Math.max(0,Math.round(+r[1]||0)),String(r[2]||"").slice(0,24)]});S.lg=S.lg||{};S.lg[g]={s:+p.s,e:+p.e,at:+p.at||Date.now(),rows:rows,sid:String(p.id||"").slice(0,24)};
- var rk=-1;rows.forEach(function(r,i){if(r[2]===S.dev&&rk<0)rk=i});var sid=S.lg[g].sid;
+ var rk=-1;rows.forEach(function(r,i){if(mine(r)&&rk<0)rk=i});var sid=S.lg[g].sid;
  if(g===S.grade&&rk>=0&&rk<3&&Date.now()>=p.e&&S.lgGot!==sid){S.boost={x:[1.5,1.3,1.2][rk],until:Date.now()+[3,2,1][rk]*864e5,sid:sid};S.lgGot=sid}save();return{league:g}}
 function importSet(p){var g=+p.g,cs=(p.cs||[]).map(Number).filter(function(c){return c>0&&c<100});if([10,11,12].indexOf(g)<0||!cs.length||!/^[A-Za-z0-9_-]{4,24}$/.test(p.id||""))throw new Error("shape");
  S.sets=S.sets||{};S.sets[p.id]={id:p.id,g:g,cs:cs,n:Math.min(30,Math.max(5,+p.n||10)),title:String(p.title||"").slice(0,60),at:+p.at||Date.now()};save();return{set:g}}

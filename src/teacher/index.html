@@ -56,8 +56,10 @@
   <div class="seg tabs"><button data-act="tab" data-v="rep">کارنامه‌ها</button><button data-act="tab" data-v="qs">سؤال‌ها</button><button data-act="tab" data-v="lg">لیگ و آزمون</button><button data-act="tab" data-v="set">تنظیمات</button></div>
   <div id="v-rep" class="tv">
    <div class="card tbox">
-    <b>افزودن کارنامه</b>
-    <p class="note">دانش‌آموزها لینک کارنامه را برایتان می‌فرستند. اگر لینک را لمس کنید خودش اضافه می‌شود؛ یا لینک‌ها را (حتی چندتا با هم) اینجا بچسبانید.</p>
+    <b>کارنامه‌ها</b>
+    <button class="btn wide" data-act="pull" hidden>🔄 دریافت کارنامه‌های تازه</button>
+    <p class="note" id="impAuto" hidden>کارنامه‌ها بعد از هر دور تمرین خودشان می‌رسند و با باز کردن پنل اضافه می‌شوند. اگر دانش‌آموزی لینک کارنامه فرستاد، لمسش کنید یا لینک‌ها را (حتی همه با هم) اینجا بچسبانید.</p>
+    <p class="note" id="impLink">دانش‌آموزها لینک کارنامه را برایتان می‌فرستند. اگر لینک را لمس کنید خودش اضافه می‌شود؛ یا لینک‌ها را (حتی چندتا با هم) اینجا بچسبانید.</p>
     <textarea class="inp" id="imp" rows="3" dir="ltr" placeholder="https://…/t/#r=…"></textarea>
     <div class="row2"><button class="btn" data-act="import">افزودن</button><label class="btn ghost">از فایل<input type="file" id="impFile" multiple hidden accept=".txt,.json,text/plain"></label></div>
     <p class="msg" id="impMsg"></p>

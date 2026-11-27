@@ -1,0 +1,9 @@
+# Cloudflare Worker «arabibazi»: the mailbox between students and the teacher. Deployed by .github/workflows/server.yml.
+name = "arabibazi"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+[[kv_namespaces]]
+binding = "KV"
+id = "__KV_ID__"

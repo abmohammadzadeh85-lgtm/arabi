@@ -1,0 +1,43 @@
+# Until the mailbox is on, checks every 20 minutes whether the secret CLOUDFLARE_API_TOKEN has been added,
+# and then turns it on (same steps as server.yml). Once src/server.json exists, this timer switches itself off.
+# It never fails, so it sends no "run failed" e-mails while it waits.
+name: Mailbox (waiting for the Cloudflare secret)
+on:
+  schedule:
+    - cron: "7,27,47 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: mailbox
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        if: hashFiles('src/server.json') == ''
+        with:
+          node-version: 22
+      - name: Turn the mailbox on if the secret is there
+        if: hashFiles('src/server.json') == ''
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -o pipefail
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then echo "⏳ رمز CLOUDFLARE_API_TOKEN هنوز اضافه نشده." | tee -a "$GITHUB_STEP_SUMMARY"; exit 0; fi
+          bash server/turn-on.sh 2>&1 | tee turn-on.log || echo "::warning::Not on yet; tried again in 20 minutes."
+          bash server/log.sh waiting || true
+      - name: Switch this timer off once the mailbox is on
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch -q origin main && git checkout -q FETCH_HEAD -- src 2>/dev/null || true
+          if [ -f src/server.json ]; then gh workflow disable server-wait.yml && echo "✅ صندوق روشن است؛ این زمان‌سنج خاموش شد." >> "$GITHUB_STEP_SUMMARY" || true; fi

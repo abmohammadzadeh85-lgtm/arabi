@@ -10,3 +10,8 @@ node_modules/
 # src/teacher.json holds the real teacher's PUBLIC code (safe to publish); tests put it back after using a test key
 __pycache__/
 *.pyc
+# made by server/deploy.sh at deploy time
+server/out.txt
+server/deploy-out.txt
+server/wrangler.deploy.toml
+server/.wrangler/

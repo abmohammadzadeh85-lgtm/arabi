@@ -15,7 +15,7 @@
 ### روشن کردن صندوق (یک بار، حدود ۱۰ دقیقه)
 1. در https://dash.cloudflare.com/sign-up حساب رایگان بسازید و ایمیلتان را تأیید کنید.
 2. به https://dash.cloudflare.com/profile/api-tokens بروید ← **Create Token** ← کنار **Edit Cloudflare Workers** دکمهٔ **Use template**.
-3. در **Account Resources** حساب خودتان و در **Zone Resources** گزینهٔ **All zones** را بگذارید ← **Continue to summary** ← **Create Token** ← رمزی که نشان می‌دهد را کپی کنید (برای من نفرستید).
+3. هر جا «نوع دسترسی» خواست، **Admin** را انتخاب کنید (نه Editor؛ ساختن صندوق برای بار اول Admin می‌خواهد) و اگر پرسید همهٔ Workerها یا یکی، **All Workers**. در **Account Resources** حساب خودتان و در **Zone Resources** گزینهٔ **All zones** را بگذارید ← **Continue to summary** ← **Create Token** ← رمزی که نشان می‌دهد را کپی کنید (برای من نفرستید).
 4. در GitHub همین مخزن: **Settings** ← **Secrets and variables** ← **Actions** ← **New repository secret**؛ نام: `CLOUDFLARE_API_TOKEN`، مقدار: همان رمز ← **Add secret**.
 5. تمام. حداکثر ۲۰ دقیقه بعد صندوق خودش روشن می‌شود، سایت به نسخهٔ ۲٫۰٫۵ می‌رود و APK تازه ساخته می‌شود. (اگر به من بگویید «انجام شد»، همان موقع راهش می‌اندازم.)
 
